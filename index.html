@@ -455,6 +455,28 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
 </main>
 <!-- TOAST -->
 <div id="toast"></div>
+<!-- MODAL: Log from Plan -->
+<div class="mo" id="planLogModal"><div class="modal">
+  <h3>📝 บันทึกจากตารางฉีด</h3>
+  <input type="hidden" id="planLogType">
+  <input type="hidden" id="planLogRoundId">
+  <div class="form-grid" style="margin-bottom:11px">
+    <div class="fg full"><label>ต้น/แปลง <span style="color:red">*</span></label><select id="planLogTree"></select></div>
+    <div class="fg"><label>วันที่ฉีดจริง</label><input type="date" id="planLogDate"></div>
+    <div class="fg"><label>เวลา</label><input type="time" id="planLogTime"></div>
+    <div class="fg full"><label>ยา/สาร</label><input type="text" id="planLogMed" style="font-size:.82rem"></div>
+    <div class="fg"><label>ปริมาณ (ตามตาราง)</label><input type="text" id="planLogAmt" placeholder="-"></div>
+    <div class="fg"><label>วิธีการ</label><select id="planLogMethod"><option>พ่นทางใบ</option><option>ราดโคนต้น</option><option>ใส่รอบโคน</option><option>ฉีดเข้าต้น</option><option>อื่นๆ</option></select></div>
+    <div class="fg full"><label>หมายเหตุ</label><input type="text" id="planLogNotes" placeholder="เช่น สภาพอากาศ, อาการต้น"></div>
+    <div class="fg" style="align-items:center">
+      <label><input type="checkbox" id="planLogMarkDone" checked style="width:auto;margin-right:5px">ทำเครื่องหมายว่าทำแล้วในตาราง</label>
+    </div>
+  </div>
+  <div class="modal-actions">
+    <button class="btn btn-s" onclick="closeModal('planLogModal')">ยกเลิก</button>
+    <button class="btn btn-p" onclick="savePlanLog()">💾 บันทึก</button>
+  </div>
+</div></div>
 <!-- MODAL: Edit Record -->
 <div class="mo" id="editRecModal"><div class="modal"><h3>✏️ แก้ไขข้อมูลการบันทึก</h3>
 <input type="hidden" id="editRecId">
@@ -847,6 +869,109 @@ function downloadCSV(content, filename) {
   a.click(); URL.revokeObjectURL(a.href);
 }
 // ==============================================================
+//  SCHEDULE HELPERS
+// ==============================================================
+function findScheduleAmt(medName, group) {
+  // ค้นหาปริมาณจากตารางฉีดรอบถัดไปที่ยังไม่ได้ทำ
+  const doneSpray = cache.completedRounds || [];
+  const doneSoil = cache.completedSoilRounds || [];
+  const doneFert = cache.completedFertRounds || [];
+  // foliar spray — ค้น chem ที่มีชื่อยานี้
+  if(group !== 'ปุ๋ย') {
+    const sprayRound = DEFAULT_SCHEDULE.find(r => !doneSpray.includes(r.id) && r.chem.includes(medName));
+    if(sprayRound) {
+      // ดึง amt ของยานี้จาก combined string "75+100+50 มล."
+      const chems = sprayRound.chem.split(' + ');
+      const amts = sprayRound.amt.split('+');
+      const idx = chems.findIndex(c => c.trim().includes(medName) || medName.includes(c.trim()));
+      if(idx >= 0 && amts[idx] && !amts[idx].includes('✅')) return amts[idx].trim();
+      if(!sprayRound.amt.includes('✅')) return sprayRound.amt;
+    }
+  }
+  // soil drench
+  const soilRound = DEFAULT_SOIL_SCHEDULE.find(r => !doneSoil.includes(r.id) && r.chem.includes(medName));
+  if(soilRound) return soilRound.rate;
+  // fertilizer
+  const fertRound = DEFAULT_FERTILIZER_SCHEDULE.find(r => !doneFert.includes(r.id) && r.main.includes(medName));
+  if(fertRound) return fertRound.mainRate;
+  return '';
+}
+function getUpcomingScheduleItems(days) {
+  const todayDate = new Date(todayStr());
+  const doneSpray = cache.completedRounds || [];
+  const doneSoil = cache.completedSoilRounds || [];
+  const doneFert = cache.completedFertRounds || [];
+  const items = [];
+  DEFAULT_SCHEDULE.forEach(r => {
+    if(doneSpray.includes(r.id)) return;
+    const dys = Math.round((new Date(r.date) - todayDate) / 86400000);
+    if(dys <= days) items.push({type:'spray', label:`🌿 ฉีดพ่นรอบ ${r.id}`, detail:r.group, date:r.date, days:dys, roundId:r.id});
+  });
+  DEFAULT_SOIL_SCHEDULE.forEach(r => {
+    if(doneSoil.includes(r.id)) return;
+    const dys = Math.round((new Date(r.date) - todayDate) / 86400000);
+    if(dys <= days) items.push({type:'soil', label:`🪣 ราดโคนรอบ ${r.id}`, detail:r.chem, date:r.date, days:dys, roundId:r.id});
+  });
+  DEFAULT_FERTILIZER_SCHEDULE.forEach(r => {
+    if(doneFert.includes(r.id)) return;
+    const dys = Math.round((new Date(r.date) - todayDate) / 86400000);
+    if(dys <= days) items.push({type:'fert', label:`🌱 ใส่ปุ๋ยรอบ ${r.id}`, detail:r.main, date:r.date, days:dys, roundId:r.id});
+  });
+  return items.sort((a,b) => a.days - b.days);
+}
+function openPlanLog(type, roundId) {
+  let med='', amt='', method='', dateStr='';
+  if(type==='spray') {
+    const r=DEFAULT_SCHEDULE.find(x=>x.id===roundId); if(!r) return;
+    med=r.chem; amt=r.amt; method='พ่นทางใบ'; dateStr=r.date;
+  } else if(type==='soil') {
+    const r=DEFAULT_SOIL_SCHEDULE.find(x=>x.id===roundId); if(!r) return;
+    med=r.chem; amt=r.rate; method='ราดโคนต้น'; dateStr=r.date;
+  } else if(type==='fert') {
+    const r=DEFAULT_FERTILIZER_SCHEDULE.find(x=>x.id===roundId); if(!r) return;
+    med=r.main+(r.extra?' + '+r.extra:''); amt=r.mainRate; method='ใส่รอบโคน'; dateStr=r.date;
+  }
+  document.getElementById('planLogMed').value=med;
+  document.getElementById('planLogAmt').value=amt&&!amt.includes('✅')?amt:'';
+  document.getElementById('planLogMethod').value=method;
+  document.getElementById('planLogDate').value=todayStr();
+  document.getElementById('planLogTime').value=nowTime();
+  document.getElementById('planLogType').value=type;
+  document.getElementById('planLogRoundId').value=roundId;
+  document.getElementById('planLogNotes').value='';
+  document.getElementById('planLogMarkDone').checked=true;
+  const treeEl=document.getElementById('planLogTree');
+  const trees=getTrees();
+  treeEl.innerHTML='<option value="">-- เลือกต้น/แปลง --</option>'+trees.map(t=>`<option value="${t}">${t}</option>`).join('');
+  if(trees.length===1) treeEl.value=trees[0];
+  document.getElementById('planLogModal').classList.add('open');
+}
+async function savePlanLog() {
+  const tree=document.getElementById('planLogTree').value;
+  const med=document.getElementById('planLogMed').value.trim();
+  const amt=document.getElementById('planLogAmt').value.trim();
+  const method=document.getElementById('planLogMethod').value;
+  const date=document.getElementById('planLogDate').value;
+  const time=document.getElementById('planLogTime').value;
+  const notes=document.getElementById('planLogNotes').value.trim();
+  const type=document.getElementById('planLogType').value;
+  const roundId=parseInt(document.getElementById('planLogRoundId').value);
+  const markDone=document.getElementById('planLogMarkDone').checked;
+  if(!tree){showToast('กรุณาเลือกต้น/แปลง');return;}
+  setSyncStatus('syncing');
+  try {
+    const record={id:uid(),tree,date,time,medicine:med,amount:amt||'-',method,nextDate:'',notes,recorder:userName,createdAt:Date.now()};
+    await fsSetRecord(record);
+    if(markDone) {
+      if(type==='spray') await markRoundDone(roundId);
+      else if(type==='soil') await markSoilRoundDone(roundId);
+      else if(type==='fert') await markFertRoundDone(roundId);
+    }
+    closeModal('planLogModal');
+    showToast('✅ บันทึกจากตารางสำเร็จ!');
+  } catch(e){showToast('เกิดข้อผิดพลาด');}
+}
+// ==============================================================
 //  DASHBOARD
 // ==============================================================
 function renderDashboard() {
@@ -867,10 +992,24 @@ function renderDashboard() {
   if(overdue.length>0) alerts+=`<div class="ab danger"><span class="ai">🚨</span><div class="at"><strong>เลยกำหนด ${overdue.length} รายการ!</strong>${overdue.slice(0,3).map(r=>`• ${r.tree} — ${r.medicine}`).join('<br>')}${overdue.length>3?`<br>...อีก ${overdue.length-3} รายการ`:''}</div></div>`;
   if(soon.length>0) alerts+=`<div class="ab"><span class="ai">⚠️</span><div class="at"><strong>ใกล้ถึงกำหนด ${soon.length} รายการ</strong>${soon.slice(0,2).map(r=>{const d=daysFrom(r.nextDate);return `• ${r.tree} — ${r.medicine} (${d===0?'วันนี้!':d+' วัน'})`;}).join('<br>')}</div></div>`;
   if(urgentBuy.length>0) alerts+=`<div class="ab danger"><span class="ai">🛒</span><div class="at"><strong>ควรซื้อด่วน ${urgentBuy.length} รายการ</strong>${urgentBuy.map(m=>`• ${m.name}`).join('<br>')}<br><a href="#" onclick="showPage('stock');return false" style="font-weight:700;color:var(--b)">→ ดูทั้งหมด</a></div></div>`;
+  // Schedule alerts
+  const schedItems = getUpcomingScheduleItems(7);
+  const schOverdue = schedItems.filter(x=>x.days<0);
+  const schSoon = schedItems.filter(x=>x.days>=0&&x.days<=3);
+  if(schOverdue.length>0) alerts+=`<div class="ab danger"><span class="ai">🚨</span><div class="at"><strong>ตารางฉีดเลยกำหนด ${schOverdue.length} รอบ!</strong><br>${schOverdue.slice(0,3).map(x=>`• ${x.label} — ${x.detail}`).join('<br>')}${schOverdue.length>3?`<br>...อีก ${schOverdue.length-3} รอบ`:''}<br><a href="#" onclick="showPage('plan');return false" style="font-weight:700;color:var(--b)">→ ไปหน้าแผนฉีด</a></div></div>`;
+  if(schSoon.length>0) alerts+=`<div class="ab"><span class="ai">📅</span><div class="at"><strong>ใกล้ถึงกำหนดฉีด ${schSoon.length} รอบ</strong><br>${schSoon.slice(0,3).map(x=>{const dl=x.days===0?'วันนี้!':x.days===1?'พรุ่งนี้':`อีก ${x.days} วัน`;return`• ${x.label} — ${x.detail} (${dl})`;}).join('<br>')}</div></div>`;
   document.getElementById('alertsContainer').innerHTML=alerts;
-  const upcoming=records.filter(r=>r.nextDate).map(r=>({...r,days:daysFrom(r.nextDate)})).filter(r=>r.days<=14).sort((a,b)=>a.days-b.days).slice(0,6);
-  document.getElementById('upcomingList').innerHTML=upcoming.length===0?'<div class="empty"><span class="ei">📅</span>ไม่มีกำหนดการใน 14 วัน</div>':
-    upcoming.map(r=>{const isOD=r.days<0,isSn=r.days>=0&&r.days<=3;const cls=isOD?'ov':isSn?'sn':'';const dl=isOD?`เลยมา ${Math.abs(r.days)} วัน`:r.days===0?'วันนี้!':`อีก ${r.days} วัน`;const badge=isOD?`<span class="badge ov">เลยกำหนด</span>`:isSn?`<span class="badge sn">ใกล้ถึง</span>`:'';return`<div class="ui-item ${cls}"><span class="tn">🌳${r.tree}</span><span class="mn">💉${r.medicine}</span>${badge}<span class="dd">📅${fmtDate(r.nextDate)} (${dl})</span></div>`;}).join('');
+  // Upcoming from schedule (14 days)
+  const schedAll = getUpcomingScheduleItems(14);
+  document.getElementById('upcomingList').innerHTML=schedAll.length===0?'<div class="empty"><span class="ei">📅</span>ไม่มีรอบฉีดใน 14 วันข้างหน้า</div>':
+    schedAll.slice(0,8).map(x=>{
+      const isOD=x.days<0,isSn=x.days>=0&&x.days<=3;
+      const cls=isOD?'ov':isSn?'sn':'';
+      const dl=isOD?`เลยมา ${Math.abs(x.days)} วัน`:x.days===0?'วันนี้!':x.days===1?'พรุ่งนี้':`อีก ${x.days} วัน`;
+      const badge=isOD?`<span class="badge ov">เลยกำหนด</span>`:isSn?`<span class="badge sn">ใกล้ถึง</span>`:'';
+      const logBtn=`<button class="btn btn-p btn-xs" onclick="openPlanLog('${x.type}',${x.roundId})" style="margin-left:4px">📝 บันทึก</button>`;
+      return`<div class="ui-item ${cls}" style="gap:6px"><span class="tn">${x.label}</span><span class="mn" style="font-size:.72rem">${x.detail}</span>${badge}<span class="dd">📅${fmtDate(x.date)} (${dl})</span>${logBtn}</div>`;
+    }).join('')+(schedAll.length>8?`<div style="text-align:center;font-size:.75rem;color:var(--gr);margin-top:6px">+ อีก ${schedAll.length-8} รอบ <a href="#" onclick="showPage('plan');return false">ดูทั้งหมด →</a></div>`:'' );
   const allBad=[...lowStock,...meds.filter(m=>m.status==='tobuy'&&m.urgency==='urgent')];
   document.getElementById('stockAlertList').innerHTML=allBad.length===0?'<div class="empty"><span class="ei">✅</span>สต็อกยาครบถ้วน</div>':
     allBad.slice(0,5).map(m=>{const isO=m.status==='owned';const st=isO?stockStatus(m):'tobuy';const icon=st==='critical'?'🚨':st==='low'?'⚠️':'🛒';const chip=st==='critical'?'<span class="chip chip-r">หมด</span>':st==='low'?'<span class="chip chip-y">น้อย</span>':'<span class="chip" style="background:#fff9c4;color:#e65100">ต้องซื้อ</span>';return`<div class="ui-item${st==='critical'?' ov':st==='low'?' sn':''}"><span style="font-size:1rem">${icon}</span><span class="mn" style="color:#263238">${m.name}</span>${chip}${isO?`<span style="font-size:.74rem;color:var(--gr)">${m.current}/${m.total}${m.unit}</span>`:'<span class="badge" style="background:#ffebee;color:#c62828">ด่วน</span>'}</div>`;}).join('')+(allBad.length>5?`<div style="text-align:center;margin-top:7px;font-size:.78rem;color:var(--gr)">+ อีก ${allBad.length-5} รายการ <a href="#" onclick="showPage('stock');return false">ดูทั้งหมด →</a></div>`:'');
@@ -895,6 +1034,9 @@ function selectPreset(id) {
   document.getElementById('deductUnit').textContent=m.unit;
   document.getElementById('deductAmt').placeholder=`จำนวน (${m.unit})`;
   document.getElementById('deductAmt').dataset.medId=id;
+  // auto-fill amount from schedule
+  const schedAmt = findScheduleAmt(m.name, m.group);
+  if(schedAmt) document.getElementById('amount').value = schedAmt;
   // auto method by group
   const methodMap={'ปุ๋ย':'ใส่รอบโคน','โรค':'ราดโคนต้น'};
   if(methodMap[m.group]) document.getElementById('method').value=methodMap[m.group];
@@ -1231,11 +1373,10 @@ function renderPlan() {
     const numCell = isDone
       ? `<td style="text-decoration:line-through;color:#90a4ae">${r.id}</td>`
       : `<td style="font-weight:700;color:var(--gd)">${r.id}</td>`;
-    const actionCell = userRole==='owner'
-      ? `<td>${isDone
-          ? `<button class="btn btn-s btn-xs" onclick="unmarkRound(${r.id})">↩️</button>`
-          : `<button class="btn btn-p btn-xs" onclick="markRoundDone(${r.id})">✅ ทำแล้ว</button>`}</td>`
-      : '<td></td>';
+    const logBtn = isDone ? '' : `<button class="btn btn-s btn-xs" onclick="openPlanLog('spray',${r.id})" title="บันทึกประวัติการฉีด">📝</button> `;
+    const actionCell = `<td>${logBtn}${userRole==='owner' ? (isDone
+      ? `<button class="btn btn-s btn-xs" onclick="unmarkRound(${r.id})">↩️</button>`
+      : `<button class="btn btn-p btn-xs" onclick="markRoundDone(${r.id})">✅ ทำแล้ว</button>`) : ''}</td>`;
     return `<tr style="${rowStyle}">
       ${numCell}
       <td style="white-space:nowrap;font-size:.8rem">${dateStr}</td>
@@ -1261,11 +1402,10 @@ function renderSoilPlan() {
       ? '<span style="color:#2d8b45;font-weight:700">✅ เสร็จแล้ว</span>'
       : isOverdue ? `<span style="color:#c62828;font-weight:700">⚠️ เลยกำหนด</span>`
       : `<span style="color:#546e7a;font-size:.78rem">รอดำเนินการ</span>`;
-    const actionCell = userRole==='owner'
-      ? `<td>${isDone
-          ? `<button class="btn btn-s btn-xs" onclick="unmarkSoilRound(${r.id})">↩️</button>`
-          : `<button class="btn btn-p btn-xs" onclick="markSoilRoundDone(${r.id})">✅ ทำแล้ว</button>`}</td>`
-      : '<td></td>';
+    const logBtnSoil = isDone ? '' : `<button class="btn btn-s btn-xs" onclick="openPlanLog('soil',${r.id})" title="บันทึกประวัติการราด">📝</button> `;
+    const actionCell = `<td>${logBtnSoil}${userRole==='owner' ? (isDone
+      ? `<button class="btn btn-s btn-xs" onclick="unmarkSoilRound(${r.id})">↩️</button>`
+      : `<button class="btn btn-p btn-xs" onclick="markSoilRoundDone(${r.id})">✅ ทำแล้ว</button>`) : ''}</td>`;
     const numCell = isDone
       ? `<td style="text-decoration:line-through;color:#90a4ae">${r.id}</td>`
       : `<td style="font-weight:700;color:var(--pu)">${r.id}</td>`;
@@ -1299,11 +1439,10 @@ function renderFertilizerPlan() {
     const numCell = isDone
       ? `<td style="text-decoration:line-through;color:#90a4ae">${r.id}</td>`
       : `<td style="font-weight:700;color:#f57f17">${r.id}</td>`;
-    const actionCell = userRole==='owner'
-      ? `<td>${isDone
-          ? `<button class="btn btn-s btn-xs" onclick="unmarkFertRound(${r.id})">↩️</button>`
-          : `<button class="btn btn-p btn-xs" onclick="markFertRoundDone(${r.id})">✅ ใส่แล้ว</button>`}</td>`
-      : '<td></td>';
+    const logBtnFert = isDone ? '' : `<button class="btn btn-s btn-xs" onclick="openPlanLog('fert',${r.id})" title="บันทึกประวัติการใส่ปุ๋ย">📝</button> `;
+    const actionCell = `<td>${logBtnFert}${userRole==='owner' ? (isDone
+      ? `<button class="btn btn-s btn-xs" onclick="unmarkFertRound(${r.id})">↩️</button>`
+      : `<button class="btn btn-p btn-xs" onclick="markFertRoundDone(${r.id})">✅ ใส่แล้ว</button>`) : ''}</td>`;
     return `<tr style="${rowStyle}">
       ${numCell}
       <td style="font-weight:700;font-size:.82rem">${r.month}</td>
