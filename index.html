@@ -203,11 +203,11 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
     <div class="farm-sub">ใส่รหัสฟาร์มจากเจ้าของสวนเพื่อเริ่มใช้งาน</div>
     <!-- JOIN FARM ONLY -->
     <div id="fsJoin" style="display:block">
-      <p style="font-size:.82rem;color:var(--gr);margin-bottom:8px">ใส่ชื่อของคุณและรหัสฟาร์มจากเจ้าของสวน</p>
+      <p style="font-size:.82rem;color:var(--gr);margin-bottom:8px">ใส่ชื่อและรหัสเข้าสวนที่ได้รับจากเจ้าของสวน</p>
       <input class="farm-input" id="joinNameInput" placeholder="ชื่อของคุณ เช่น กี้, สมชาย" maxlength="30" style="margin-bottom:8px;letter-spacing:0;text-transform:none;text-align:left;font-family:inherit">
-      <input class="farm-input" id="joinCodeInput" placeholder="รหัสฟาร์ม เช่น FARM-A3B7" maxlength="12" oninput="this.value=this.value.toUpperCase()">
-      <div class="farm-error" id="joinError">❌ ไม่พบรหัสฟาร์มนี้ กรุณาตรวจสอบใหม่อีกครั้ง</div>
-      <button onclick="joinFarm()" class="farm-btn primary" style="margin-top:10px">🔗 เข้าร่วมฟาร์ม</button>
+      <input class="farm-input" id="joinPassInput" type="password" placeholder="รหัสเข้าสวน" maxlength="20" onkeydown="if(event.key==='Enter')joinFarm()">
+      <div class="farm-error" id="joinError">❌ รหัสเข้าสวนไม่ถูกต้อง</div>
+      <button onclick="joinFarm()" class="farm-btn primary" style="margin-top:10px">🌿 เข้าสู่สวนศรีจิรา</button>
     </div>
   </div>
 </div>
@@ -706,9 +706,13 @@ async function _createFarmInternal(code) { // internal use only
 }
 async function joinFarm() {
   const nameVal = document.getElementById('joinNameInput').value.trim();
-  const code = document.getElementById('joinCodeInput').value.trim().toUpperCase();
+  const passVal = document.getElementById('joinPassInput').value;
   if (!nameVal) { showToast('กรุณาใส่ชื่อของคุณ'); return; }
-  if (!code) { showToast('กรุณาใส่รหัสฟาร์ม'); return; }
+  if (passVal !== '9955') {
+    document.getElementById('joinError').style.display = 'block';
+    return;
+  }
+  const code = 'FARM-ABQR';
   document.getElementById('joinError').style.display = 'none';
   setSyncStatus('syncing');
   try {
