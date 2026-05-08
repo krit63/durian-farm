@@ -708,7 +708,9 @@ async function joinFarm() {
   const nameVal = document.getElementById('joinNameInput').value.trim();
   const passVal = document.getElementById('joinPassInput').value;
   if (!nameVal) { showToast('กรุณาใส่ชื่อของคุณ'); return; }
-  if (passVal !== '9955') {
+  const isAdmin = passVal === '9911';
+  const isMember = passVal === '9955';
+  if (!isAdmin && !isMember) {
     document.getElementById('joinError').style.display = 'block';
     return;
   }
@@ -721,10 +723,11 @@ async function joinFarm() {
       document.getElementById('joinError').style.display = 'block';
       setSyncStatus('offline'); return;
     }
+    const role = isAdmin ? 'owner' : 'member';
     localStorage.setItem('durianFarmCode', code);
-    localStorage.setItem('durianFarmRole', 'member');
+    localStorage.setItem('durianFarmRole', role);
     localStorage.setItem('durianFarmUser', nameVal);
-    userRole = 'member';
+    userRole = role;
     userName = nameVal;
     farmCode = code;
     hideFarmScreen();
