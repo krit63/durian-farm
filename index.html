@@ -269,10 +269,9 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
     <div style="margin-bottom:11px">
       <label style="display:block;margin-bottom:5px;font-size:.8rem;font-weight:700;color:var(--gd)">💊 เลือกจากคลังยา <span style="font-weight:400;color:var(--gr)">(กดชื่อยา → กด ⚡ บันทึกเร็ว)</span></label>
       <div class="preset-tags" id="presetTags"></div>
-      <div id="quickSaveBar" style="display:none;margin-top:9px;background:#e8f5e9;border-radius:10px;padding:9px 12px;display:none;align-items:center;gap:9px;flex-wrap:wrap">
-        <span id="quickSaveMedName" style="font-weight:700;color:var(--gd);flex:1;font-size:.88rem"></span>
-        <input type="text" id="quickSaveAmt" placeholder="ปริมาณ เช่น 200 มล." style="width:140px;padding:6px 10px;font-size:.85rem">
-        <button class="btn btn-p btn-sm" onclick="quickSave()">⚡ บันทึกเร็ว</button>
+      <div id="quickSaveBar" style="display:none;margin-top:9px;background:#e8f5e9;border-radius:10px;padding:10px 14px;align-items:center;gap:10px;flex-wrap:wrap">
+        <span id="quickSaveMedName" style="font-weight:700;color:var(--gd);font-size:.9rem;flex:1"></span>
+        <button class="btn btn-p" id="quickSaveConfirmBtn" style="font-size:.95rem;padding:9px 20px">⚡ บันทึก</button>
         <button class="btn btn-s btn-sm" onclick="closeQuickSave()">✕</button>
       </div>
     </div>
@@ -468,8 +467,8 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
     <div class="fg"><label>ปริมาณ (ตามตาราง)</label><input type="text" id="planLogAmt" placeholder="-"></div>
     <div class="fg"><label>วิธีการ</label><select id="planLogMethod"><option>พ่นทางใบ</option><option>ราดโคนต้น</option><option>ใส่รอบโคน</option><option>ฉีดเข้าต้น</option><option>อื่นๆ</option></select></div>
     <div class="fg full"><label>หมายเหตุ</label><input type="text" id="planLogNotes" placeholder="เช่น สภาพอากาศ, อาการต้น"></div>
-    <div class="fg" style="align-items:center">
-      <label><input type="checkbox" id="planLogMarkDone" checked style="width:auto;margin-right:5px">ทำเครื่องหมายว่าทำแล้วในตาราง</label>
+    <div class="fg" id="planLogMarkDoneRow" style="align-items:center">
+      <label><input type="checkbox" id="planLogMarkDone" checked style="width:auto;margin-right:5px">ทำเครื่องหมายว่าทำแล้วในตาราง (เจ้าของสวนเท่านั้น)</label>
     </div>
   </div>
   <div class="modal-actions">
@@ -939,7 +938,8 @@ function openPlanLog(type, roundId) {
   document.getElementById('planLogType').value=type;
   document.getElementById('planLogRoundId').value=roundId;
   document.getElementById('planLogNotes').value='';
-  document.getElementById('planLogMarkDone').checked=true;
+  document.getElementById('planLogMarkDone').checked = userRole==='owner';
+  document.getElementById('planLogMarkDoneRow').style.display = userRole==='owner' ? '' : 'none';
   const treeEl=document.getElementById('planLogTree');
   const trees=getTrees();
   treeEl.innerHTML='<option value="">-- เลือกต้น/แปลง --</option>'+trees.map(t=>`<option value="${t}">${t}</option>`).join('');
@@ -962,7 +962,7 @@ async function savePlanLog() {
   try {
     const record={id:uid(),tree,date,time,medicine:med,amount:amt||'-',method,nextDate:'',notes,recorder:userName,createdAt:Date.now()};
     await fsSetRecord(record);
-    if(markDone) {
+    if(markDone && userRole==='owner') {
       if(type==='spray') await markRoundDone(roundId);
       else if(type==='soil') await markSoilRoundDone(roundId);
       else if(type==='fert') await markFertRoundDone(roundId);
@@ -1028,57 +1028,38 @@ function updateTreeSelect() {
 function renderFormPresets() {
   document.getElementById('presetTags').innerHTML=getMeds().filter(m=>m.status==='owned').map(m=>`<span class="pt" onclick="selectPreset('${m.id}')">${m.name}</span>`).join('');
 }
+let _pendingMedId='';
 function selectPreset(id) {
   const m=getMeds().find(x=>x.id===id);if(!m)return;
-  document.getElementById('medicineType').value=m.name;
-  document.getElementById('deductUnit').textContent=m.unit;
-  document.getElementById('deductAmt').placeholder=`จำนวน (${m.unit})`;
-  document.getElementById('deductAmt').dataset.medId=id;
-  // auto-fill amount from schedule
-  const schedAmt = findScheduleAmt(m.name, m.group);
-  if(schedAmt) document.getElementById('amount').value = schedAmt;
-  // auto method by group
-  const methodMap={'ปุ๋ย':'ใส่รอบโคน','โรค':'ราดโคนต้น'};
-  if(methodMap[m.group]) document.getElementById('method').value=methodMap[m.group];
-  else document.getElementById('method').value='พ่นทางใบ';
-  // auto-select tree if only one
-  const trees=getTrees();
-  if(trees.length===1) document.getElementById('treeSelect').value=trees[0];
+  _pendingMedId=id;
   // highlight selected tag
   document.querySelectorAll('.pt').forEach(el=>el.classList.remove('pt-active'));
-  const allTags=document.querySelectorAll('.pt');
-  allTags.forEach(el=>{if(el.textContent===m.name)el.classList.add('pt-active');});
-  // show quick save bar
-  const bar=document.getElementById('quickSaveBar');
-  bar.style.display='flex';
-  document.getElementById('quickSaveMedName').textContent='💊 '+m.name;
-  document.getElementById('quickSaveAmt').value='';
-  document.getElementById('quickSaveAmt').setAttribute('data-med-id',id);
+  event.currentTarget.classList.add('pt-active');
+  const amt=findScheduleAmt(m.name,m.group);
+  const amtText=amt?` (${amt})`:'';
+  document.getElementById('quickSaveMedName').textContent='💊 '+m.name+amtText;
+  document.getElementById('quickSaveConfirmBtn').onclick=()=>instantSave(id);
+  document.getElementById('quickSaveBar').style.display='flex';
 }
 function closeQuickSave(){
   document.getElementById('quickSaveBar').style.display='none';
   document.querySelectorAll('.pt').forEach(el=>el.classList.remove('pt-active'));
+  _pendingMedId='';
 }
-async function quickSave(){
-  const tree=document.getElementById('treeSelect').value;
-  if(!tree){showToast('กรุณาเลือกต้น/แปลงก่อน');return;}
-  const med=document.getElementById('medicineType').value.trim();
-  if(!med){showToast('กรุณาเลือกชนิดยาก่อน');return;}
-  const amt=document.getElementById('quickSaveAmt').value.trim()||'-';
-  const deductEl=document.getElementById('deductAmt');
-  const deductAmt=parseFloat(deductEl.value)||0;
-  const deductMedId=deductEl.dataset.medId||'';
+async function instantSave(medId){
+  const m=getMeds().find(x=>x.id===medId);if(!m)return;
+  const methodMap={'ปุ๋ย':'ใส่รอบโคน','โรค':'ราดโคนต้น'};
+  const method=methodMap[m.group]||'พ่นทางใบ';
+  const amt=findScheduleAmt(m.name,m.group)||'-';
+  const trees=getTrees();
+  const tree=trees.length>0?trees[0]:'ทั้งสวน';
+  closeQuickSave();
   setSyncStatus('syncing');
   try{
-    const record={id:uid(),tree,date:todayStr(),time:nowTime(),medicine:med,amount:amt,
-      method:document.getElementById('method').value,nextDate:'',notes:'',recorder:userName,createdAt:Date.now()};
+    const record={id:uid(),tree,date:todayStr(),time:nowTime(),medicine:m.name,
+      amount:amt,method,nextDate:'',notes:'',recorder:userName,createdAt:Date.now()};
     await fsSetRecord(record);
-    if(deductMedId&&deductAmt>0){
-      const m=getMeds().find(x=>x.id===deductMedId);
-      if(m){const updated={...m,current:Math.max(0,(parseFloat(m.current)||0)-deductAmt)};await fsSetMed(updated);}
-    }
-    closeQuickSave();
-    showToast('⚡ บันทึกเร็วสำเร็จ! — '+med);
+    showToast('⚡ บันทึก '+m.name+' แล้ว!');
   }catch(e){showToast('เกิดข้อผิดพลาด');}
 }
 function updateUserDisplay(){
