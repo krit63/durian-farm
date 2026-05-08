@@ -199,27 +199,10 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
   <div class="farm-card">
     <div class="farm-logo">🌿</div>
     <div class="farm-title">ระบบติดตามการฉีดยาทุเรียน</div>
-    <div class="farm-sub">เลือกว่าจะสร้างฟาร์มใหม่หรือเข้าร่วมฟาร์มที่มีอยู่</div>
-    <div class="farm-tabs">
-      <button class="farm-tab active" onclick="switchFarmTab('new')">🌱 สร้างฟาร์มใหม่</button>
-      <button class="farm-tab" onclick="switchFarmTab('join')">🔗 เข้าร่วมฟาร์ม</button>
-    </div>
-    <!-- NEW FARM -->
-    <div class="farm-section active" id="fsNew">
-      <p style="font-size:.82rem;color:var(--gr);margin-bottom:8px">รหัสฟาร์มของคุณ (แชร์ให้ทีมเพื่อเข้าถึงข้อมูลเดียวกัน)</p>
-      <div class="code-display">
-        <div class="code-big" id="generatedCode">-</div>
-        <div class="code-hint">กดปุ่มด้านล่างเพื่อสร้างรหัสใหม่</div>
-      </div>
-      <button onclick="regenerateCode()" class="farm-btn secondary" style="margin-top:6px">🔄 สร้างรหัสใหม่</button>
-      <button onclick="createNewFarm()" class="farm-btn primary">🚀 สร้างฟาร์มและเริ่มใช้งาน</button>
-      <div style="font-size:.75rem;color:var(--gr);margin-top:10px;padding:8px;background:var(--grl);border-radius:8px;line-height:1.6">
-        💡 <strong>วิธีให้ทีมเข้าร่วม:</strong> ส่งรหัสนี้ให้ทีม → เขาเปิดเว็บ → กด "เข้าร่วมฟาร์ม" → ใส่รหัส
-      </div>
-    </div>
-    <!-- JOIN FARM -->
-    <div class="farm-section" id="fsJoin">
-      <p style="font-size:.82rem;color:var(--gr);margin-bottom:8px">ใส่รหัสฟาร์มที่ได้รับจากผู้สร้าง</p>
+    <div class="farm-sub">ใส่รหัสฟาร์มจากเจ้าของสวนเพื่อเริ่มใช้งาน</div>
+    <!-- JOIN FARM ONLY -->
+    <div id="fsJoin" style="display:block">
+      <p style="font-size:.82rem;color:var(--gr);margin-bottom:8px">ใส่รหัสฟาร์มที่ได้รับจากเจ้าของสวน</p>
       <input class="farm-input" id="joinCodeInput" placeholder="เช่น FARM-A3B7" maxlength="12" oninput="this.value=this.value.toUpperCase()">
       <div class="farm-error" id="joinError">❌ ไม่พบรหัสฟาร์มนี้ กรุณาตรวจสอบใหม่อีกครั้ง</div>
       <button onclick="joinFarm()" class="farm-btn primary" style="margin-top:10px">🔗 เข้าร่วมฟาร์ม</button>
@@ -450,54 +433,54 @@ const DEFAULT_MEDS = [
 //  DEFAULT SPRAY SCHEDULE
 // ==============================================================
 const DEFAULT_SCHEDULE = [
-  {id:1,  date:'2025-05-10',season:'เริ่มฝน',  group:'เพลี้ย+บำรุง',    chem:'ฟลอนิคามิด + Zn EDTA + Mg EDTA + MIX-EDTA + Calcium Boron',      amt:'ฉีดแล้ว',                    ppe:'—',                      obs:'ตรวจใบ เพลี้ยไฟ บำรุง',         done:true},
-  {id:2,  date:'2025-05-17',season:'เริ่มฝน',  group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'สีใบ ใบอ่อน แตกกิ่ง',            done:false},
-  {id:3,  date:'2025-05-24',season:'เริ่มฝน',  group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + อะซีทามิพริด + MIX-EDTA + อมิโนแอซิด',              amt:'150+ฉลาก+100+100 มล.',        ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน เพลี้ยแป้ง ยอดอ่อน',         done:false},
-  {id:4,  date:'2025-05-31',season:'เริ่มฝน',  group:'โรค+บำรุง',        chem:'Fosetyl-Al + MIX-EDTA + Mg EDTA + อมิโนแอซิด',                     amt:'150+100+125+150 มล.',         ppe:'ถุงมือ',                  obs:'โคนต้น รอยเน่า ยางไหล',           done:false},
-  {id:5,  date:'2025-06-07',season:'ฝนชุก',    group:'แมลง B+ไร',        chem:'Abamectin + สไปโรไดโคชเฟน + Zn EDTA',                              amt:'75+ฉลาก+50 มล.',             ppe:'ชุดเต็ม',                obs:'ใต้ใบ ไรแดง เพลี้ยไฟ',            done:false},
-  {id:6,  date:'2025-06-14',season:'ฝนชุก',    group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด',                         amt:'200+125+100 มล.',            ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'ขอบใบ จุดน้ำตาล ราสนิม',          done:false},
-  {id:7,  date:'2025-06-21',season:'ฝนชุก',    group:'ราดดิน+บำรุง',     chem:'Metalaxyl ราด + MIX-EDTA + ไฮเมกซาโซล',                            amt:'50ก./10ล./ต้น+MIX 100+ฉลาก', ppe:'ชุดเต็ม+บูท',            obs:'ขุดดูราก สีน้ำตาล=เน่า',          done:false},
-  {id:8,  date:'2025-06-28',season:'ฝนชุก',    group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + ฟลอนิคามิด + MIX-EDTA',                             amt:'150+ฉลาก+100 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน เพลี้ยแป้ง ผงขาว',           done:false},
-  {id:9,  date:'2025-07-05',season:'ฝนมาก',    group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Zn EDTA + อมิโนแอซิด',                        amt:'100+125+50+150 มล.',          ppe:'ถุงมือ',                  obs:'ใบอ่อน โคนต้น น้ำขัง',            done:false},
-  {id:10, date:'2025-07-12',season:'ฝนมาก',    group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด',                         amt:'200+125+100 มล.',            ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'ใบแก่ จุดสี ราแป้ง',              done:false},
-  {id:11, date:'2025-07-19',season:'ฝนมาก',    group:'แมลง B+ไร',        chem:'Abamectin + เฮกซีไทอะซอกซ์ + Zn EDTA',                            amt:'75+ฉลาก+50 มล.',             ppe:'ชุดเต็ม',                obs:'ใต้ใบ ไรแดง เส้นใย',              done:false},
-  {id:12, date:'2025-07-26',season:'ฝนมาก',    group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'โคนต้น รอยแตก ยางไหล',            done:false},
-  {id:13, date:'2025-08-02',season:'ฝนมาก',    group:'โรค+ราดดิน',       chem:'Fosetyl-Al ราด + MIX-EDTA + ไฮเมกซาโซล',                           amt:'ราด+MIX 100+ฉลาก',           ppe:'ชุดเต็ม+บูท',            obs:'ราดซ้ำ ดูรากหลังขุด',             done:false},
-  {id:14, date:'2025-08-09',season:'ฝนมาก',    group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + อะซีทามิพริด + MIX-EDTA',                           amt:'150+ฉลาก+100 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'หนอนม้วนใบ เพลี้ยหอย',            done:false},
-  {id:15, date:'2025-08-16',season:'ฝนมาก',    group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Zn EDTA + Calcium Boron',                      amt:'100+125+50+ฉลาก',            ppe:'ถุงมือ',                  obs:'ใบอ่อน สีเปลือก รอยช้ำ',          done:false},
-  {id:16, date:'2025-08-23',season:'ฝนมาก',    group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด',                         amt:'200+125+100 มล.',            ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'เชื้อราใบ ราสนิม ใบไหม้',         done:false},
-  {id:17, date:'2025-08-30',season:'ฝนมาก',    group:'แมลง B+ไร',        chem:'Emamectin + สไปโรไดโคชเฟน + Zn EDTA',                              amt:'50+ฉลาก+50 มล.',             ppe:'ชุดเต็ม',                obs:'ใต้ใบ ไข่ไร ตัวอ่อน',             done:false},
-  {id:18, date:'2025-09-06',season:'ฝนชุก',    group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'ใต้ใบอ่อน ไร เพลี้ยไฟ',           done:false},
-  {id:19, date:'2025-09-13',season:'ฝนชุก',    group:'โรค+บำรุง',        chem:'Fosetyl-Al + MIX-EDTA + Mg EDTA',                                  amt:'150+100+125 มล.',            ppe:'ถุงมือ',                  obs:'ใบจุด ขอบน้ำตาล แอนแทรคโนส',     done:false},
-  {id:20, date:'2025-09-20',season:'ฝนชุก',    group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + ฟลอนิคามิด + MIX-EDTA',                             amt:'150+ฉลาก+100 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน รอยกัด กิ่งเหี่ยว',          done:false},
-  {id:21, date:'2025-09-27',season:'ฝนชุก',    group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Zn EDTA + Calcium Boron',                      amt:'100+125+50+ฉลาก',            ppe:'ถุงมือ',                  obs:'โคนต้น สีดิน ระบายน้ำ',           done:false},
-  {id:22, date:'2025-10-04',season:'ปลายฝน',   group:'แมลง B+เพลี้ย',   chem:'Abamectin + อะซีทามิพริด + Zn EDTA',                               amt:'75+ฉลาก+50 มล.',             ppe:'ชุดเต็ม',                obs:'ใต้ใบ เพลี้ย สะสมอาหาร',          done:false},
-  {id:23, date:'2025-10-11',season:'ปลายฝน',   group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด',                         amt:'200+125+100 มล.',            ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'ป้องกันรากเน่าปลายฝน',             done:false},
-  {id:24, date:'2025-10-18',season:'ปลายฝน',   group:'แมลง C+เพลี้ย',   chem:'Indoxacarb + ฟลอนิคามิด + MIX-EDTA',                               amt:'75+ฉลาก+100 มล.',            ppe:'หน้ากาก+ถุงมือ',          obs:'ด้วง รูเจาะ เพลี้ยแป้ง',           done:false},
-  {id:25, date:'2025-10-25',season:'ปลายฝน',   group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'สีใบรวม เตรียมรับหนาว',            done:false},
-  {id:26, date:'2025-11-01',season:'หนาว',      group:'แมลง B+ไร',        chem:'Emamectin + เฮกซีไทอะซอกซ์ + Zn EDTA',                            amt:'50+ฉลาก+50 มล.',             ppe:'ชุดเต็ม',                obs:'ใต้ใบ ไร เพลี้ยไฟ',               done:false},
-  {id:27, date:'2025-11-08',season:'หนาว',      group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + Calcium Boron',                  amt:'100+125+150+ฉลาก',           ppe:'ถุงมือ',                  obs:'ใบอ่อน สมบูรณ์ไหม',               done:false},
-  {id:28, date:'2025-11-15',season:'หนาว',      group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + อะซีทามิพริด + MIX-EDTA',                           amt:'150+ฉลาก+100 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน เพลี้ยแป้ง ผงขาวกิ่ง',       done:false},
-  {id:29, date:'2025-11-22',season:'หนาว',      group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Zn EDTA',                                     amt:'100+125+50 มล.',             ppe:'ถุงมือ',                  obs:'ใบแก่ Mg เส้นใบเหลือง',           done:false},
-  {id:30, date:'2025-11-29',season:'หนาว',      group:'แมลง C+เพลี้ย',   chem:'Indoxacarb + ฟลอนิคามิด + MIX-EDTA',                               amt:'75+ฉลาก+100 มล.',            ppe:'หน้ากาก+ถุงมือ',          obs:'รูเจาะ ด้วง โคนต้น',              done:false},
-  {id:31, date:'2025-12-06',season:'หนาวจัด',   group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'ทรงพุ่ม กิ่งแตกใหม่',              done:false},
-  {id:32, date:'2025-12-13',season:'หนาวจัด',   group:'แมลง B+ไร',        chem:'Abamectin + สไปโรไดโคชเฟน + Zn EDTA',                              amt:'75+ฉลาก+50 มล.',             ppe:'ชุดเต็ม',                obs:'ใต้ใบ เส้นใย ผงขาว',              done:false},
-  {id:33, date:'2025-12-20',season:'หนาวจัด',   group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Calcium Boron',                               amt:'100+125+ฉลาก',               ppe:'ถุงมือ',                  obs:'สีใบ การสะสมอาหาร',               done:false},
-  {id:34, date:'2025-12-27',season:'หนาวจัด',   group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + อะซีทามิพริด + MIX-EDTA',                           amt:'150+ฉลาก+100 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน กิ่งผิดปกติ',                done:false},
-  {id:35, date:'2026-01-03',season:'ไรแดง',     group:'ไรแดง+ธาตุ',       chem:'Bifenazate + Zn EDTA + อมิโนแอซิด',                                amt:'75+50+100 มล.',              ppe:'หน้ากาก+ถุงมือ',          obs:'ใต้ใบ จุดขาว เส้นใยไรแดง',        done:false},
-  {id:36, date:'2026-01-10',season:'ไรแดง',     group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'ใบอ่อน การแตกยอดใหม่',            done:false},
-  {id:37, date:'2026-01-17',season:'ไรแดง',     group:'ไรแดง+แมลง',       chem:'Bifenazate + Emamectin + Zn EDTA',                                 amt:'75+50+50 มล.',               ppe:'ชุดเต็ม',                obs:'ใต้ใบ ไรแดงสีแดงเข้ม',            done:false},
-  {id:38, date:'2026-01-24',season:'ไรแดง',     group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Calcium Boron',                               amt:'100+125+ฉลาก',               ppe:'ถุงมือ',                  obs:'ใบอ่อนสมบูรณ์ ไม่หงิกงอ',         done:false},
-  {id:39, date:'2026-01-31',season:'ไรแดง',     group:'ไรแดง+เพลี้ย',    chem:'สไปโรไดโคชเฟน + เฮกซีไทอะซอกซ์ + ฟลอนิคามิด',                   amt:'ฉลาก+ฉลาก+ฉลาก',            ppe:'หน้ากาก+ถุงมือ',          obs:'ใต้ใบ เพลี้ยไฟ ไรแดง',            done:false},
-  {id:40, date:'2026-02-07',season:'เริ่มร้อน', group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'สีใบ การเติบโตรวม',               done:false},
-  {id:41, date:'2026-02-14',season:'เริ่มร้อน', group:'ไรแดง+แมลง C',     chem:'Bifenazate + Indoxacarb + Zn EDTA',                                amt:'75+75+50 มล.',               ppe:'หน้ากาก+ถุงมือ',          obs:'ใต้ใบ ไรแดง หนอน',               done:false},
-  {id:42, date:'2026-02-21',season:'เริ่มร้อน', group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Calcium Boron',                               amt:'100+125+ฉลาก',               ppe:'ถุงมือ',                  obs:'ทรงพุ่ม กิ่งแตกใหม่',              done:false},
-  {id:43, date:'2026-02-28',season:'เริ่มร้อน', group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + ฟลอนิคามิด + MIX-EDTA',                             amt:'150+ฉลาก+100 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน เพลี้ยแป้ง',                 done:false},
-  {id:44, date:'2026-03-07',season:'ร้อนแล้ง',  group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'ใบแก่ ขาดธาตุ stress ร้อน',       done:false},
-  {id:45, date:'2026-03-14',season:'ร้อนแล้ง',  group:'ไรแดง+เพลี้ย',    chem:'สไปโรไดโคชเฟน + อะซีทามิพริด + Zn EDTA',                          amt:'ฉลาก+ฉลาก+50 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'ใต้ใบ ไรแดงระบาดสูงสุด',          done:false},
-  {id:46, date:'2026-03-21',season:'ร้อนแล้ง',  group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Calcium Boron',                               amt:'100+125+ฉลาก',               ppe:'ถุงมือ',                  obs:'สภาพต้นรวม',                       done:false},
-  {id:47, date:'2026-03-28',season:'ร้อนแล้ง',  group:'แมลง B+ไร',        chem:'Abamectin + เฮกซีไทอะซอกซ์ + MIX-EDTA',                           amt:'75+ฉลาก+100 มล.',            ppe:'ชุดเต็ม',                obs:'หนอน ด้วง รูเจาะ',                done:false},
-  {id:48, date:'2026-04-04',season:'ร้อนจัด',   group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Zn EDTA + อมิโนแอซิด + Calcium Boron',        amt:'100+125+50+150+ฉลาก',        ppe:'ถุงมือ',                  obs:'สภาพต้นรวม เตรียมรับฝนปีหน้า',    done:false},
+  {id:1,  date:'2026-05-10',season:'เริ่มฝน',  group:'เพลี้ย+บำรุง',    chem:'ฟลอนิคามิด + Zn EDTA + Mg EDTA + MIX-EDTA + Calcium Boron',      amt:'ฉีดแล้ว',                    ppe:'—',                      obs:'ตรวจใบ เพลี้ยไฟ บำรุง',         done:true},
+  {id:2,  date:'2026-05-17',season:'เริ่มฝน',  group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'สีใบ ใบอ่อน แตกกิ่ง',            done:false},
+  {id:3,  date:'2026-05-24',season:'เริ่มฝน',  group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + อะซีทามิพริด + MIX-EDTA + อมิโนแอซิด',              amt:'150+ฉลาก+100+100 มล.',        ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน เพลี้ยแป้ง ยอดอ่อน',         done:false},
+  {id:4,  date:'2026-05-31',season:'เริ่มฝน',  group:'โรค+บำรุง',        chem:'Fosetyl-Al + MIX-EDTA + Mg EDTA + อมิโนแอซิด',                     amt:'150+100+125+150 มล.',         ppe:'ถุงมือ',                  obs:'โคนต้น รอยเน่า ยางไหล',           done:false},
+  {id:5,  date:'2026-06-07',season:'ฝนชุก',    group:'แมลง B+ไร',        chem:'Abamectin + สไปโรไดโคชเฟน + Zn EDTA',                              amt:'75+ฉลาก+50 มล.',             ppe:'ชุดเต็ม',                obs:'ใต้ใบ ไรแดง เพลี้ยไฟ',            done:false},
+  {id:6,  date:'2026-06-14',season:'ฝนชุก',    group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด',                         amt:'200+125+100 มล.',            ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'ขอบใบ จุดน้ำตาล ราสนิม',          done:false},
+  {id:7,  date:'2026-06-21',season:'ฝนชุก',    group:'ราดดิน+บำรุง',     chem:'Metalaxyl ราด + MIX-EDTA + ไฮเมกซาโซล',                            amt:'50ก./10ล./ต้น+MIX 100+ฉลาก', ppe:'ชุดเต็ม+บูท',            obs:'ขุดดูราก สีน้ำตาล=เน่า',          done:false},
+  {id:8,  date:'2026-06-28',season:'ฝนชุก',    group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + ฟลอนิคามิด + MIX-EDTA',                             amt:'150+ฉลาก+100 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน เพลี้ยแป้ง ผงขาว',           done:false},
+  {id:9,  date:'2026-07-05',season:'ฝนมาก',    group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Zn EDTA + อมิโนแอซิด',                        amt:'100+125+50+150 มล.',          ppe:'ถุงมือ',                  obs:'ใบอ่อน โคนต้น น้ำขัง',            done:false},
+  {id:10, date:'2026-07-12',season:'ฝนมาก',    group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด',                         amt:'200+125+100 มล.',            ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'ใบแก่ จุดสี ราแป้ง',              done:false},
+  {id:11, date:'2026-07-19',season:'ฝนมาก',    group:'แมลง B+ไร',        chem:'Abamectin + เฮกซีไทอะซอกซ์ + Zn EDTA',                            amt:'75+ฉลาก+50 มล.',             ppe:'ชุดเต็ม',                obs:'ใต้ใบ ไรแดง เส้นใย',              done:false},
+  {id:12, date:'2026-07-26',season:'ฝนมาก',    group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'โคนต้น รอยแตก ยางไหล',            done:false},
+  {id:13, date:'2026-08-02',season:'ฝนมาก',    group:'โรค+ราดดิน',       chem:'Fosetyl-Al ราด + MIX-EDTA + ไฮเมกซาโซล',                           amt:'ราด+MIX 100+ฉลาก',           ppe:'ชุดเต็ม+บูท',            obs:'ราดซ้ำ ดูรากหลังขุด',             done:false},
+  {id:14, date:'2026-08-09',season:'ฝนมาก',    group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + อะซีทามิพริด + MIX-EDTA',                           amt:'150+ฉลาก+100 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'หนอนม้วนใบ เพลี้ยหอย',            done:false},
+  {id:15, date:'2026-08-16',season:'ฝนมาก',    group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Zn EDTA + Calcium Boron',                      amt:'100+125+50+ฉลาก',            ppe:'ถุงมือ',                  obs:'ใบอ่อน สีเปลือก รอยช้ำ',          done:false},
+  {id:16, date:'2026-08-23',season:'ฝนมาก',    group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด',                         amt:'200+125+100 มล.',            ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'เชื้อราใบ ราสนิม ใบไหม้',         done:false},
+  {id:17, date:'2026-08-30',season:'ฝนมาก',    group:'แมลง B+ไร',        chem:'Emamectin + สไปโรไดโคชเฟน + Zn EDTA',                              amt:'50+ฉลาก+50 มล.',             ppe:'ชุดเต็ม',                obs:'ใต้ใบ ไข่ไร ตัวอ่อน',             done:false},
+  {id:18, date:'2026-09-06',season:'ฝนชุก',    group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'ใต้ใบอ่อน ไร เพลี้ยไฟ',           done:false},
+  {id:19, date:'2026-09-13',season:'ฝนชุก',    group:'โรค+บำรุง',        chem:'Fosetyl-Al + MIX-EDTA + Mg EDTA',                                  amt:'150+100+125 มล.',            ppe:'ถุงมือ',                  obs:'ใบจุด ขอบน้ำตาล แอนแทรคโนส',     done:false},
+  {id:20, date:'2026-09-20',season:'ฝนชุก',    group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + ฟลอนิคามิด + MIX-EDTA',                             amt:'150+ฉลาก+100 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน รอยกัด กิ่งเหี่ยว',          done:false},
+  {id:21, date:'2026-09-27',season:'ฝนชุก',    group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Zn EDTA + Calcium Boron',                      amt:'100+125+50+ฉลาก',            ppe:'ถุงมือ',                  obs:'โคนต้น สีดิน ระบายน้ำ',           done:false},
+  {id:22, date:'2026-10-04',season:'ปลายฝน',   group:'แมลง B+เพลี้ย',   chem:'Abamectin + อะซีทามิพริด + Zn EDTA',                               amt:'75+ฉลาก+50 มล.',             ppe:'ชุดเต็ม',                obs:'ใต้ใบ เพลี้ย สะสมอาหาร',          done:false},
+  {id:23, date:'2026-10-11',season:'ปลายฝน',   group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด',                         amt:'200+125+100 มล.',            ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'ป้องกันรากเน่าปลายฝน',             done:false},
+  {id:24, date:'2026-10-18',season:'ปลายฝน',   group:'แมลง C+เพลี้ย',   chem:'Indoxacarb + ฟลอนิคามิด + MIX-EDTA',                               amt:'75+ฉลาก+100 มล.',            ppe:'หน้ากาก+ถุงมือ',          obs:'ด้วง รูเจาะ เพลี้ยแป้ง',           done:false},
+  {id:25, date:'2026-10-25',season:'ปลายฝน',   group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'สีใบรวม เตรียมรับหนาว',            done:false},
+  {id:26, date:'2026-11-01',season:'หนาว',      group:'แมลง B+ไร',        chem:'Emamectin + เฮกซีไทอะซอกซ์ + Zn EDTA',                            amt:'50+ฉลาก+50 มล.',             ppe:'ชุดเต็ม',                obs:'ใต้ใบ ไร เพลี้ยไฟ',               done:false},
+  {id:27, date:'2026-11-08',season:'หนาว',      group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + Calcium Boron',                  amt:'100+125+150+ฉลาก',           ppe:'ถุงมือ',                  obs:'ใบอ่อน สมบูรณ์ไหม',               done:false},
+  {id:28, date:'2026-11-15',season:'หนาว',      group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + อะซีทามิพริด + MIX-EDTA',                           amt:'150+ฉลาก+100 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน เพลี้ยแป้ง ผงขาวกิ่ง',       done:false},
+  {id:29, date:'2026-11-22',season:'หนาว',      group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Zn EDTA',                                     amt:'100+125+50 มล.',             ppe:'ถุงมือ',                  obs:'ใบแก่ Mg เส้นใบเหลือง',           done:false},
+  {id:30, date:'2026-11-29',season:'หนาว',      group:'แมลง C+เพลี้ย',   chem:'Indoxacarb + ฟลอนิคามิด + MIX-EDTA',                               amt:'75+ฉลาก+100 มล.',            ppe:'หน้ากาก+ถุงมือ',          obs:'รูเจาะ ด้วง โคนต้น',              done:false},
+  {id:31, date:'2026-12-06',season:'หนาวจัด',   group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'ทรงพุ่ม กิ่งแตกใหม่',              done:false},
+  {id:32, date:'2026-12-13',season:'หนาวจัด',   group:'แมลง B+ไร',        chem:'Abamectin + สไปโรไดโคชเฟน + Zn EDTA',                              amt:'75+ฉลาก+50 มล.',             ppe:'ชุดเต็ม',                obs:'ใต้ใบ เส้นใย ผงขาว',              done:false},
+  {id:33, date:'2026-12-20',season:'หนาวจัด',   group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Calcium Boron',                               amt:'100+125+ฉลาก',               ppe:'ถุงมือ',                  obs:'สีใบ การสะสมอาหาร',               done:false},
+  {id:34, date:'2026-12-27',season:'หนาวจัด',   group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + อะซีทามิพริด + MIX-EDTA',                           amt:'150+ฉลาก+100 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน กิ่งผิดปกติ',                done:false},
+  {id:35, date:'2027-01-03',season:'ไรแดง',     group:'ไรแดง+ธาตุ',       chem:'Bifenazate + Zn EDTA + อมิโนแอซิด',                                amt:'75+50+100 มล.',              ppe:'หน้ากาก+ถุงมือ',          obs:'ใต้ใบ จุดขาว เส้นใยไรแดง',        done:false},
+  {id:36, date:'2027-01-10',season:'ไรแดง',     group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'ใบอ่อน การแตกยอดใหม่',            done:false},
+  {id:37, date:'2027-01-17',season:'ไรแดง',     group:'ไรแดง+แมลง',       chem:'Bifenazate + Emamectin + Zn EDTA',                                 amt:'75+50+50 มล.',               ppe:'ชุดเต็ม',                obs:'ใต้ใบ ไรแดงสีแดงเข้ม',            done:false},
+  {id:38, date:'2027-01-24',season:'ไรแดง',     group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Calcium Boron',                               amt:'100+125+ฉลาก',               ppe:'ถุงมือ',                  obs:'ใบอ่อนสมบูรณ์ ไม่หงิกงอ',         done:false},
+  {id:39, date:'2027-01-31',season:'ไรแดง',     group:'ไรแดง+เพลี้ย',    chem:'สไปโรไดโคชเฟน + เฮกซีไทอะซอกซ์ + ฟลอนิคามิด',                   amt:'ฉลาก+ฉลาก+ฉลาก',            ppe:'หน้ากาก+ถุงมือ',          obs:'ใต้ใบ เพลี้ยไฟ ไรแดง',            done:false},
+  {id:40, date:'2027-02-07',season:'เริ่มร้อน', group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'สีใบ การเติบโตรวม',               done:false},
+  {id:41, date:'2027-02-14',season:'เริ่มร้อน', group:'ไรแดง+แมลง C',     chem:'Bifenazate + Indoxacarb + Zn EDTA',                                amt:'75+75+50 มล.',               ppe:'หน้ากาก+ถุงมือ',          obs:'ใต้ใบ ไรแดง หนอน',               done:false},
+  {id:42, date:'2027-02-21',season:'เริ่มร้อน', group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Calcium Boron',                               amt:'100+125+ฉลาก',               ppe:'ถุงมือ',                  obs:'ทรงพุ่ม กิ่งแตกใหม่',              done:false},
+  {id:43, date:'2027-02-28',season:'เริ่มร้อน', group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + ฟลอนิคามิด + MIX-EDTA',                             amt:'150+ฉลาก+100 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน เพลี้ยแป้ง',                 done:false},
+  {id:44, date:'2027-03-07',season:'ร้อนแล้ง',  group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'ใบแก่ ขาดธาตุ stress ร้อน',       done:false},
+  {id:45, date:'2027-03-14',season:'ร้อนแล้ง',  group:'ไรแดง+เพลี้ย',    chem:'สไปโรไดโคชเฟน + อะซีทามิพริด + Zn EDTA',                          amt:'ฉลาก+ฉลาก+50 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'ใต้ใบ ไรแดงระบาดสูงสุด',          done:false},
+  {id:46, date:'2027-03-21',season:'ร้อนแล้ง',  group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Calcium Boron',                               amt:'100+125+ฉลาก',               ppe:'ถุงมือ',                  obs:'สภาพต้นรวม',                       done:false},
+  {id:47, date:'2027-03-28',season:'ร้อนแล้ง',  group:'แมลง B+ไร',        chem:'Abamectin + เฮกซีไทอะซอกซ์ + MIX-EDTA',                           amt:'75+ฉลาก+100 มล.',            ppe:'ชุดเต็ม',                obs:'หนอน ด้วง รูเจาะ',                done:false},
+  {id:48, date:'2027-04-04',season:'ร้อนจัด',   group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Zn EDTA + อมิโนแอซิด + Calcium Boron',        amt:'100+125+50+150+ฉลาก',        ppe:'ถุงมือ',                  obs:'สภาพต้นรวม เตรียมรับฝนปีหน้า',    done:false},
 ];
 // ==============================================================
 //  APP STATE
@@ -529,35 +512,24 @@ function generateCode() {
   for (let i = 0; i < 4; i++) code += chars[Math.floor(Math.random() * chars.length)];
   return code;
 }
-function switchFarmTab(tab) {
-  document.querySelectorAll('.farm-tab').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.farm-section').forEach(s => s.classList.remove('active'));
-  const idx = tab === 'new' ? 0 : 1;
-  document.querySelectorAll('.farm-tab')[idx].classList.add('active');
-  document.getElementById(tab === 'new' ? 'fsNew' : 'fsJoin').classList.add('active');
-}
-function regenerateCode() {
-  pendingCode = generateCode();
-  document.getElementById('generatedCode').textContent = pendingCode;
-}
-async function createNewFarm() {
-  if (!pendingCode) { showToast('กดสร้างรหัสก่อน'); return; }
+function regenerateCode() { pendingCode = generateCode(); }
+async function _createFarmInternal(code) { // internal use only
   setSyncStatus('syncing');
   try {
     const batch = db.batch();
     DEFAULT_MEDS.forEach(m => {
-      batch.set(db.doc(`farms/${pendingCode}/meds/${m.id}`), m);
+      batch.set(db.doc(`farms/${code}/meds/${m.id}`), m);
     });
-    batch.set(db.doc(`farms/${pendingCode}/config/plan`), { completedRounds: [1] });
-    batch.set(db.doc(`farms/${pendingCode}/config/settings`), {
+    batch.set(db.doc(`farms/${code}/config/plan`), { completedRounds: [1] });
+    batch.set(db.doc(`farms/${code}/config/settings`), {
       trees: DEFAULT_TREES,
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
     await batch.commit();
-    localStorage.setItem('durianFarmCode', pendingCode);
+    localStorage.setItem('durianFarmCode', code);
     localStorage.setItem('durianFarmRole', 'owner');
     userRole = 'owner';
-    farmCode = pendingCode;
+    farmCode = code;
     hideFarmScreen();
     updateFarmCodeDisplay();
     startListeners();
@@ -592,20 +564,8 @@ async function joinFarm() {
 function hideFarmScreen() { document.getElementById('farmScreen').classList.add('hidden'); }
 function showFarmScreen() {
   document.getElementById('farmScreen').classList.remove('hidden');
-  const _role = localStorage.getItem('durianFarmRole');
-  const _createTab = document.querySelectorAll('.farm-tab')[0];
-  if (_role === 'member') {
-    // member เห็นแค่แท็บ "เข้าร่วมฟาร์ม"
-    _createTab.style.display = 'none';
-    document.querySelectorAll('.farm-tab')[0].classList.remove('active');
-    document.querySelectorAll('.farm-tab')[1].classList.add('active');
-    document.getElementById('fsNew').classList.remove('active');
-    document.getElementById('fsJoin').classList.add('active');
-  } else {
-    _createTab.style.display = '';
-    regenerateCode();
-    switchFarmTab('new');
-  }
+  document.getElementById('joinCodeInput').value = '';
+  document.getElementById('joinError').style.display = 'none';
 }
 function updateFarmCodeDisplay() {
   document.getElementById('farmCodeDisplay').textContent = farmCode;
