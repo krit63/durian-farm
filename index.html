@@ -19,7 +19,6 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{font-size:15px}
 body{font-family:'Segoe UI','Sarabun',sans-serif;background:linear-gradient(135deg,#e8f5e9,#f9fbe7);min-height:100vh;min-height:-webkit-fill-available;color:#263238}
-
 /* ===== FARM SETUP SCREEN ===== */
 #farmScreen{position:fixed;inset:0;background:linear-gradient(160deg,var(--gd) 0%,var(--g) 60%,#388e3c 100%);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
 #farmScreen.hidden{display:none}
@@ -41,7 +40,6 @@ body{font-family:'Segoe UI','Sarabun',sans-serif;background:linear-gradient(135d
 .farm-input{width:100%;padding:11px 14px;border:1.5px solid #cfd8dc;border-radius:10px;font-size:1rem;font-family:monospace;text-align:center;letter-spacing:2px;text-transform:uppercase;background:#fafafa}
 .farm-input:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 3px rgba(45,139,69,.12)}
 .farm-error{background:var(--rl);color:var(--r);padding:8px 12px;border-radius:8px;font-size:.82rem;margin-top:8px;display:none}
-
 /* ===== CONFIG ERROR ===== */
 #configError{position:fixed;inset:0;background:var(--gd);z-index:600;display:none;align-items:center;justify-content:center;padding:20px}
 #configError.show{display:flex}
@@ -49,7 +47,6 @@ body{font-family:'Segoe UI','Sarabun',sans-serif;background:linear-gradient(135d
 .config-card h2{color:var(--r);margin-bottom:10px;font-size:1.2rem}
 .config-card p{font-size:.85rem;color:var(--gr);line-height:1.7;margin-bottom:14px}
 .config-card a{color:var(--b);font-weight:700}
-
 /* ===== HEADER ===== */
 header{background:linear-gradient(135deg,var(--gd),var(--g));color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 16px rgba(0,0,0,.18)}
 .header-inner{max-width:1150px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
@@ -62,13 +59,11 @@ header{background:linear-gradient(135deg,var(--gd),var(--g));color:#fff;position
 .farm-code-badge:hover{background:rgba(255,255,255,.28)}
 .farm-code-badge strong{font-family:monospace;letter-spacing:1px}
 .header-date{background:rgba(255,255,255,.12);padding:4px 10px;border-radius:14px;font-size:.75rem;white-space:nowrap}
-
 /* ===== SYNC STATUS ===== */
 #syncDot{width:8px;height:8px;border-radius:50%;background:#81c784;display:inline-block;margin-right:4px;transition:background .5s}
 #syncDot.syncing{background:var(--y);animation:pulse .8s infinite}
 #syncDot.offline{background:var(--r)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-
 /* ===== NAV ===== */
 nav{background:var(--gd);border-top:1px solid rgba(255,255,255,.12)}
 .nav-inner{max-width:1150px;margin:0 auto;display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
@@ -76,27 +71,22 @@ nav{background:var(--gd);border-top:1px solid rgba(255,255,255,.12)}
 .tab-btn{background:none;border:none;color:rgba(255,255,255,.65);padding:11px 16px;font-size:.82rem;cursor:pointer;display:flex;align-items:center;gap:5px;border-bottom:3px solid transparent;transition:all .2s;font-family:inherit;white-space:nowrap;flex-shrink:0}
 .tab-btn:hover{color:#fff;background:rgba(255,255,255,.07)}
 .tab-btn.active{color:var(--y);border-bottom-color:var(--y);font-weight:700}
-
 /* ===== MAIN ===== */
 main{max-width:1150px;margin:0 auto;padding:16px 12px 80px}
 .page{display:none}.page.active{display:block}
-
 /* ===== CARD ===== */
 .card{background:#fff;border-radius:var(--rad);box-shadow:var(--sh);padding:18px;margin-bottom:16px}
 .card-title{font-size:.95rem;font-weight:700;color:var(--gd);display:flex;align-items:center;gap:7px;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--gp)}
-
 /* ===== STATS ===== */
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:16px}
 .stat-card{background:#fff;border-radius:var(--rad);padding:14px 16px;box-shadow:var(--sh);display:flex;align-items:center;gap:10px;border-left:4px solid var(--g)}
 .stat-card.y{border-left-color:var(--y)}.stat-card.o{border-left-color:var(--o)}.stat-card.b{border-left-color:var(--b)}.stat-card.r{border-left-color:var(--r)}.stat-card.p{border-left-color:var(--pu)}
 .si{font-size:1.6rem}.sn{font-size:1.5rem;font-weight:800;color:var(--gd);line-height:1}.sl{font-size:.7rem;color:var(--gr);margin-top:2px}
-
 /* ===== ALERTS ===== */
 .ab{background:linear-gradient(135deg,#fff3e0,#fff8e1);border:1.5px solid var(--y);border-radius:var(--rsm);padding:11px 14px;margin-bottom:12px;display:flex;align-items:flex-start;gap:9px}
 .ab.danger{background:linear-gradient(135deg,#ffebee,#fce4ec);border-color:var(--r)}
 .ab .ai{font-size:1.2rem;flex-shrink:0}.ab .at{font-size:.81rem;line-height:1.55}
 .ab .at strong{font-size:.87rem;display:block;margin-bottom:2px}
-
 /* ===== UPCOMING ===== */
 .upcoming-list{display:flex;flex-direction:column;gap:6px}
 .ui-item{display:flex;align-items:center;gap:9px;padding:8px 12px;border-radius:var(--rsm);background:var(--grl);border-left:4px solid var(--gl);flex-wrap:wrap}
@@ -106,7 +96,6 @@ main{max-width:1150px;margin:0 auto;padding:16px 12px 80px}
 .ui-item .mn{color:var(--gr);font-size:.77rem;flex:1}
 .ui-item .dd{font-size:.77rem;font-weight:700}
 .ui-item.ov .dd{color:var(--r)}.ui-item.sn .dd{color:var(--o)}
-
 /* ===== BADGE / CHIP ===== */
 .badge{font-size:.66rem;padding:2px 7px;border-radius:9px;font-weight:700;background:var(--gp);color:var(--gd);white-space:nowrap}
 .badge.ov{background:var(--rl);color:var(--r)}.badge.sn{background:var(--yl);color:var(--o)}
@@ -115,7 +104,6 @@ main{max-width:1150px;margin:0 auto;padding:16px 12px 80px}
 .g-i{background:#f3e5f5;color:#6a1b9a}.g-m{background:#fff3e0;color:#bf360c}.g-p{background:#e3f2fd;color:#0d47a1}
 .g-d{background:#ffebee;color:#b71c1c}.g-s{background:#efebe9;color:#4e342e}.g-n{background:#e8f5e9;color:#1b5e20}
 .group-chip{display:inline-block;padding:2px 8px;border-radius:9px;font-size:.7rem;font-weight:700;white-space:nowrap}
-
 /* ===== FORM ===== */
 .fg{display:flex;flex-direction:column;gap:4px}
 .fg.full{grid-column:1/-1}
@@ -126,7 +114,6 @@ input,select,textarea{border:1.5px solid #cfd8dc;border-radius:var(--rsm);paddin
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 3px rgba(45,139,69,.12);background:#fff}
 textarea{min-height:60px;resize:vertical}
 .form-note{font-size:.72rem;color:var(--gr);margin-top:2px}
-
 /* ===== BUTTONS ===== */
 .btn{padding:10px 18px;border:none;border-radius:var(--rsm);font-size:.88rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .18s;font-family:inherit;-webkit-appearance:none}
 .btn-p{background:linear-gradient(135deg,var(--g),var(--gd));color:#fff;box-shadow:0 3px 10px rgba(45,139,69,.28)}.btn-p:hover{transform:translateY(-1px)}
@@ -136,12 +123,10 @@ textarea{min-height:60px;resize:vertical}
 .btn-w{background:var(--yl);color:var(--o);border:1.5px solid #ffcc02}.btn-w:hover{background:var(--y);color:#fff}
 .btn-sm{padding:6px 12px;font-size:.8rem}.btn-xs{padding:3px 9px;font-size:.72rem}
 .form-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
-
 /* ===== FILTER ===== */
 .filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:flex-end}
 .filter-bar .fg label{font-size:.76rem}
 .filter-bar input,.filter-bar select{max-width:150px;padding:7px 10px;font-size:.82rem}
-
 /* ===== TABLE ===== */
 .tw{overflow-x:auto;border-radius:var(--rsm);-webkit-overflow-scrolling:touch}
 table{width:100%;border-collapse:collapse;font-size:.82rem;min-width:550px}
@@ -152,7 +137,6 @@ tr:hover td{background:var(--gp)}
 tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:var(--gp)}
 .empty{text-align:center;padding:32px;color:var(--gr);font-size:.85rem}
 .empty .ei{font-size:2.2rem;display:block;margin-bottom:7px}
-
 /* ===== STOCK BAR ===== */
 .sbw{display:flex;align-items:center;gap:7px;min-width:110px}
 .sbar{flex:1;height:7px;background:#eceff1;border-radius:4px;overflow:hidden}
@@ -160,59 +144,46 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
 .sfill.ok{background:var(--gl)}.sfill.low{background:var(--y)}.sfill.crit{background:var(--r)}
 .stxt{font-size:.77rem;font-weight:700;white-space:nowrap}
 .stxt.ok{color:var(--g)}.stxt.low{color:var(--o)}.stxt.crit{color:var(--r)}
-
 /* ===== PRESET TAGS ===== */
 .preset-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
 .pt{background:var(--gp);color:var(--gd);border:1.5px solid var(--gl);padding:3px 10px;border-radius:12px;font-size:.75rem;cursor:pointer;transition:all .15s;font-weight:600}
 .pt:hover{background:var(--gl);color:#fff}
-
 /* ===== 2-COL GRID ===== */
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:680px){.two-col{grid-template-columns:1fr}}
-
 /* ===== PAGE HEADER ===== */
 .ph{margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:9px}
 .ph h2{font-size:1.1rem;font-weight:800;color:var(--gd);display:flex;align-items:center;gap:7px}
-
 /* ===== SUCCESS MSG ===== */
 .success-msg{background:var(--gp);color:var(--gd);padding:9px 14px;border-radius:var(--rsm);font-size:.84rem;font-weight:700;display:none;align-items:center;gap:8px;margin-bottom:8px}
-
 /* ===== TOBUY CARD ===== */
 .tobuy-card{background:linear-gradient(135deg,#fff9c4,#fff3e0);border:1.5px solid var(--y);border-radius:var(--rsm);padding:12px 14px;margin-bottom:9px;display:flex;align-items:center;gap:11px;flex-wrap:wrap}
 .tobuy-card .tn{font-weight:700;font-size:.88rem;flex:1;min-width:110px}
 .tobuy-card .gu{font-size:.77rem;color:var(--gr)}
-
 /* ===== MODAL ===== */
 .mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:300;align-items:center;justify-content:center;padding:12px}
 .mo.open{display:flex}
 .modal{background:#fff;border-radius:var(--rad);padding:22px;max-width:480px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.22);max-height:90vh;overflow-y:auto}
 .modal h3{color:var(--gd);font-size:1rem;margin-bottom:12px;padding-bottom:9px;border-bottom:2px solid var(--gp)}
 .modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}
-
 /* ===== SETTINGS ===== */
 .settings-section{margin-bottom:20px}
 .settings-section h3{font-size:.9rem;font-weight:700;color:var(--gd);margin-bottom:9px;padding-bottom:7px;border-bottom:1.5px solid var(--gp)}
 .tree-item{display:flex;align-items:center;justify-content:space-between;background:var(--grl);padding:8px 12px;border-radius:var(--rsm);font-size:.84rem;margin-bottom:5px}
-
 /* ===== GS GUIDE ===== */
 .gs-guide{background:linear-gradient(135deg,#e3f2fd,#e8eaf6);border:1.5px solid #90caf9;border-radius:var(--rsm);padding:13px;margin-top:13px;font-size:.8rem;line-height:1.7;color:#1a237e}
 .gs-guide strong{display:block;margin-bottom:5px;font-size:.85rem}
-
 /* ===== DIVIDER ===== */
 .dv{height:1px;background:var(--gp);margin:13px 0}
-
 /* ===== TOAST ===== */
 #toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:#323232;color:#fff;padding:10px 20px;border-radius:24px;font-size:.84rem;font-weight:600;z-index:400;transition:transform .3s ease;pointer-events:none;white-space:nowrap}
 #toast.show{transform:translateX(-50%) translateY(0)}
-
 /* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-track{background:#f0f0f0;border-radius:3px}::-webkit-scrollbar-thumb{background:var(--gl);border-radius:3px}
-
 @media(max-width:400px){.tab-btn{padding:9px 10px;font-size:.75rem}.header-title h1{font-size:.9rem}.btn-sm{padding:5px 10px;font-size:.76rem}}
 </style>
 </head>
 <body>
-
 <!-- ===== CONFIG ERROR ===== -->
 <div id="configError">
   <div class="config-card">
@@ -223,7 +194,6 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
     <p style="margin-top:12px;font-size:.75rem;color:#90a4ae">แก้ไข FIREBASE_CONFIG ในไฟล์ durian-tracker.html</p>
   </div>
 </div>
-
 <!-- ===== FARM SETUP SCREEN ===== -->
 <div id="farmScreen">
   <div class="farm-card">
@@ -234,7 +204,6 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
       <button class="farm-tab active" onclick="switchFarmTab('new')">🌱 สร้างฟาร์มใหม่</button>
       <button class="farm-tab" onclick="switchFarmTab('join')">🔗 เข้าร่วมฟาร์ม</button>
     </div>
-
     <!-- NEW FARM -->
     <div class="farm-section active" id="fsNew">
       <p style="font-size:.82rem;color:var(--gr);margin-bottom:8px">รหัสฟาร์มของคุณ (แชร์ให้ทีมเพื่อเข้าถึงข้อมูลเดียวกัน)</p>
@@ -248,7 +217,6 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
         💡 <strong>วิธีให้ทีมเข้าร่วม:</strong> ส่งรหัสนี้ให้ทีม → เขาเปิดเว็บ → กด "เข้าร่วมฟาร์ม" → ใส่รหัส
       </div>
     </div>
-
     <!-- JOIN FARM -->
     <div class="farm-section" id="fsJoin">
       <p style="font-size:.82rem;color:var(--gr);margin-bottom:8px">ใส่รหัสฟาร์มที่ได้รับจากผู้สร้าง</p>
@@ -258,7 +226,6 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
     </div>
   </div>
 </div>
-
 <!-- ===== HEADER ===== -->
 <header>
   <div class="header-inner">
@@ -285,12 +252,11 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
     <button class="tab-btn" onclick="showPage('add')" id="tab-add">➕ บันทึก</button>
     <button class="tab-btn" onclick="showPage('history')" id="tab-history">📋 ประวัติ</button>
     <button class="tab-btn" onclick="showPage('stock')" id="tab-stock">💊 คลังยา</button>
+    <button class="tab-btn" onclick="showPage('plan')" id="tab-plan">📅 แผนฉีด</button>
     <button class="tab-btn" onclick="showPage('settings')" id="tab-settings">⚙️ ตั้งค่า</button>
   </div>
 </nav>
-
 <main>
-
 <!-- ===== DASHBOARD ===== -->
 <div class="page active" id="page-dashboard">
   <div class="ph"><h2>📊 ภาพรวมสวน</h2><button class="btn btn-p btn-sm" onclick="showPage('add')">➕ บันทึกใหม่</button></div>
@@ -305,7 +271,6 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
     <div class="tw"><table><thead><tr><th>ต้น/แปลง</th><th>ครั้งล่าสุด</th><th>ยา/ปุ๋ยล่าสุด</th><th>รวม</th></tr></thead><tbody id="treeSummaryBody"><tr><td colspan="4" class="empty"><span class="ei">🌱</span>ยังไม่มีข้อมูล</td></tr></tbody></table></div>
   </div>
 </div>
-
 <!-- ===== ADD RECORD ===== -->
 <div class="page" id="page-add">
   <div class="ph"><h2>➕ บันทึกการฉีดยา/ใส่ปุ๋ย</h2></div>
@@ -334,7 +299,6 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
     </div>
   </div>
 </div>
-
 <!-- ===== HISTORY ===== -->
 <div class="page" id="page-history">
   <div class="ph"><h2>📋 ประวัติ</h2><button class="btn btn-e btn-sm" onclick="exportCSV()">📤 Export CSV</button></div>
@@ -352,7 +316,6 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
     <div class="gs-guide"><strong>📊 นำเข้า Google Sheets:</strong> กด Export CSV → เปิด Google Sheets → File → Import → Upload → Separator: Comma ✅</div>
   </div>
 </div>
-
 <!-- ===== STOCK ===== -->
 <div class="page" id="page-stock">
   <div class="ph"><h2>💊 คลังยาและปุ๋ย</h2><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="btn btn-p btn-sm" onclick="openAddMedModal()">➕ เพิ่มรายการ</button><button class="btn btn-e btn-sm" onclick="exportStockCSV()">📤 Export CSV</button></div></div>
@@ -367,7 +330,6 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
   </div>
   <div class="card"><div class="card-title">🛒 ยาแนะนำซื้อเพิ่ม</div><div id="toBuyList"></div></div>
 </div>
-
 <!-- ===== SETTINGS ===== -->
 <div class="page" id="page-settings">
   <div class="ph"><h2>⚙️ ตั้งค่า</h2></div>
@@ -378,6 +340,7 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
         <div style="font-size:1.3rem;font-weight:900;letter-spacing:3px;color:var(--gd);font-family:monospace" id="settingFarmCode">-</div>
         <div style="font-size:.72rem;color:var(--gr);margin-top:3px">รหัสนี้ใช้เข้าถึงข้อมูลเดียวกันกับทีม</div>
       </div>
+      <div id="roleDisplay" style="margin-bottom:10px"></div>
       <button class="btn btn-p btn-sm" onclick="copyFarmCode()">📋 คัดลอกรหัส</button>
       <button class="btn btn-s btn-sm" onclick="changeFarm()">🔄 เปลี่ยนฟาร์ม</button>
     </div>
@@ -385,7 +348,7 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
     <div class="settings-section">
       <h3>🌳 จัดการต้น/แปลงทุเรียน</h3>
       <div id="treeList" style="margin-bottom:9px"></div>
-      <div style="display:flex;gap:7px;flex-wrap:wrap;align-items:center">
+      <div id="addTreeSection" style="display:flex;gap:7px;flex-wrap:wrap;align-items:center">
         <input type="text" id="newTreeInput" placeholder="เช่น ต้น A-01, แปลงเหนือ" style="max-width:220px">
         <button class="btn btn-p btn-sm" onclick="addTree()">➕ เพิ่ม</button>
       </div>
@@ -394,41 +357,62 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
     <div class="settings-section">
       <h3>🗑️ จัดการข้อมูล</h3>
       <p style="font-size:.8rem;color:var(--gr);margin-bottom:9px">ข้อมูลซิงค์แบบ real-time ผ่าน Firebase Cloud</p>
-      <button class="btn btn-d btn-sm" onclick="openClearModal('records')">🗑️ ล้างประวัติทั้งหมด</button>
+      <button id="clearRecordsBtn" class="btn btn-d btn-sm" onclick="openClearModal('records')">🗑️ ล้างประวัติทั้งหมด</button>
     </div>
   </div>
 </div>
 
+<!-- ===== SPRAY PLAN ===== -->
+<div class="page" id="page-plan">
+  <div class="ph"><h2>📅 แผนฉีดยาประจำปี</h2></div>
+  <div class="card" style="background:linear-gradient(135deg,#fff3e0,#fff8e1);border:1.5px solid #f9a825;padding:13px 16px;margin-bottom:14px">
+    <div style="font-size:.82rem;line-height:1.85;color:#263238">
+      <strong style="display:block;margin-bottom:5px;font-size:.9rem">⚠️ ข้อห้ามสำคัญ</strong>
+      ❌ ห้ามผสม Copper + Abamectin/Emamectin<br>
+      ❌ Copper ใช้เฉพาะ <strong>มิ.ย.–ต.ค.</strong> เท่านั้น<br>
+      ⏰ ฉีดหลัง <strong>16:00 น.</strong> เสมอ<br>
+      🌧️ ฝนตกภายใน 4 ชม. — ฉีดซ้ำวันถัดไป
+    </div>
+  </div>
+  <div class="card" style="padding:0;overflow:hidden">
+    <div class="tw"><table id="planTable" style="min-width:700px">
+      <thead><tr>
+        <th style="width:36px">#</th>
+        <th>วันที่</th>
+        <th>ฤดู</th>
+        <th>กลุ่ม</th>
+        <th>สารที่ใช้ / ปริมาณ</th>
+        <th>PPE</th>
+        <th>สังเกต</th>
+        <th id="planActionTh"></th>
+      </tr></thead>
+      <tbody id="planBody"></tbody>
+    </table></div>
+  </div>
+</div>
 </main>
-
 <!-- TOAST -->
 <div id="toast"></div>
-
 <!-- MODAL: Delete -->
 <div class="mo" id="deleteModal"><div class="modal"><h3 style="color:var(--r)">⚠️ ยืนยันการลบ</h3><p style="font-size:.85rem;color:var(--gr);margin-bottom:12px">ต้องการลบรายการนี้ใช่ไหม?</p><div class="modal-actions"><button class="btn btn-s" onclick="closeModal('deleteModal')">ยกเลิก</button><button class="btn btn-d" id="confirmDeleteBtn">ลบ</button></div></div></div>
-
 <!-- MODAL: Clear -->
 <div class="mo" id="clearModal"><div class="modal"><h3 style="color:var(--r)">⚠️ ยืนยัน</h3><p id="clearModalMsg" style="font-size:.85rem;color:var(--gr);margin-bottom:12px"></p><div class="modal-actions"><button class="btn btn-s" onclick="closeModal('clearModal')">ยกเลิก</button><button class="btn btn-d" id="confirmClearBtn">ดำเนินการ</button></div></div></div>
-
 <!-- MODAL: Edit Med -->
 <div class="mo" id="editStockModal"><div class="modal"><h3>📦 แก้ไขข้อมูลยา</h3><input type="hidden" id="editMedId"><div class="form-grid" style="margin-bottom:11px"><div class="fg full"><label>ชื่อยา/ปุ๋ย</label><input type="text" id="editMedName"></div><div class="fg full"><label>กลุ่ม</label><select id="editMedGroup"><option>แมลง</option><option>ไร</option><option>เพลี้ย</option><option>โรค</option><option>หอยทาก</option><option>ธาตุอาหาร</option><option>อื่นๆ</option></select></div><div class="fg full"><label>ใช้กับ</label><input type="text" id="editMedUses"></div><div class="fg"><label>จำนวนที่มี</label><input type="number" id="editMedTotal" min="0" step="0.1"></div><div class="fg"><label>คงเหลือ</label><input type="number" id="editMedCurrent" min="0" step="0.1"></div><div class="fg"><label>แจ้งเตือนเมื่อเหลือ ≤</label><input type="number" id="editMedMin" min="0" step="0.1"></div><div class="fg"><label>หน่วย</label><select id="editMedUnit"><option>มล.</option><option>ลิตร</option><option>กรัม</option><option>กก.</option><option>ขวด</option><option>ถุง</option><option>กล่อง</option><option>ซอง</option></select></div><div class="fg full"><label>หมายเหตุ</label><input type="text" id="editMedNotes"></div></div><div class="modal-actions"><button class="btn btn-d btn-sm" id="deleteMedBtn">🗑️ ลบ</button><div style="flex:1"></div><button class="btn btn-s" onclick="closeModal('editStockModal')">ยกเลิก</button><button class="btn btn-p" onclick="saveEditMed()">💾 บันทึก</button></div></div></div>
-
 <!-- MODAL: Add Med -->
 <div class="mo" id="addMedModal"><div class="modal"><h3>➕ เพิ่มรายการยา/ปุ๋ย</h3><div class="form-grid" style="margin-bottom:11px"><div class="fg full"><label>ชื่อยา/ปุ๋ย *</label><input type="text" id="addMedName" placeholder="เช่น ไซเพอร์เมทริน"></div><div class="fg full"><label>กลุ่ม</label><select id="addMedGroup"><option>แมลง</option><option>ไร</option><option>เพลี้ย</option><option>โรค</option><option>หอยทาก</option><option>ธาตุอาหาร</option><option>อื่นๆ</option></select></div><div class="fg full"><label>ใช้กับ</label><input type="text" id="addMedUses" placeholder="เช่น ไรแดง เพลี้ยไฟ"></div><div class="fg"><label>จำนวนที่มี</label><input type="number" id="addMedTotal" min="0" step="0.1" value="0"></div><div class="fg"><label>คงเหลือ</label><input type="number" id="addMedCurrent" min="0" step="0.1" value="0"></div><div class="fg"><label>แจ้งเตือน ≤</label><input type="number" id="addMedMin" min="0" step="0.1" value="0"></div><div class="fg"><label>หน่วย</label><select id="addMedUnit"><option>มล.</option><option>ลิตร</option><option>กรัม</option><option>กก.</option><option>ขวด</option><option>ถุง</option><option>กล่อง</option><option>ซอง</option></select></div><div class="fg full"><label>หมายเหตุ</label><input type="text" id="addMedNotes"></div></div><div class="modal-actions"><button class="btn btn-s" onclick="closeModal('addMedModal')">ยกเลิก</button><button class="btn btn-p" onclick="saveNewMed()">➕ เพิ่ม</button></div></div></div>
-
 <script>
 // ==============================================================
 // 🔧 FIREBASE CONFIG
-// วิธีแก้ไข: ดูคู่มือในไฟล์ setup-guide.html
 // ==============================================================
 const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyDgUlBjz4b72OyYo7xnDvJ5dcuxHULCxVw",
-  authDomain: "durian-farm-f97b6.firebaseapp.com",
-  projectId: "durian-farm-f97b6",
-  storageBucket: "durian-farm-f97b6.firebasestorage.app",
-  messagingSenderId: "192044474624",
-  appId: "1:192044474624:web:c0740efbaa5c2506b7d3e5",
-  measurementId: "G-KEG2HD8X8J",
+  apiKey: "AIzaSyDgUlBjz4b72OyYo7xnDvJ5dcuxHULCxVw",
+  authDomain: "durian-farm-f97b6.firebaseapp.com",
+  projectId: "durian-farm-f97b6",
+  storageBucket: "durian-farm-f97b6.firebasestorage.app",
+  messagingSenderId: "192044474624",
+  appId: "1:192044474624:web:c0740efbaa5c2506b7d3e5",
+  measurementId: "G-KEG2HD8X8J",
 };
 // ==============================================================
 //  DEFAULT DATA
@@ -459,18 +443,72 @@ const DEFAULT_MEDS = [
   {id:'m22',name:'Emamectin',           group:'แมลง',    uses:'สลับ Abamectin',            total:0,current:0,minAlert:0,unit:'กรัม',notes:'',status:'tobuy',urgency:'normal'},
   {id:'m23',name:'Indoxacarb',          group:'แมลง',    uses:'ด้วงเจาะกิ่ง',              total:0,current:0,minAlert:0,unit:'กรัม',notes:'',status:'tobuy',urgency:'normal'},
   {id:'m24',name:'Fipronil (ราดดิน)',   group:'แมลง',    uses:'ปลวก มด',                   total:0,current:0,minAlert:0,unit:'มล.',  notes:'แมลงดิน',status:'tobuy',urgency:'normal'},
+  {id:'m25',name:'Calcium Boron',       group:'ธาตุอาหาร',uses:'ผนังเซลล์ ลำเลียง Ca เข้าต้น',total:0,current:0,minAlert:0,unit:'มล.',  notes:'ใส่ทุก 3-4 สัปดาห์',status:'owned'},
 ];
 
+// ==============================================================
+//  DEFAULT SPRAY SCHEDULE
+// ==============================================================
+const DEFAULT_SCHEDULE = [
+  {id:1,  date:'2025-05-10',season:'เริ่มฝน',  group:'เพลี้ย+บำรุง',    chem:'ฟลอนิคามิด + Zn EDTA + Mg EDTA + MIX-EDTA + Calcium Boron',      amt:'ฉีดแล้ว',                    ppe:'—',                      obs:'ตรวจใบ เพลี้ยไฟ บำรุง',         done:true},
+  {id:2,  date:'2025-05-17',season:'เริ่มฝน',  group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'สีใบ ใบอ่อน แตกกิ่ง',            done:false},
+  {id:3,  date:'2025-05-24',season:'เริ่มฝน',  group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + อะซีทามิพริด + MIX-EDTA + อมิโนแอซิด',              amt:'150+ฉลาก+100+100 มล.',        ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน เพลี้ยแป้ง ยอดอ่อน',         done:false},
+  {id:4,  date:'2025-05-31',season:'เริ่มฝน',  group:'โรค+บำรุง',        chem:'Fosetyl-Al + MIX-EDTA + Mg EDTA + อมิโนแอซิด',                     amt:'150+100+125+150 มล.',         ppe:'ถุงมือ',                  obs:'โคนต้น รอยเน่า ยางไหล',           done:false},
+  {id:5,  date:'2025-06-07',season:'ฝนชุก',    group:'แมลง B+ไร',        chem:'Abamectin + สไปโรไดโคชเฟน + Zn EDTA',                              amt:'75+ฉลาก+50 มล.',             ppe:'ชุดเต็ม',                obs:'ใต้ใบ ไรแดง เพลี้ยไฟ',            done:false},
+  {id:6,  date:'2025-06-14',season:'ฝนชุก',    group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด',                         amt:'200+125+100 มล.',            ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'ขอบใบ จุดน้ำตาล ราสนิม',          done:false},
+  {id:7,  date:'2025-06-21',season:'ฝนชุก',    group:'ราดดิน+บำรุง',     chem:'Metalaxyl ราด + MIX-EDTA + ไฮเมกซาโซล',                            amt:'50ก./10ล./ต้น+MIX 100+ฉลาก', ppe:'ชุดเต็ม+บูท',            obs:'ขุดดูราก สีน้ำตาล=เน่า',          done:false},
+  {id:8,  date:'2025-06-28',season:'ฝนชุก',    group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + ฟลอนิคามิด + MIX-EDTA',                             amt:'150+ฉลาก+100 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน เพลี้ยแป้ง ผงขาว',           done:false},
+  {id:9,  date:'2025-07-05',season:'ฝนมาก',    group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Zn EDTA + อมิโนแอซิด',                        amt:'100+125+50+150 มล.',          ppe:'ถุงมือ',                  obs:'ใบอ่อน โคนต้น น้ำขัง',            done:false},
+  {id:10, date:'2025-07-12',season:'ฝนมาก',    group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด',                         amt:'200+125+100 มล.',            ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'ใบแก่ จุดสี ราแป้ง',              done:false},
+  {id:11, date:'2025-07-19',season:'ฝนมาก',    group:'แมลง B+ไร',        chem:'Abamectin + เฮกซีไทอะซอกซ์ + Zn EDTA',                            amt:'75+ฉลาก+50 มล.',             ppe:'ชุดเต็ม',                obs:'ใต้ใบ ไรแดง เส้นใย',              done:false},
+  {id:12, date:'2025-07-26',season:'ฝนมาก',    group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'โคนต้น รอยแตก ยางไหล',            done:false},
+  {id:13, date:'2025-08-02',season:'ฝนมาก',    group:'โรค+ราดดิน',       chem:'Fosetyl-Al ราด + MIX-EDTA + ไฮเมกซาโซล',                           amt:'ราด+MIX 100+ฉลาก',           ppe:'ชุดเต็ม+บูท',            obs:'ราดซ้ำ ดูรากหลังขุด',             done:false},
+  {id:14, date:'2025-08-09',season:'ฝนมาก',    group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + อะซีทามิพริด + MIX-EDTA',                           amt:'150+ฉลาก+100 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'หนอนม้วนใบ เพลี้ยหอย',            done:false},
+  {id:15, date:'2025-08-16',season:'ฝนมาก',    group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Zn EDTA + Calcium Boron',                      amt:'100+125+50+ฉลาก',            ppe:'ถุงมือ',                  obs:'ใบอ่อน สีเปลือก รอยช้ำ',          done:false},
+  {id:16, date:'2025-08-23',season:'ฝนมาก',    group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด',                         amt:'200+125+100 มล.',            ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'เชื้อราใบ ราสนิม ใบไหม้',         done:false},
+  {id:17, date:'2025-08-30',season:'ฝนมาก',    group:'แมลง B+ไร',        chem:'Emamectin + สไปโรไดโคชเฟน + Zn EDTA',                              amt:'50+ฉลาก+50 มล.',             ppe:'ชุดเต็ม',                obs:'ใต้ใบ ไข่ไร ตัวอ่อน',             done:false},
+  {id:18, date:'2025-09-06',season:'ฝนชุก',    group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'ใต้ใบอ่อน ไร เพลี้ยไฟ',           done:false},
+  {id:19, date:'2025-09-13',season:'ฝนชุก',    group:'โรค+บำรุง',        chem:'Fosetyl-Al + MIX-EDTA + Mg EDTA',                                  amt:'150+100+125 มล.',            ppe:'ถุงมือ',                  obs:'ใบจุด ขอบน้ำตาล แอนแทรคโนส',     done:false},
+  {id:20, date:'2025-09-20',season:'ฝนชุก',    group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + ฟลอนิคามิด + MIX-EDTA',                             amt:'150+ฉลาก+100 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน รอยกัด กิ่งเหี่ยว',          done:false},
+  {id:21, date:'2025-09-27',season:'ฝนชุก',    group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Zn EDTA + Calcium Boron',                      amt:'100+125+50+ฉลาก',            ppe:'ถุงมือ',                  obs:'โคนต้น สีดิน ระบายน้ำ',           done:false},
+  {id:22, date:'2025-10-04',season:'ปลายฝน',   group:'แมลง B+เพลี้ย',   chem:'Abamectin + อะซีทามิพริด + Zn EDTA',                               amt:'75+ฉลาก+50 มล.',             ppe:'ชุดเต็ม',                obs:'ใต้ใบ เพลี้ย สะสมอาหาร',          done:false},
+  {id:23, date:'2025-10-11',season:'ปลายฝน',   group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด',                         amt:'200+125+100 มล.',            ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'ป้องกันรากเน่าปลายฝน',             done:false},
+  {id:24, date:'2025-10-18',season:'ปลายฝน',   group:'แมลง C+เพลี้ย',   chem:'Indoxacarb + ฟลอนิคามิด + MIX-EDTA',                               amt:'75+ฉลาก+100 มล.',            ppe:'หน้ากาก+ถุงมือ',          obs:'ด้วง รูเจาะ เพลี้ยแป้ง',           done:false},
+  {id:25, date:'2025-10-25',season:'ปลายฝน',   group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'สีใบรวม เตรียมรับหนาว',            done:false},
+  {id:26, date:'2025-11-01',season:'หนาว',      group:'แมลง B+ไร',        chem:'Emamectin + เฮกซีไทอะซอกซ์ + Zn EDTA',                            amt:'50+ฉลาก+50 มล.',             ppe:'ชุดเต็ม',                obs:'ใต้ใบ ไร เพลี้ยไฟ',               done:false},
+  {id:27, date:'2025-11-08',season:'หนาว',      group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + Calcium Boron',                  amt:'100+125+150+ฉลาก',           ppe:'ถุงมือ',                  obs:'ใบอ่อน สมบูรณ์ไหม',               done:false},
+  {id:28, date:'2025-11-15',season:'หนาว',      group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + อะซีทามิพริด + MIX-EDTA',                           amt:'150+ฉลาก+100 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน เพลี้ยแป้ง ผงขาวกิ่ง',       done:false},
+  {id:29, date:'2025-11-22',season:'หนาว',      group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Zn EDTA',                                     amt:'100+125+50 มล.',             ppe:'ถุงมือ',                  obs:'ใบแก่ Mg เส้นใบเหลือง',           done:false},
+  {id:30, date:'2025-11-29',season:'หนาว',      group:'แมลง C+เพลี้ย',   chem:'Indoxacarb + ฟลอนิคามิด + MIX-EDTA',                               amt:'75+ฉลาก+100 มล.',            ppe:'หน้ากาก+ถุงมือ',          obs:'รูเจาะ ด้วง โคนต้น',              done:false},
+  {id:31, date:'2025-12-06',season:'หนาวจัด',   group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'ทรงพุ่ม กิ่งแตกใหม่',              done:false},
+  {id:32, date:'2025-12-13',season:'หนาวจัด',   group:'แมลง B+ไร',        chem:'Abamectin + สไปโรไดโคชเฟน + Zn EDTA',                              amt:'75+ฉลาก+50 มล.',             ppe:'ชุดเต็ม',                obs:'ใต้ใบ เส้นใย ผงขาว',              done:false},
+  {id:33, date:'2025-12-20',season:'หนาวจัด',   group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Calcium Boron',                               amt:'100+125+ฉลาก',               ppe:'ถุงมือ',                  obs:'สีใบ การสะสมอาหาร',               done:false},
+  {id:34, date:'2025-12-27',season:'หนาวจัด',   group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + อะซีทามิพริด + MIX-EDTA',                           amt:'150+ฉลาก+100 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน กิ่งผิดปกติ',                done:false},
+  {id:35, date:'2026-01-03',season:'ไรแดง',     group:'ไรแดง+ธาตุ',       chem:'Bifenazate + Zn EDTA + อมิโนแอซิด',                                amt:'75+50+100 มล.',              ppe:'หน้ากาก+ถุงมือ',          obs:'ใต้ใบ จุดขาว เส้นใยไรแดง',        done:false},
+  {id:36, date:'2026-01-10',season:'ไรแดง',     group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'ใบอ่อน การแตกยอดใหม่',            done:false},
+  {id:37, date:'2026-01-17',season:'ไรแดง',     group:'ไรแดง+แมลง',       chem:'Bifenazate + Emamectin + Zn EDTA',                                 amt:'75+50+50 มล.',               ppe:'ชุดเต็ม',                obs:'ใต้ใบ ไรแดงสีแดงเข้ม',            done:false},
+  {id:38, date:'2026-01-24',season:'ไรแดง',     group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Calcium Boron',                               amt:'100+125+ฉลาก',               ppe:'ถุงมือ',                  obs:'ใบอ่อนสมบูรณ์ ไม่หงิกงอ',         done:false},
+  {id:39, date:'2026-01-31',season:'ไรแดง',     group:'ไรแดง+เพลี้ย',    chem:'สไปโรไดโคชเฟน + เฮกซีไทอะซอกซ์ + ฟลอนิคามิด',                   amt:'ฉลาก+ฉลาก+ฉลาก',            ppe:'หน้ากาก+ถุงมือ',          obs:'ใต้ใบ เพลี้ยไฟ ไรแดง',            done:false},
+  {id:40, date:'2026-02-07',season:'เริ่มร้อน', group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'สีใบ การเติบโตรวม',               done:false},
+  {id:41, date:'2026-02-14',season:'เริ่มร้อน', group:'ไรแดง+แมลง C',     chem:'Bifenazate + Indoxacarb + Zn EDTA',                                amt:'75+75+50 มล.',               ppe:'หน้ากาก+ถุงมือ',          obs:'ใต้ใบ ไรแดง หนอน',               done:false},
+  {id:42, date:'2026-02-21',season:'เริ่มร้อน', group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Calcium Boron',                               amt:'100+125+ฉลาก',               ppe:'ถุงมือ',                  obs:'ทรงพุ่ม กิ่งแตกใหม่',              done:false},
+  {id:43, date:'2026-02-28',season:'เริ่มร้อน', group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + ฟลอนิคามิด + MIX-EDTA',                             amt:'150+ฉลาก+100 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน เพลี้ยแป้ง',                 done:false},
+  {id:44, date:'2026-03-07',season:'ร้อนแล้ง',  group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                        amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'ใบแก่ ขาดธาตุ stress ร้อน',       done:false},
+  {id:45, date:'2026-03-14',season:'ร้อนแล้ง',  group:'ไรแดง+เพลี้ย',    chem:'สไปโรไดโคชเฟน + อะซีทามิพริด + Zn EDTA',                          amt:'ฉลาก+ฉลาก+50 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'ใต้ใบ ไรแดงระบาดสูงสุด',          done:false},
+  {id:46, date:'2026-03-21',season:'ร้อนแล้ง',  group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Calcium Boron',                               amt:'100+125+ฉลาก',               ppe:'ถุงมือ',                  obs:'สภาพต้นรวม',                       done:false},
+  {id:47, date:'2026-03-28',season:'ร้อนแล้ง',  group:'แมลง B+ไร',        chem:'Abamectin + เฮกซีไทอะซอกซ์ + MIX-EDTA',                           amt:'75+ฉลาก+100 มล.',            ppe:'ชุดเต็ม',                obs:'หนอน ด้วง รูเจาะ',                done:false},
+  {id:48, date:'2026-04-04',season:'ร้อนจัด',   group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Zn EDTA + อมิโนแอซิด + Calcium Boron',        amt:'100+125+50+150+ฉลาก',        ppe:'ถุงมือ',                  obs:'สภาพต้นรวม เตรียมรับฝนปีหน้า',    done:false},
+];
 // ==============================================================
 //  APP STATE
 // ==============================================================
 let db = null;
 let farmCode = '';
 let currentPage = 'dashboard';
-let cache = { records: [], meds: [...DEFAULT_MEDS], trees: [...DEFAULT_TREES] };
+let cache = { records: [], meds: [...DEFAULT_MEDS], trees: [...DEFAULT_TREES], completedRounds: [1] };
 let listeners = [];
 let pendingCode = '';
-
+let userRole = 'owner'; // 'owner'=เจ้าของฟาร์ม | 'member'=สมาชิก
 // ==============================================================
 //  FIREBASE INIT
 // ==============================================================
@@ -482,7 +520,6 @@ function initFirebase() {
     return true;
   } catch(e) { return false; }
 }
-
 // ==============================================================
 //  FARM CODE
 // ==============================================================
@@ -492,7 +529,6 @@ function generateCode() {
   for (let i = 0; i < 4; i++) code += chars[Math.floor(Math.random() * chars.length)];
   return code;
 }
-
 function switchFarmTab(tab) {
   document.querySelectorAll('.farm-tab').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.farm-section').forEach(s => s.classList.remove('active'));
@@ -500,12 +536,10 @@ function switchFarmTab(tab) {
   document.querySelectorAll('.farm-tab')[idx].classList.add('active');
   document.getElementById(tab === 'new' ? 'fsNew' : 'fsJoin').classList.add('active');
 }
-
 function regenerateCode() {
   pendingCode = generateCode();
   document.getElementById('generatedCode').textContent = pendingCode;
 }
-
 async function createNewFarm() {
   if (!pendingCode) { showToast('กดสร้างรหัสก่อน'); return; }
   setSyncStatus('syncing');
@@ -514,12 +548,15 @@ async function createNewFarm() {
     DEFAULT_MEDS.forEach(m => {
       batch.set(db.doc(`farms/${pendingCode}/meds/${m.id}`), m);
     });
+    batch.set(db.doc(`farms/${pendingCode}/config/plan`), { completedRounds: [1] });
     batch.set(db.doc(`farms/${pendingCode}/config/settings`), {
       trees: DEFAULT_TREES,
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
     await batch.commit();
     localStorage.setItem('durianFarmCode', pendingCode);
+    localStorage.setItem('durianFarmRole', 'owner');
+    userRole = 'owner';
     farmCode = pendingCode;
     hideFarmScreen();
     updateFarmCodeDisplay();
@@ -529,7 +566,6 @@ async function createNewFarm() {
     showToast('เกิดข้อผิดพลาด กรุณาตรวจสอบอินเทอร์เน็ต');
   }
 }
-
 async function joinFarm() {
   const code = document.getElementById('joinCodeInput').value.trim().toUpperCase();
   if (!code) { showToast('กรุณาใส่รหัสฟาร์ม'); return; }
@@ -542,6 +578,8 @@ async function joinFarm() {
       setSyncStatus('offline'); return;
     }
     localStorage.setItem('durianFarmCode', code);
+    localStorage.setItem('durianFarmRole', 'member');
+    userRole = 'member';
     farmCode = code;
     hideFarmScreen();
     updateFarmCodeDisplay();
@@ -551,18 +589,28 @@ async function joinFarm() {
     setSyncStatus('offline');
   }
 }
-
 function hideFarmScreen() { document.getElementById('farmScreen').classList.add('hidden'); }
 function showFarmScreen() {
   document.getElementById('farmScreen').classList.remove('hidden');
-  regenerateCode();
+  const _role = localStorage.getItem('durianFarmRole');
+  const _createTab = document.querySelectorAll('.farm-tab')[0];
+  if (_role === 'member') {
+    // member เห็นแค่แท็บ "เข้าร่วมฟาร์ม"
+    _createTab.style.display = 'none';
+    document.querySelectorAll('.farm-tab')[0].classList.remove('active');
+    document.querySelectorAll('.farm-tab')[1].classList.add('active');
+    document.getElementById('fsNew').classList.remove('active');
+    document.getElementById('fsJoin').classList.add('active');
+  } else {
+    _createTab.style.display = '';
+    regenerateCode();
+    switchFarmTab('new');
+  }
 }
-
 function updateFarmCodeDisplay() {
   document.getElementById('farmCodeDisplay').textContent = farmCode;
   document.getElementById('settingFarmCode').textContent = farmCode;
 }
-
 function changeFarm() {
   if (!confirm('เปลี่ยนฟาร์ม? ข้อมูลในเครื่องนี้จะถูกยกเลิก')) return;
   listeners.forEach(u => u()); listeners = [];
@@ -571,55 +619,52 @@ function changeFarm() {
   cache = { records: [], meds: [...DEFAULT_MEDS], trees: [...DEFAULT_TREES] };
   showFarmScreen();
 }
-
 function copyFarmCode() {
   if (!farmCode) return;
   navigator.clipboard.writeText(farmCode).then(() => showToast('คัดลอกรหัส ' + farmCode + ' แล้ว!')).catch(() => {
     prompt('รหัสฟาร์ม (คัดลอกด้วยตัวเอง):', farmCode);
   });
 }
-
 // ==============================================================
 //  FIRESTORE LISTENERS
 // ==============================================================
 function startListeners() {
   listeners.forEach(u => u()); listeners = [];
   const fp = `farms/${farmCode}`;
-
   const u1 = db.collection(`${fp}/records`).orderBy('date','desc').onSnapshot(snap => {
     cache.records = snap.docs.map(d => ({...d.data(), id: d.id}));
     rerenderCurrent();
     setSyncStatus('connected');
   }, () => setSyncStatus('offline'));
-
   const u2 = db.collection(`${fp}/meds`).onSnapshot(snap => {
     cache.meds = snap.docs.map(d => ({...d.data(), id: d.id}));
     rerenderCurrent();
   }, () => {});
-
   const u3 = db.doc(`${fp}/config/settings`).onSnapshot(doc => {
     if (doc.exists) cache.trees = doc.data().trees || DEFAULT_TREES;
     updateTreeSelect(); rerenderCurrent();
   }, () => {});
-
-  listeners = [u1, u2, u3];
+  const u4 = db.doc(`${fp}/config/plan`).onSnapshot(doc => {
+    if(doc.exists && doc.data().completedRounds) cache.completedRounds = doc.data().completedRounds;
+    else cache.completedRounds = [1];
+    if(currentPage==='plan') renderPlan();
+  }, () => {});
+  listeners = [u1, u2, u3, u4];
 }
-
 function rerenderCurrent() {
   if (currentPage === 'dashboard') renderDashboard();
   if (currentPage === 'history')   renderHistory();
   if (currentPage === 'stock')     renderStock();
   if (currentPage === 'settings')  renderSettings();
   if (currentPage === 'add')       { updateTreeSelect(); renderFormPresets(); }
+  if (currentPage === 'plan')      renderPlan();
 }
-
 // ==============================================================
 //  DATA GETTERS (from cache)
 // ==============================================================
 function getRecords() { return cache.records; }
 function getMeds()    { return cache.meds; }
 function getTrees()   { return cache.trees; }
-
 // ==============================================================
 //  FIRESTORE WRITES
 // ==============================================================
@@ -628,7 +673,6 @@ async function fsDeleteRecord(id){ await db.doc(`farms/${farmCode}/records/${id}
 async function fsSetMed(m)       { await db.doc(`farms/${farmCode}/meds/${m.id}`).set(m); }
 async function fsDeleteMed(id)   { await db.doc(`farms/${farmCode}/meds/${id}`).delete(); }
 async function fsSetTrees(trees) { await db.doc(`farms/${farmCode}/config/settings`).update({trees}); }
-
 // ==============================================================
 //  SYNC STATUS
 // ==============================================================
@@ -638,7 +682,6 @@ function setSyncStatus(s) {
   dot.className = s === 'connected' ? '' : s === 'syncing' ? 'syncing' : 'offline';
   dot.style.background = s === 'connected' ? '#81c784' : s === 'syncing' ? '#f9a825' : '#ef5350';
 }
-
 // ==============================================================
 //  NAV
 // ==============================================================
@@ -650,7 +693,6 @@ function showPage(name) {
   currentPage = name;
   rerenderCurrent();
 }
-
 // ==============================================================
 //  UTILS
 // ==============================================================
@@ -668,7 +710,6 @@ function showToast(msg) {
   setTimeout(()=>t.classList.remove('show'), 2500);
 }
 function updateHeaderDate(){ document.getElementById('headerDate').textContent = new Date().toLocaleDateString('th-TH',{weekday:'short',day:'numeric',month:'short',year:'numeric'}); }
-
 function groupChip(g) {
   const map={แมลง:'g-i',ไร:'g-m',เพลี้ย:'g-p',โรค:'g-d',หอยทาก:'g-s',ธาตุอาหาร:'g-n'};
   return `<span class="group-chip ${map[g]||'g-n'}">${g}</span>`;
@@ -692,7 +733,6 @@ function downloadCSV(content, filename) {
   const a = Object.assign(document.createElement('a'),{href:URL.createObjectURL(blob),download:filename});
   a.click(); URL.revokeObjectURL(a.href);
 }
-
 // ==============================================================
 //  DASHBOARD
 // ==============================================================
@@ -704,34 +744,28 @@ function renderDashboard() {
   const trees=[...new Set(records.map(r=>r.tree))].filter(Boolean);
   const lowStock=meds.filter(m=>m.status==='owned'&&m.total>0&&stockStatus(m)!=='ok'&&stockStatus(m)!=='none');
   const urgentBuy=meds.filter(m=>m.status==='tobuy'&&m.urgency==='urgent');
-
   document.getElementById('statsGrid').innerHTML=`
     <div class="stat-card"><span class="si">📋</span><div><div class="sn">${records.length}</div><div class="sl">รวมทั้งหมด</div></div></div>
     <div class="stat-card y"><span class="si">📅</span><div><div class="sn">${thisMonth.length}</div><div class="sl">เดือนนี้</div></div></div>
     <div class="stat-card o"><span class="si">🌳</span><div><div class="sn">${trees.length}</div><div class="sl">ต้นที่บันทึก</div></div></div>
     <div class="stat-card r"><span class="si">⚠️</span><div><div class="sn">${overdue.length+soon.length}</div><div class="sl">นัดใกล้/เลย</div></div></div>
     <div class="stat-card p"><span class="si">💊</span><div><div class="sn">${lowStock.length}</div><div class="sl">ยาสต็อกน้อย</div></div></div>`;
-
   let alerts='';
   if(overdue.length>0) alerts+=`<div class="ab danger"><span class="ai">🚨</span><div class="at"><strong>เลยกำหนด ${overdue.length} รายการ!</strong>${overdue.slice(0,3).map(r=>`• ${r.tree} — ${r.medicine}`).join('<br>')}${overdue.length>3?`<br>...อีก ${overdue.length-3} รายการ`:''}</div></div>`;
   if(soon.length>0) alerts+=`<div class="ab"><span class="ai">⚠️</span><div class="at"><strong>ใกล้ถึงกำหนด ${soon.length} รายการ</strong>${soon.slice(0,2).map(r=>{const d=daysFrom(r.nextDate);return `• ${r.tree} — ${r.medicine} (${d===0?'วันนี้!':d+' วัน'})`;}).join('<br>')}</div></div>`;
   if(urgentBuy.length>0) alerts+=`<div class="ab danger"><span class="ai">🛒</span><div class="at"><strong>ควรซื้อด่วน ${urgentBuy.length} รายการ</strong>${urgentBuy.map(m=>`• ${m.name}`).join('<br>')}<br><a href="#" onclick="showPage('stock');return false" style="font-weight:700;color:var(--b)">→ ดูทั้งหมด</a></div></div>`;
   document.getElementById('alertsContainer').innerHTML=alerts;
-
   const upcoming=records.filter(r=>r.nextDate).map(r=>({...r,days:daysFrom(r.nextDate)})).filter(r=>r.days<=14).sort((a,b)=>a.days-b.days).slice(0,6);
   document.getElementById('upcomingList').innerHTML=upcoming.length===0?'<div class="empty"><span class="ei">📅</span>ไม่มีกำหนดการใน 14 วัน</div>':
     upcoming.map(r=>{const isOD=r.days<0,isSn=r.days>=0&&r.days<=3;const cls=isOD?'ov':isSn?'sn':'';const dl=isOD?`เลยมา ${Math.abs(r.days)} วัน`:r.days===0?'วันนี้!':`อีก ${r.days} วัน`;const badge=isOD?`<span class="badge ov">เลยกำหนด</span>`:isSn?`<span class="badge sn">ใกล้ถึง</span>`:'';return`<div class="ui-item ${cls}"><span class="tn">🌳${r.tree}</span><span class="mn">💉${r.medicine}</span>${badge}<span class="dd">📅${fmtDate(r.nextDate)} (${dl})</span></div>`;}).join('');
-
   const allBad=[...lowStock,...meds.filter(m=>m.status==='tobuy'&&m.urgency==='urgent')];
   document.getElementById('stockAlertList').innerHTML=allBad.length===0?'<div class="empty"><span class="ei">✅</span>สต็อกยาครบถ้วน</div>':
     allBad.slice(0,5).map(m=>{const isO=m.status==='owned';const st=isO?stockStatus(m):'tobuy';const icon=st==='critical'?'🚨':st==='low'?'⚠️':'🛒';const chip=st==='critical'?'<span class="chip chip-r">หมด</span>':st==='low'?'<span class="chip chip-y">น้อย</span>':'<span class="chip" style="background:#fff9c4;color:#e65100">ต้องซื้อ</span>';return`<div class="ui-item${st==='critical'?' ov':st==='low'?' sn':''}"><span style="font-size:1rem">${icon}</span><span class="mn" style="color:#263238">${m.name}</span>${chip}${isO?`<span style="font-size:.74rem;color:var(--gr)">${m.current}/${m.total}${m.unit}</span>`:'<span class="badge" style="background:#ffebee;color:#c62828">ด่วน</span>'}</div>`;}).join('')+(allBad.length>5?`<div style="text-align:center;margin-top:7px;font-size:.78rem;color:var(--gr)">+ อีก ${allBad.length-5} รายการ <a href="#" onclick="showPage('stock');return false">ดูทั้งหมด →</a></div>`:'');
-
   const treeMap={};
   records.forEach(r=>{if(!r.tree)return;if(!treeMap[r.tree])treeMap[r.tree]={records:[],last:null};treeMap[r.tree].records.push(r);if(!treeMap[r.tree].last||r.date>treeMap[r.tree].last.date)treeMap[r.tree].last=r;});
   document.getElementById('treeSummaryBody').innerHTML=Object.keys(treeMap).length===0?'<tr><td colspan="4" class="empty"><span class="ei">🌱</span>ยังไม่มีข้อมูล</td></tr>':
     Object.entries(treeMap).map(([tree,data])=>`<tr><td><strong>🌳${tree}</strong></td><td>${fmtDate(data.last.date)}</td><td>${data.last.medicine}</td><td><span class="chip chip-g">${data.records.length} ครั้ง</span></td></tr>`).join('');
 }
-
 // ==============================================================
 //  ADD RECORD
 // ==============================================================
@@ -786,7 +820,6 @@ function clearForm() {
   document.getElementById('deductAmt').dataset.medId='';
   document.getElementById('deductUnit').textContent='-';
 }
-
 // ==============================================================
 //  HISTORY
 // ==============================================================
@@ -809,7 +842,7 @@ function renderHistory() {
   tbody.innerHTML=f.map((r,i)=>{
     const days=r.nextDate?daysFrom(r.nextDate):null;
     const nc=r.nextDate?`<span style="color:${days<0?'var(--r)':days<=3?'var(--o)':'var(--gd)'}">${fmtDate(r.nextDate)}${days<0?' 🚨':days===0?' ⚠️':''}</span>`:'-';
-    return`<tr><td>${f.length-i}</td><td style="white-space:nowrap">${fmtDT(r.date,r.time)}</td><td><strong>🌳${r.tree}</strong></td><td>${r.medicine}</td><td>${r.amount||'-'}</td><td>${r.method||'-'}</td><td style="white-space:nowrap">${nc}</td><td style="max-width:120px;font-size:.76rem;color:var(--gr)">${r.notes||'-'}</td><td><button class="btn btn-d btn-xs" onclick="deleteRecord('${r.id}')">🗑️</button></td></tr>`;
+    return`<tr><td>${f.length-i}</td><td style="white-space:nowrap">${fmtDT(r.date,r.time)}</td><td><strong>🌳${r.tree}</strong></td><td>${r.medicine}</td><td>${r.amount||'-'}</td><td>${r.method||'-'}</td><td style="white-space:nowrap">${nc}</td><td style="max-width:120px;font-size:.76rem;color:var(--gr)">${r.notes||'-'}</td><td>${userRole==='owner'?`<button class="btn btn-d btn-xs" onclick="deleteRecord('${r.id}')">🗑️</button>`:''}</td></tr>`;
   }).join('');
 }
 function clearFilters(){['searchInput','filterTree','filterMonth'].forEach(id=>document.getElementById(id).value='');renderHistory();}
@@ -819,7 +852,6 @@ function exportCSV(){
   const rows=r.map((x,i)=>[r.length-i,x.date||'',x.time||'',x.tree||'',x.medicine||'',x.amount||'',x.method||'',x.nextDate||'',(x.notes||'').replace(/,/g,' ')]);
   downloadCSV('﻿'+[h,...rows].map(row=>row.map(c=>`"${c}"`).join(',')).join('\n'),`durian-records-${todayStr()}.csv`);
 }
-
 // ==============================================================
 //  DELETE RECORD
 // ==============================================================
@@ -831,7 +863,6 @@ function deleteRecord(id){
     try{await fsDeleteRecord(pendingDeleteId);closeModal('deleteModal');showToast('ลบแล้ว');}catch(e){showToast('เกิดข้อผิดพลาด');}
   };
 }
-
 // ==============================================================
 //  STOCK
 // ==============================================================
@@ -848,7 +879,6 @@ function renderStock(){
   });
   document.getElementById('stockBody').innerHTML=owned.length===0?'<tr><td colspan="8" class="empty"><span class="ei">💊</span>ไม่พบรายการ</td></tr>':
     owned.map((m,i)=>`<tr><td>${i+1}</td><td><strong>${m.name}</strong>${m.notes?`<br><small style="color:var(--gr)">${m.notes}</small>`:''}</td><td>${groupChip(m.group)}</td><td style="font-size:.78rem;color:var(--gr)">${m.uses}</td><td style="font-size:.85rem;font-weight:700">${m.total||0}${m.unit}</td><td><div style="display:flex;align-items:center;gap:5px"><input type="number" value="${m.current||0}" min="0" step="0.1" onchange="quickUpdateStock('${m.id}',this.value)" style="width:65px;padding:4px 6px;font-size:.8rem;text-align:center;border:1.5px solid #cfd8dc;border-radius:6px"><span style="font-size:.75rem;color:var(--gr)">${m.unit}</span></div></td><td>${stockLabel(m)}</td><td><button class="btn btn-s btn-xs" onclick="openEditMed('${m.id}')">✏️</button></td></tr>`).join('');
-
   const tobuy=meds.filter(m=>m.status==='tobuy');
   const ugmap={urgent:{icon:'🔴',label:'ด่วน',cls:'badge' +' ov'},soon:{icon:'🟡',label:'เร็วๆ นี้',cls:'badge sn'},normal:{icon:'🟢',label:'ไม่เร่ง',cls:'badge'}};
   document.getElementById('toBuyList').innerHTML=tobuy.length===0?'<div class="empty"><span class="ei">🎉</span>ซื้อครบแล้ว!</div>':
@@ -875,6 +905,7 @@ function openEditMed(id){
   document.getElementById('editMedUnit').value=m.unit||'มล.';
   document.getElementById('editMedNotes').value=m.notes||'';
   document.getElementById('deleteMedBtn').onclick=()=>deleteMed(id);
+  document.getElementById('deleteMedBtn').style.display = userRole==='owner' ? '' : 'none';
   document.getElementById('editStockModal').classList.add('open');
 }
 async function saveEditMed(){
@@ -906,14 +937,24 @@ function exportStockCSV(){
   const rows=m.map((x,i)=>[i+1,x.name,x.group,x.uses,x.total||0,x.current||0,x.minAlert||0,x.unit]);
   downloadCSV('﻿'+[h,...rows].map(r=>r.map(c=>`"${c}"`).join(',')).join('\n'),`durian-stock-${todayStr()}.csv`);
 }
-
 // ==============================================================
 //  SETTINGS
 // ==============================================================
 function renderSettings(){
   const trees=getTrees();
   document.getElementById('treeList').innerHTML=trees.length===0?'<div style="color:var(--gr);font-size:.82rem">ยังไม่มีต้น/แปลง</div>':
-    trees.map((t,i)=>`<div class="tree-item"><span>🌳${t}</span><button class="btn btn-d btn-xs" onclick="removeTree(${i})">ลบ</button></div>`).join('');
+    trees.map((t,i)=>`<div class="tree-item"><span>🌳${t}</span>${userRole==='owner'?`<button class="btn btn-d btn-xs" onclick="removeTree(${i})">ลบ</button>`:''}</div>`).join('');
+  _updateSettingsForRole();
+}
+function _updateSettingsForRole(){
+  const _cb=document.getElementById('clearRecordsBtn');
+  if(_cb)_cb.style.display=userRole==='owner'?'':'none';
+  const _at=document.getElementById('addTreeSection');
+  if(_at)_at.style.display=userRole==='owner'?'':'none';
+  const _rd=document.getElementById('roleDisplay');
+  if(_rd)_rd.innerHTML=userRole==='owner'
+    ?'<span style="background:#e8f5e9;color:#1b5e20;padding:3px 10px;border-radius:12px;font-size:.75rem;font-weight:700">👑 เจ้าของฟาร์ม</span>'
+    :'<span style="background:#e3f2fd;color:#0d47a1;padding:3px 10px;border-radius:12px;font-size:.75rem;font-weight:700">👥 สมาชิก</span><div style=\"font-size:.72rem;color:var(--gr);margin-top:5px\">ดูและบันทึกได้ แต่ไม่สามารถลบข้อมูลได้</div>';
 }
 async function addTree(){
   const input=document.getElementById('newTreeInput');const name=input.value.trim();
@@ -936,6 +977,91 @@ function openClearModal(type){
 }
 
 // ==============================================================
+//  PLAN
+// ==============================================================
+function renderPlan() {
+  const done = cache.completedRounds || [1];
+  const today = todayStr();
+  document.getElementById('planActionTh').textContent = userRole==='owner' ? 'สถานะ' : '';
+
+  const seasonColor = {
+    'เริ่มฝน':'#e8f5e9','ฝนชุก':'#e3f2fd','ฝนมาก':'#bbdefb',
+    'ปลายฝน':'#fff3e0','หนาว':'#f3e5f5','หนาวจัด':'#ede7f6',
+    'ไรแดง':'#fff8e1','เริ่มร้อน':'#fff9c4','ร้อนแล้ง':'#ffe0b2','ร้อนจัด':'#ffccbc'
+  };
+
+  document.getElementById('planBody').innerHTML = DEFAULT_SCHEDULE.map(r => {
+    const isDone = done.includes(r.id);
+    const dys = daysFrom(r.date);
+    const isToday = (dys === 0);
+    const isOverdue = (dys !== null && dys < 0 && !isDone);
+    const isNext7 = (dys !== null && dys > 0 && dys <= 7 && !isDone);
+
+    let rowStyle = '';
+    if (isDone) rowStyle = 'background:#f1f8e9;opacity:.7';
+    else if (isToday) rowStyle = 'background:#fff9c4;font-weight:700';
+    else if (isOverdue) rowStyle = 'background:#ffebee';
+    else if (isNext7) rowStyle = 'background:#fff3e0';
+    else { const sc = seasonColor[r.season]||''; rowStyle = sc ? `background:${sc}` : ''; }
+
+    const dateStr = fmtDate(r.date);
+    const statusBadge = isDone
+      ? '<span style="color:#2d8b45;font-weight:700">✅ เสร็จแล้ว</span>'
+      : isToday
+        ? '<span style="color:#e65100;font-weight:700">🔔 วันนี้!</span>'
+        : isOverdue
+          ? `<span style="color:#c62828;font-weight:700">⚠️ เลย ${Math.abs(dys)} วัน</span>`
+          : isNext7
+            ? `<span style="color:#e65100">📌 อีก ${dys} วัน</span>`
+            : `<span style="color:#546e7a;font-size:.78rem">อีก ${dys} วัน</span>`;
+
+    const numCell = isDone
+      ? `<td style="text-decoration:line-through;color:#90a4ae">${r.id}</td>`
+      : `<td style="font-weight:700;color:var(--gd)">${r.id}</td>`;
+
+    const actionCell = userRole === 'owner'
+      ? `<td>${isDone
+          ? `<button class="btn btn-s btn-xs" onclick="unmarkRound(${r.id})">↩️</button>`
+          : `<button class="btn btn-p btn-xs" onclick="markRoundDone(${r.id})">✅ ทำแล้ว</button>`
+        }</td>`
+      : '<td></td>';
+
+    return `<tr style="${rowStyle}">
+      ${numCell}
+      <td style="white-space:nowrap;font-size:.8rem">${dateStr}</td>
+      <td><span style="font-size:.72rem;background:#eceff1;padding:1px 7px;border-radius:9px">${r.season}</span></td>
+      <td style="font-size:.78rem;font-weight:600;color:var(--gd)">${r.group}</td>
+      <td style="font-size:.78rem;max-width:220px"><strong>${r.chem}</strong><br><span style="color:var(--gr)">${r.amt}</span></td>
+      <td style="font-size:.75rem;color:var(--o)">${r.ppe}</td>
+      <td style="font-size:.75rem;color:var(--gr);max-width:120px">${r.obs}</td>
+      <td style="white-space:nowrap">${statusBadge}${actionCell ? '' : ''}</td>
+      ${actionCell}
+    </tr>`;
+  }).join('');
+}
+
+async function markRoundDone(id) {
+  const done = [...(cache.completedRounds||[1])];
+  if(!done.includes(id)) done.push(id);
+  try {
+    await db.doc(`farms/${farmCode}/config/plan`).set({ completedRounds: done }, { merge: true });
+    cache.completedRounds = done;
+    renderPlan();
+    showToast('✅ บันทึกรอบที่ ' + id + ' แล้ว!');
+  } catch(e) { showToast('เกิดข้อผิดพลาด'); }
+}
+
+async function unmarkRound(id) {
+  if(!confirm('ยกเลิกสถานะ "ทำแล้ว" รอบที่ ' + id + '?')) return;
+  const done = (cache.completedRounds||[1]).filter(x => x !== id);
+  try {
+    await db.doc(`farms/${farmCode}/config/plan`).set({ completedRounds: done }, { merge: true });
+    cache.completedRounds = done;
+    renderPlan();
+    showToast('ยกเลิกรอบที่ ' + id);
+  } catch(e) { showToast('เกิดข้อผิดพลาด'); }
+}
+// ==============================================================
 //  INIT
 // ==============================================================
 function init(){
@@ -951,7 +1077,7 @@ function init(){
   document.getElementById('recordTime').value=nowTime();
   document.getElementById('filterMonth').value=todayStr().slice(0,7);
   setSyncStatus('syncing');
-
+  userRole = localStorage.getItem('durianFarmRole') || 'owner';
   const saved=localStorage.getItem('durianFarmCode');
   if(saved){
     farmCode=saved;
