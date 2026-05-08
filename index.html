@@ -243,7 +243,7 @@
 <p class="p2"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;h</span><span class="s2">2</span><span class="s3">&gt;</span><span class="s1">ยังไม่ได้ตั้งค่า</span><span class="s2"> </span><span class="s3">Firebase&lt;/h</span><span class="s2">2</span><span class="s3">&gt;</span></p>
 <p class="p2"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s3">&lt;p&gt;</span><span class="s1">กรุณาทำตามคู่มือตั้งค่าก่อนใช้งาน&lt;br&gt;เปิดไฟล์</span><span class="s2"> </span><span class="s3">&lt;strong&gt;setup-guide.html&lt;/strong&gt;</span><span class="s2"> </span><span class="s1">แล้วทำตามขั้นตอน</span><span class="s2"> </span><span class="s1">หรือดูคู่มือได้ที่:&lt;/p&gt;</span></p>
 <p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">&lt;a</span><span class="s2"> </span><span class="s1">href="setup-guide.html"</span><span class="s2"> </span><span class="s1">target="_blank"</span><span class="s2"> </span><span class="s1">style="display:inline-block;background:var(--gd);color:</span><span class="s2">#</span><span class="s1">fff;padding:</span><span class="s2">10</span><span class="s1">px</span><span class="s2"> 20</span><span class="s1">px;border-radius:</span><span class="s2">10</span><span class="s1">px;font-weight:</span><span class="s2">700</span><span class="s1">;text-decoration:none;margin-top:</span><span class="s2">4</span><span class="s1">px"&gt;</span><span class="s2">📖 </span><span class="s4">เปิดคู่มือตั้งค่า&lt;/a&gt;</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">&lt;p</span><span class="s2"> </span><span class="s1">style="margin-top:</span><span class="s2">12</span><span class="s1">px;font-size:.</span><span class="s2">75</span><span class="s1">rem;color:</span><span class="s2">#90</span><span class="s1">a</span><span class="s2">4</span><span class="s1">ae"&gt;</span><span class="s4">แก้ไข</span><span class="s2"> </span><span class="s1">FIREBASE_CONFIG</span><span class="s2"> </span><span class="s4">ในไฟล์</span><span class="s2"> </span><span class="s1">durian-tracker.html&lt;/p&gt;</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">&lt;p</span><span class="s2"> </span><span class="s1">style="margin-top:</span><span class="s2">12</span><span class="s1">px;font-size:.</span><span class="s2">75</span><span class="s1">rem;color:</span><span class="s2">#90</span><span class="s1">a</span><span class="s2">4</span><span class="s1">ae"&gt;</span><span class="s4">แก้ไข</span><span class="s2"> </span><span class="s1">firebaseConfig</span><span class="s2"> </span><span class="s4">ในไฟล์</span><span class="s2"> </span><span class="s1">durian-tracker.html&lt;/p&gt;</span></p>
 <p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">&lt;/div&gt;</span></p>
 <p class="p1"><span class="s1">&lt;/div&gt;</span></p>
 <p class="p3"><span class="s1"></span><br></p>
@@ -451,7 +451,7 @@
 <p class="p5"><span class="s1">  storageBucket: "durian-farm-f97b6.firebasestorage.app",</span></p>
 <p class="p5"><span class="s1">  messagingSenderId: "192044474624",</span></p>
 <p class="p5"><span class="s1">  appId: "1:192044474624:web:c0740efbaa5c2506b7d3e5",</span></p>
-<p class="p5"><span class="s1">  measurementId: "G-KEG2HD8X8J”,</span></p>
+<p class="p5"><span class="s1">  measurementId: "G-KEG2HD8X8J”</span></p>
 <p class="p5"><span class="s1">};</span></p>
 <p class="p1"><span class="s1">//</span><span class="s2"> </span><span class="s1">==============================================================</span></p>
 <p class="p1"><span class="s1">//</span><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">DEFAULT</span><span class="s2"> </span><span class="s1">DATA</span></p>
@@ -499,7 +499,7 @@
 <p class="p1"><span class="s1">//</span><span class="s2"> </span><span class="s1">==============================================================</span></p>
 <p class="p1"><span class="s1">function</span><span class="s2"> </span><span class="s1">initFirebase()</span><span class="s2"> </span><span class="s1">{</span></p>
 <p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">try</span><span class="s2"> </span><span class="s1">{</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">firebase.initializeApp(FIREBASE_CONFIG);</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">firebase.initializeApp(firebaseConfig);</span></p>
 <p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">db</span><span class="s2"> </span><span class="s1">=</span><span class="s2"> </span><span class="s1">firebase.firestore();</span></p>
 <p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">db.enablePersistence({</span><span class="s2"> </span><span class="s1">synchronizeTabs:</span><span class="s2"> </span><span class="s1">true</span><span class="s2"> </span><span class="s1">}).catch(()</span><span class="s2"> </span><span class="s1">=&gt;</span><span class="s2"> </span><span class="s1">{});</span></p>
 <p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">return</span><span class="s2"> </span><span class="s1">true;</span></p>
@@ -962,7 +962,7 @@
 <p class="p1"><span class="s1">//</span><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">INIT</span></p>
 <p class="p1"><span class="s1">//</span><span class="s2"> </span><span class="s1">==============================================================</span></p>
 <p class="p1"><span class="s1">function</span><span class="s2"> </span><span class="s1">init(){</span></p>
-<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">if(FIREBASE_CONFIG.apiKey==='YOUR_API_KEY'){</span></p>
+<p class="p1"><span class="s2"><span class="Apple-converted-space">  </span></span><span class="s1">if(firebaseConfig.apiKey==='YOUR_API_KEY'){</span></p>
 <p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">document.getElementById('configError').classList.add('show');</span></p>
 <p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">document.getElementById('farmScreen').classList.add('hidden');</span></p>
 <p class="p1"><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">return;</span></p>
