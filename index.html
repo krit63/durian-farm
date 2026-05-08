@@ -178,6 +178,7 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
 /* ===== TOAST ===== */
 #toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:#323232;color:#fff;padding:10px 20px;border-radius:24px;font-size:.84rem;font-weight:600;z-index:400;transition:transform .3s ease;pointer-events:none;white-space:nowrap}
 #toast.show{transform:translateX(-50%) translateY(0)}
+.pt-active{background:var(--gd)!important;color:#fff!important;box-shadow:0 2px 8px rgba(45,139,69,.35)!important}
 /* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-track{background:#f0f0f0;border-radius:3px}::-webkit-scrollbar-thumb{background:var(--gl);border-radius:3px}
 @media(max-width:400px){.tab-btn{padding:9px 10px;font-size:.75rem}.header-title h1{font-size:.9rem}.btn-sm{padding:5px 10px;font-size:.76rem}}
@@ -202,8 +203,9 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
     <div class="farm-sub">ใส่รหัสฟาร์มจากเจ้าของสวนเพื่อเริ่มใช้งาน</div>
     <!-- JOIN FARM ONLY -->
     <div id="fsJoin" style="display:block">
-      <p style="font-size:.82rem;color:var(--gr);margin-bottom:8px">ใส่รหัสฟาร์มที่ได้รับจากเจ้าของสวน</p>
-      <input class="farm-input" id="joinCodeInput" placeholder="เช่น FARM-A3B7" maxlength="12" oninput="this.value=this.value.toUpperCase()">
+      <p style="font-size:.82rem;color:var(--gr);margin-bottom:8px">ใส่ชื่อของคุณและรหัสฟาร์มจากเจ้าของสวน</p>
+      <input class="farm-input" id="joinNameInput" placeholder="ชื่อของคุณ เช่น กี้, สมชาย" maxlength="30" style="margin-bottom:8px;letter-spacing:0;text-transform:none;text-align:left;font-family:inherit">
+      <input class="farm-input" id="joinCodeInput" placeholder="รหัสฟาร์ม เช่น FARM-A3B7" maxlength="12" oninput="this.value=this.value.toUpperCase()">
       <div class="farm-error" id="joinError">❌ ไม่พบรหัสฟาร์มนี้ กรุณาตรวจสอบใหม่อีกครั้ง</div>
       <button onclick="joinFarm()" class="farm-btn primary" style="margin-top:10px">🔗 เข้าร่วมฟาร์ม</button>
     </div>
@@ -220,6 +222,7 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
       </div>
     </div>
     <div class="header-right">
+      <div id="userBadge" style="background:rgba(255,255,255,.18);padding:5px 11px;border-radius:20px;font-size:.75rem;white-space:nowrap;display:none">👤 <span id="userNameDisplay">-</span></div>
       <div class="farm-code-badge" onclick="copyFarmCode()" title="คลิกเพื่อคัดลอกรหัสฟาร์ม">
         <span id="syncDot"></span>
         <span>รหัส: <strong id="farmCodeDisplay">-</strong></span>
@@ -263,7 +266,16 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
   </div>
   <div class="card">
     <div class="card-title">💉 รายละเอียดการฉีดยา/ใส่ปุ๋ย</div>
-    <div style="margin-bottom:11px"><label style="display:block;margin-bottom:5px;font-size:.8rem;font-weight:700;color:var(--gd)">💊 เลือกจากคลังยา (คลิกเติมข้อมูล)</label><div class="preset-tags" id="presetTags"></div></div>
+    <div style="margin-bottom:11px">
+      <label style="display:block;margin-bottom:5px;font-size:.8rem;font-weight:700;color:var(--gd)">💊 เลือกจากคลังยา <span style="font-weight:400;color:var(--gr)">(กดชื่อยา → กด ⚡ บันทึกเร็ว)</span></label>
+      <div class="preset-tags" id="presetTags"></div>
+      <div id="quickSaveBar" style="display:none;margin-top:9px;background:#e8f5e9;border-radius:10px;padding:9px 12px;display:none;align-items:center;gap:9px;flex-wrap:wrap">
+        <span id="quickSaveMedName" style="font-weight:700;color:var(--gd);flex:1;font-size:.88rem"></span>
+        <input type="text" id="quickSaveAmt" placeholder="ปริมาณ เช่น 200 มล." style="width:140px;padding:6px 10px;font-size:.85rem">
+        <button class="btn btn-p btn-sm" onclick="quickSave()">⚡ บันทึกเร็ว</button>
+        <button class="btn btn-s btn-sm" onclick="closeQuickSave()">✕</button>
+      </div>
+    </div>
     <div class="form-grid">
       <div class="fg"><label>วันที่ *</label><input type="date" id="recordDate"></div>
       <div class="fg"><label>เวลา</label><input type="time" id="recordTime"></div>
@@ -293,7 +305,7 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
       <button class="btn btn-s btn-sm" onclick="clearFilters()">✕ ล้าง</button>
     </div>
     <div class="tw">
-      <table><thead><tr><th>#</th><th>วันที่/เวลา</th><th>ต้น/แปลง</th><th>ยา/ปุ๋ย</th><th>ปริมาณ</th><th>วิธี</th><th>นัดถัดไป</th><th>หมายเหตุ</th><th></th></tr></thead>
+      <table><thead><tr><th>#</th><th>วันที่/เวลา</th><th>ต้น/แปลง</th><th>ยา/ปุ๋ย</th><th>ปริมาณ</th><th>วิธี</th><th>ผู้บันทึก</th><th>นัดถัดไป</th><th>หมายเหตุ</th><th></th></tr></thead>
       <tbody id="historyBody"></tbody></table>
     </div>
     <div class="gs-guide"><strong>📊 นำเข้า Google Sheets:</strong> กด Export CSV → เปิด Google Sheets → File → Import → Upload → Separator: Comma ✅</div>
@@ -326,6 +338,15 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
       <div id="roleDisplay" style="margin-bottom:10px"></div>
       <button class="btn btn-p btn-sm" onclick="copyFarmCode()">📋 คัดลอกรหัส</button>
       <button class="btn btn-s btn-sm" onclick="changeFarm()">🔄 เปลี่ยนฟาร์ม</button>
+    </div>
+    <div class="dv"></div>
+    <div class="settings-section">
+      <h3>👤 ชื่อผู้ใช้งาน</h3>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <input type="text" id="userNameInput" placeholder="ชื่อของคุณ" style="max-width:200px" maxlength="30">
+        <button class="btn btn-p btn-sm" onclick="saveUserName()">💾 บันทึกชื่อ</button>
+      </div>
+      <div id="currentUserName" style="font-size:.78rem;color:var(--gr);margin-top:6px"></div>
     </div>
     <div class="dv"></div>
     <div class="settings-section">
@@ -434,6 +455,21 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
 </main>
 <!-- TOAST -->
 <div id="toast"></div>
+<!-- MODAL: Edit Record -->
+<div class="mo" id="editRecModal"><div class="modal"><h3>✏️ แก้ไขข้อมูลการบันทึก</h3>
+<input type="hidden" id="editRecId">
+<div class="form-grid" style="margin-bottom:11px">
+  <div class="fg full"><label>ต้น/แปลง</label><select id="editRecTree"></select></div>
+  <div class="fg"><label>วันที่</label><input type="date" id="editRecDate"></div>
+  <div class="fg"><label>เวลา</label><input type="time" id="editRecTime"></div>
+  <div class="fg full"><label>ชนิดยา/ปุ๋ย</label><input type="text" id="editRecMed"></div>
+  <div class="fg"><label>ปริมาณ</label><input type="text" id="editRecAmt" placeholder="เช่น 200 มล."></div>
+  <div class="fg"><label>วิธีการ</label><select id="editRecMethod"><option>ฉีดเข้าต้น</option><option>พ่นทางใบ</option><option>ราดโคนต้น</option><option>ใส่รอบโคน</option><option>อื่นๆ</option></select></div>
+  <div class="fg full"><label>นัดถัดไป</label><input type="date" id="editRecNextDate"></div>
+  <div class="fg full"><label>หมายเหตุ</label><textarea id="editRecNotes"></textarea></div>
+</div>
+<div class="modal-actions"><button class="btn btn-s" onclick="closeModal('editRecModal')">ยกเลิก</button><button class="btn btn-p" onclick="saveEditRecord()">💾 บันทึกการแก้ไข</button></div>
+</div></div>
 <!-- MODAL: Delete -->
 <div class="mo" id="deleteModal"><div class="modal"><h3 style="color:var(--r)">⚠️ ยืนยันการลบ</h3><p style="font-size:.85rem;color:var(--gr);margin-bottom:12px">ต้องการลบรายการนี้ใช่ไหม?</p><div class="modal-actions"><button class="btn btn-s" onclick="closeModal('deleteModal')">ยกเลิก</button><button class="btn btn-d" id="confirmDeleteBtn">ลบ</button></div></div></div>
 <!-- MODAL: Clear -->
@@ -600,6 +636,7 @@ let cache = { records: [], meds: [...DEFAULT_MEDS], trees: [...DEFAULT_TREES], c
 let listeners = [];
 let pendingCode = '';
 let userRole = 'owner'; // 'owner'=เจ้าของฟาร์ม | 'member'=สมาชิก
+let userName = ''; // ชื่อผู้ใช้งาน
 // ==============================================================
 //  FIREBASE INIT
 // ==============================================================
@@ -647,7 +684,9 @@ async function _createFarmInternal(code) { // internal use only
   }
 }
 async function joinFarm() {
+  const nameVal = document.getElementById('joinNameInput').value.trim();
   const code = document.getElementById('joinCodeInput').value.trim().toUpperCase();
+  if (!nameVal) { showToast('กรุณาใส่ชื่อของคุณ'); return; }
   if (!code) { showToast('กรุณาใส่รหัสฟาร์ม'); return; }
   document.getElementById('joinError').style.display = 'none';
   setSyncStatus('syncing');
@@ -659,10 +698,13 @@ async function joinFarm() {
     }
     localStorage.setItem('durianFarmCode', code);
     localStorage.setItem('durianFarmRole', 'member');
+    localStorage.setItem('durianFarmUser', nameVal);
     userRole = 'member';
+    userName = nameVal;
     farmCode = code;
     hideFarmScreen();
     updateFarmCodeDisplay();
+    updateUserDisplay();
     startListeners();
   } catch(e) {
     document.getElementById('joinError').style.display = 'block';
@@ -853,6 +895,91 @@ function selectPreset(id) {
   document.getElementById('deductUnit').textContent=m.unit;
   document.getElementById('deductAmt').placeholder=`จำนวน (${m.unit})`;
   document.getElementById('deductAmt').dataset.medId=id;
+  // auto method by group
+  const methodMap={'ปุ๋ย':'ใส่รอบโคน','โรค':'ราดโคนต้น'};
+  if(methodMap[m.group]) document.getElementById('method').value=methodMap[m.group];
+  else document.getElementById('method').value='พ่นทางใบ';
+  // auto-select tree if only one
+  const trees=getTrees();
+  if(trees.length===1) document.getElementById('treeSelect').value=trees[0];
+  // highlight selected tag
+  document.querySelectorAll('.pt').forEach(el=>el.classList.remove('pt-active'));
+  const allTags=document.querySelectorAll('.pt');
+  allTags.forEach(el=>{if(el.textContent===m.name)el.classList.add('pt-active');});
+  // show quick save bar
+  const bar=document.getElementById('quickSaveBar');
+  bar.style.display='flex';
+  document.getElementById('quickSaveMedName').textContent='💊 '+m.name;
+  document.getElementById('quickSaveAmt').value='';
+  document.getElementById('quickSaveAmt').setAttribute('data-med-id',id);
+}
+function closeQuickSave(){
+  document.getElementById('quickSaveBar').style.display='none';
+  document.querySelectorAll('.pt').forEach(el=>el.classList.remove('pt-active'));
+}
+async function quickSave(){
+  const tree=document.getElementById('treeSelect').value;
+  if(!tree){showToast('กรุณาเลือกต้น/แปลงก่อน');return;}
+  const med=document.getElementById('medicineType').value.trim();
+  if(!med){showToast('กรุณาเลือกชนิดยาก่อน');return;}
+  const amt=document.getElementById('quickSaveAmt').value.trim()||'-';
+  const deductEl=document.getElementById('deductAmt');
+  const deductAmt=parseFloat(deductEl.value)||0;
+  const deductMedId=deductEl.dataset.medId||'';
+  setSyncStatus('syncing');
+  try{
+    const record={id:uid(),tree,date:todayStr(),time:nowTime(),medicine:med,amount:amt,
+      method:document.getElementById('method').value,nextDate:'',notes:'',recorder:userName,createdAt:Date.now()};
+    await fsSetRecord(record);
+    if(deductMedId&&deductAmt>0){
+      const m=getMeds().find(x=>x.id===deductMedId);
+      if(m){const updated={...m,current:Math.max(0,(parseFloat(m.current)||0)-deductAmt)};await fsSetMed(updated);}
+    }
+    closeQuickSave();
+    showToast('⚡ บันทึกเร็วสำเร็จ! — '+med);
+  }catch(e){showToast('เกิดข้อผิดพลาด');}
+}
+function updateUserDisplay(){
+  const badge=document.getElementById('userBadge');
+  const nameEl=document.getElementById('userNameDisplay');
+  if(userName&&badge&&nameEl){badge.style.display='block';nameEl.textContent=userName;}
+  else if(badge){badge.style.display='none';}
+}
+function openEditRecord(id){
+  const r=cache.records.find(x=>x.id===id);if(!r)return;
+  document.getElementById('editRecId').value=id;
+  // populate tree options
+  const treeEl=document.getElementById('editRecTree');
+  treeEl.innerHTML=getTrees().map(t=>`<option value="${t}" ${t===r.tree?'selected':''}>${t}</option>`).join('');
+  document.getElementById('editRecDate').value=r.date||'';
+  document.getElementById('editRecTime').value=r.time||'';
+  document.getElementById('editRecMed').value=r.medicine||'';
+  document.getElementById('editRecAmt').value=(r.amount&&r.amount!=='-')?r.amount:'';
+  document.getElementById('editRecMethod').value=r.method||'พ่นทางใบ';
+  document.getElementById('editRecNextDate').value=r.nextDate||'';
+  document.getElementById('editRecNotes').value=r.notes||'';
+  document.getElementById('editRecModal').classList.add('open');
+}
+async function saveEditRecord(){
+  const id=document.getElementById('editRecId').value;
+  const r=cache.records.find(x=>x.id===id);if(!r)return;
+  const amt=document.getElementById('editRecAmt').value.trim();
+  const updated={...r,
+    tree:document.getElementById('editRecTree').value,
+    date:document.getElementById('editRecDate').value,
+    time:document.getElementById('editRecTime').value,
+    medicine:document.getElementById('editRecMed').value.trim(),
+    amount:amt||'-',
+    method:document.getElementById('editRecMethod').value,
+    nextDate:document.getElementById('editRecNextDate').value,
+    notes:document.getElementById('editRecNotes').value.trim(),
+    editedAt:Date.now(),editedBy:userName
+  };
+  try{
+    await fsSetRecord(updated);
+    closeModal('editRecModal');
+    showToast('✅ แก้ไขข้อมูลสำเร็จ!');
+  }catch(e){showToast('เกิดข้อผิดพลาด');}
 }
 async function saveRecord() {
   const tree=document.getElementById('treeSelect').value;
@@ -869,10 +996,9 @@ async function saveRecord() {
   if(!tree){showToast('กรุณาเลือกต้น/แปลง');return;}
   if(!date){showToast('กรุณาระบุวันที่');return;}
   if(!medicine){showToast('กรุณาระบุชนิดยา/ปุ๋ย');return;}
-  if(!amount){showToast('กรุณาระบุปริมาณ');return;}
   setSyncStatus('syncing');
   try {
-    const record={id:uid(),tree,date,time,medicine,amount,method,nextDate,notes,createdAt:Date.now()};
+    const record={id:uid(),tree,date,time,medicine,amount:amount||'-',method,nextDate,notes,recorder:userName,createdAt:Date.now()};
     await fsSetRecord(record);
     if(deductMedId&&deductAmt>0){
       const m=getMeds().find(x=>x.id===deductMedId);
@@ -909,11 +1035,13 @@ function renderHistory() {
     return true;
   });
   const tbody=document.getElementById('historyBody');
-  if(!f.length){tbody.innerHTML='<tr><td colspan="9" class="empty"><span class="ei">🔍</span>ไม่พบข้อมูล</td></tr>';return;}
+  if(!f.length){tbody.innerHTML='<tr><td colspan="10" class="empty"><span class="ei">🔍</span>ไม่พบข้อมูล</td></tr>';return;}
   tbody.innerHTML=f.map((r,i)=>{
     const days=r.nextDate?daysFrom(r.nextDate):null;
     const nc=r.nextDate?`<span style="color:${days<0?'var(--r)':days<=3?'var(--o)':'var(--gd)'}">${fmtDate(r.nextDate)}${days<0?' 🚨':days===0?' ⚠️':''}</span>`:'-';
-    return`<tr><td>${f.length-i}</td><td style="white-space:nowrap">${fmtDT(r.date,r.time)}</td><td><strong>🌳${r.tree}</strong></td><td>${r.medicine}</td><td>${r.amount||'-'}</td><td>${r.method||'-'}</td><td style="white-space:nowrap">${nc}</td><td style="max-width:120px;font-size:.76rem;color:var(--gr)">${r.notes||'-'}</td><td>${userRole==='owner'?`<button class="btn btn-d btn-xs" onclick="deleteRecord('${r.id}')">🗑️</button>`:''}</td></tr>`;
+    const recName=r.recorder?`<span style="background:#e8f5e9;color:#1b5e20;padding:1px 7px;border-radius:8px;font-size:.72rem;font-weight:700">${r.recorder}</span>`:'-';
+    const actionBtns=`<button class="btn btn-s btn-xs" onclick="openEditRecord('${r.id}')" title="แก้ไข">✏️</button>${userRole==='owner'?` <button class="btn btn-d btn-xs" onclick="deleteRecord('${r.id}')" title="ลบ">🗑️</button>`:''}`;
+    return`<tr><td>${f.length-i}</td><td style="white-space:nowrap">${fmtDT(r.date,r.time)}</td><td><strong>🌳${r.tree}</strong></td><td>${r.medicine}</td><td>${r.amount||'-'}</td><td>${r.method||'-'}</td><td>${recName}</td><td style="white-space:nowrap">${nc}</td><td style="max-width:120px;font-size:.76rem;color:var(--gr)">${r.notes||'-'}</td><td>${actionBtns}</td></tr>`;
   }).join('');
 }
 function clearFilters(){['searchInput','filterTree','filterMonth'].forEach(id=>document.getElementById(id).value='');renderHistory();}
@@ -1025,7 +1153,20 @@ function _updateSettingsForRole(){
   const _rd=document.getElementById('roleDisplay');
   if(_rd)_rd.innerHTML=userRole==='owner'
     ?'<span style="background:#e8f5e9;color:#1b5e20;padding:3px 10px;border-radius:12px;font-size:.75rem;font-weight:700">👑 เจ้าของฟาร์ม</span>'
-    :'<span style="background:#e3f2fd;color:#0d47a1;padding:3px 10px;border-radius:12px;font-size:.75rem;font-weight:700">👥 สมาชิก</span><div style=\"font-size:.72rem;color:var(--gr);margin-top:5px\">ดูและบันทึกได้ แต่ไม่สามารถลบข้อมูลได้</div>';
+    :'<span style="background:#e3f2fd;color:#0d47a1;padding:3px 10px;border-radius:12px;font-size:.75rem;font-weight:700">👥 สมาชิก</span><div style="font-size:.72rem;color:var(--gr);margin-top:5px">ดูและบันทึกได้ แต่ไม่สามารถลบข้อมูลได้</div>';
+  const _ui=document.getElementById('userNameInput');
+  if(_ui)_ui.value=userName;
+  const _cu=document.getElementById('currentUserName');
+  if(_cu)_cu.textContent=userName?'ชื่อปัจจุบัน: '+userName:'ยังไม่ได้ตั้งชื่อ';
+}
+function saveUserName(){
+  const v=document.getElementById('userNameInput').value.trim();
+  if(!v){showToast('กรุณาใส่ชื่อ');return;}
+  userName=v;
+  localStorage.setItem('durianFarmUser',v);
+  updateUserDisplay();
+  _updateSettingsForRole();
+  showToast('✅ บันทึกชื่อ "'+v+'" แล้ว!');
 }
 async function addTree(){
   const input=document.getElementById('newTreeInput');const name=input.value.trim();
@@ -1244,6 +1385,8 @@ function init(){
   document.getElementById('filterMonth').value=todayStr().slice(0,7);
   setSyncStatus('syncing');
   userRole = localStorage.getItem('durianFarmRole') || 'owner';
+  userName = localStorage.getItem('durianFarmUser') || '';
+  updateUserDisplay();
   const saved=localStorage.getItem('durianFarmCode');
   if(saved){
     farmCode=saved;
