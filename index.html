@@ -367,9 +367,9 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
 
 <!-- ===== SPRAY PLAN ===== -->
 <div class="page" id="page-plan">
-  <div class="ph"><h2>📅 แผนฉีดยาประจำปี</h2></div>
+  <div class="ph"><h2>📅 แผนฉีดยาประจำปี</h2><div id="planResetBtn" style="display:none"><button class="btn btn-s btn-sm" id="planResetBtnInner" onclick="">🔄 รีเซ็ตตาราง</button></div></div>
   <!-- sub-tabs -->
-  <div style="display:flex;gap:6px;margin-bottom:12px">
+  <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap">
     <button id="planTab1" class="btn btn-p btn-sm" onclick="switchPlanTab(1)">🌿 ฉีดพ่นใบ (48 รอบ)</button>
     <button id="planTab2" class="btn btn-s btn-sm" onclick="switchPlanTab(2)">🪣 ราดโคนต้น (12 เดือน)</button>
     <button id="planTab3" class="btn btn-s btn-sm" onclick="switchPlanTab(3)">🌱 ใส่ปุ๋ย (24 รอบ)</button>
@@ -378,12 +378,12 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
   <div id="planSection1">
     <div class="card" style="background:linear-gradient(135deg,#fff3e0,#fff8e1);border:1.5px solid #f9a825;padding:13px 16px;margin-bottom:14px">
       <div style="font-size:.82rem;line-height:1.85;color:#263238">
-        <strong style="display:block;margin-bottom:5px;font-size:.9rem">⚠️ ข้อห้ามสำคัญ — ฉีดพ่นใบ</strong>
+        <strong style="display:block;margin-bottom:5px;font-size:.9rem">⚠️ ข้อห้ามสำคัญ — ฉีดพ่นใบ (เริ่ม 22 พ.ค. 2569 · ทุกวันอาทิตย์)</strong>
         ❌ ห้ามผสม Copper + Abamectin<br>
         ❌ Copper ใช้เฉพาะ <strong>มิ.ย.–ต.ค.</strong> เท่านั้น<br>
-        ❌ ตัด Emamectin ออกแล้ว — ใช้ Abamectin แทน<br>
         ⏰ ฉีดพ่นหลัง <strong>16:00 น.</strong> เสมอ · ถัง 100 ลิตร · ทุกวันอาทิตย์<br>
-        🌧️ ฝนตกภายใน 4 ชม. — ฉีดซ้ำวันถัดไป
+        🌧️ ฝนตกภายใน 4 ชม. — ฉีดซ้ำวันถัดไป<br>
+        🔄 สลับกลุ่มยาทุกครั้ง ป้องกันดื้อยา · 💊 PPE ครบทุกครั้ง อาบน้ำทันทีหลังฉีด
       </div>
     </div>
     <div class="card" style="padding:0;overflow:hidden">
@@ -415,7 +415,7 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
     <div class="card" style="padding:0;overflow:hidden">
       <div class="tw"><table style="min-width:500px">
         <thead><tr>
-          <th>#</th><th>เดือน</th><th>สาร</th><th>กลุ่มสาร</th><th>อัตรา/ต้น</th><th>PPE</th><th>สถานะ</th><th id="soilActionTh"></th>
+          <th>#</th><th>เดือน</th><th>สาร</th><th>กลุ่มสาร</th><th>อัตรา/ต้น</th><th>PPE</th><th>สังเกต</th><th>สถานะ</th><th id="soilActionTh"></th>
         </tr></thead>
         <tbody id="soilPlanBody"></tbody>
       </table></div>
@@ -444,8 +444,9 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
     </div>
     <div class="card" style="background:#f9fbe7;border:1.5px solid #aed581;padding:10px 14px;margin-top:0">
       <div style="font-size:.8rem;color:#33691e;line-height:1.7">
-        <strong>📦 รวมทั้งปีต่อต้น (24 รอบ / ทุก 2 อาทิตย์):</strong><br>
-        9-3-3: 525 ก. (7 ครั้ง) &nbsp;|&nbsp; 15-15-15: 1,025 ก. (13 ครั้ง) &nbsp;|&nbsp; 46-0-0: 125 ก. (5 ครั้ง) &nbsp;|&nbsp; ฮิวมิก: ตามฉลาก × 24 ครั้ง
+        <strong>📦 รวมทั้งปีต่อต้น (24 รอบ / ทุก 2 อาทิตย์ | เริ่ม 15 พ.ค. 2569):</strong><br>
+        9-3-3: 525 ก. (7 ครั้ง) &nbsp;|&nbsp; 15-15-15: 1,050 ก. (14 ครั้ง) &nbsp;|&nbsp; 46-0-0: 75 ก. (3 ครั้ง) &nbsp;|&nbsp; ฮิวมิก: ตามฉลาก × 24 ครั้ง<br>
+        <span style="font-size:.75rem">🌧️ พ.ค.-ต.ค.: 9-3-3 + 46-0-0 เร่งโต &nbsp;|&nbsp; ❄️ พ.ย.-ม.ค.: 15-15-15 ห้ามใส่ N สูง &nbsp;|&nbsp; ☀️ มี.ค.-เม.ย.: ลด N ประคองต้น</span>
       </div>
     </div>
   </div>
@@ -497,6 +498,17 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
 <div class="mo" id="clearModal"><div class="modal"><h3 style="color:var(--r)">⚠️ ยืนยัน</h3><p id="clearModalMsg" style="font-size:.85rem;color:var(--gr);margin-bottom:12px"></p><div class="modal-actions"><button class="btn btn-s" onclick="closeModal('clearModal')">ยกเลิก</button><button class="btn btn-d" id="confirmClearBtn">ดำเนินการ</button></div></div></div>
 <!-- MODAL: Edit Med -->
 <div class="mo" id="editStockModal"><div class="modal"><h3>📦 แก้ไขข้อมูลยา</h3><input type="hidden" id="editMedId"><div class="form-grid" style="margin-bottom:11px"><div class="fg full"><label>ชื่อยา/ปุ๋ย</label><input type="text" id="editMedName"></div><div class="fg full"><label>กลุ่ม</label><select id="editMedGroup"><option>แมลง</option><option>ไร</option><option>เพลี้ย</option><option>โรค</option><option>หอยทาก</option><option>ธาตุอาหาร</option><option>อื่นๆ</option></select></div><div class="fg full"><label>ใช้กับ</label><input type="text" id="editMedUses"></div><div class="fg"><label>จำนวนที่มี</label><input type="number" id="editMedTotal" min="0" step="0.1"></div><div class="fg"><label>คงเหลือ</label><input type="number" id="editMedCurrent" min="0" step="0.1"></div><div class="fg"><label>แจ้งเตือนเมื่อเหลือ ≤</label><input type="number" id="editMedMin" min="0" step="0.1"></div><div class="fg"><label>หน่วย</label><select id="editMedUnit"><option>มล.</option><option>ลิตร</option><option>กรัม</option><option>กก.</option><option>ขวด</option><option>ถุง</option><option>กล่อง</option><option>ซอง</option></select></div><div class="fg full"><label>หมายเหตุ</label><input type="text" id="editMedNotes"></div></div><div class="modal-actions"><button class="btn btn-d btn-sm" id="deleteMedBtn">🗑️ ลบ</button><div style="flex:1"></div><button class="btn btn-s" onclick="closeModal('editStockModal')">ยกเลิก</button><button class="btn btn-p" onclick="saveEditMed()">💾 บันทึก</button></div></div></div>
+<!-- MODAL: Edit Schedule Row (owner only) -->
+<div class="mo" id="schedEditModal"><div class="modal">
+  <h3 id="schedEditTitle">✏️ แก้ไขตาราง</h3>
+  <input type="hidden" id="schedEditType">
+  <input type="hidden" id="schedEditId">
+  <div id="schedEditFields"></div>
+  <div class="modal-actions">
+    <button class="btn btn-s" onclick="closeModal('schedEditModal')">ยกเลิก</button>
+    <button class="btn btn-p" onclick="saveEditScheduleRow()">💾 บันทึก</button>
+  </div>
+</div></div>
 <!-- MODAL: Add Med -->
 <div class="mo" id="addMedModal"><div class="modal"><h3>➕ เพิ่มรายการยา/ปุ๋ย</h3><div class="form-grid" style="margin-bottom:11px"><div class="fg full"><label>ชื่อยา/ปุ๋ย *</label><input type="text" id="addMedName" placeholder="เช่น ไซเพอร์เมทริน"></div><div class="fg full"><label>กลุ่ม</label><select id="addMedGroup"><option>แมลง</option><option>ไร</option><option>เพลี้ย</option><option>โรค</option><option>หอยทาก</option><option>ธาตุอาหาร</option><option>อื่นๆ</option></select></div><div class="fg full"><label>ใช้กับ</label><input type="text" id="addMedUses" placeholder="เช่น ไรแดง เพลี้ยไฟ"></div><div class="fg"><label>จำนวนที่มี</label><input type="number" id="addMedTotal" min="0" step="0.1" value="0"></div><div class="fg"><label>คงเหลือ</label><input type="number" id="addMedCurrent" min="0" step="0.1" value="0"></div><div class="fg"><label>แจ้งเตือน ≤</label><input type="number" id="addMedMin" min="0" step="0.1" value="0"></div><div class="fg"><label>หน่วย</label><select id="addMedUnit"><option>มล.</option><option>ลิตร</option><option>กรัม</option><option>กก.</option><option>ขวด</option><option>ถุง</option><option>กล่อง</option><option>ซอง</option></select></div><div class="fg full"><label>หมายเหตุ</label><input type="text" id="addMedNotes"></div></div><div class="modal-actions"><button class="btn btn-s" onclick="closeModal('addMedModal')">ยกเลิก</button><button class="btn btn-p" onclick="saveNewMed()">➕ เพิ่ม</button></div></div></div>
 <script>
@@ -556,96 +568,96 @@ const DEFAULT_MEDS = [
 //  DEFAULT SPRAY SCHEDULE
 // ==============================================================
 const DEFAULT_SCHEDULE = [
-  {id:1,  date:'2026-05-10',season:'เริ่มฝน',  group:'เพลี้ย+บำรุง',    chem:'ฟลอนิคามิด + Zn EDTA + Mg EDTA + MIX-EDTA + Calcium Boron',        amt:'✅ ฉีดแล้ว',               ppe:'—',                      obs:'ตรวจใบ เพลี้ยไฟ บำรุง',         done:true},
-  {id:2,  date:'2026-05-17',season:'เริ่มฝน',  group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                         amt:'100+125+150+100 มล.',        ppe:'ถุงมือ',                  obs:'สีใบ ใบอ่อน แตกกิ่ง',            done:false},
-  {id:3,  date:'2026-05-24',season:'เริ่มฝน',  group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + ฟลอนิคามิด + MIX-EDTA + อมิโนแอซิด',                 amt:'150+ฉลาก+100+100 มล.',       ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน เพลี้ยแป้ง ยอดอ่อน',         done:false},
-  {id:4,  date:'2026-05-31',season:'เริ่มฝน',  group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด',                          amt:'200+125+100 มล.',            ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'ขอบใบ จุดน้ำตาล ราสนิม',          done:false},
-  {id:5,  date:'2026-06-07',season:'ฝนชุก',    group:'แมลง B+เพลี้ย',   chem:'Abamectin + Buprofezin + Zn EDTA',                                   amt:'75+100+50 มล.',              ppe:'ชุดเต็ม',                obs:'ใต้ใบ เพลี้ยไฟ หนอน',             done:false},
-  {id:6,  date:'2026-06-14',season:'ฝนชุก',    group:'โรค+บำรุง',        chem:'Fosetyl-Al + MIX-EDTA + Mg EDTA',                                    amt:'150+100+125 มล.',            ppe:'ถุงมือ',                  obs:'โคนต้น รอยเน่า ยางไหล',           done:false},
-  {id:7,  date:'2026-06-21',season:'ฝนชุก',    group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + อะซีทามิพริด + MIX-EDTA',                             amt:'150+ฉลาก+100 มล.',          ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน เพลี้ยแป้ง ผงขาว',           done:false},
-  {id:8,  date:'2026-06-28',season:'ฝนชุก',    group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด + Calcium Boron',          amt:'200+125+100+ฉลาก',          ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'ใบแก่ จุดสี ราแป้ง',              done:false},
-  {id:9,  date:'2026-07-05',season:'ฝนมาก',    group:'แมลง C+เพลี้ย',   chem:'Indoxacarb + ฟลอนิคามิด + MIX-EDTA',                                amt:'75+ฉลาก+100 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'ด้วง รูเจาะ เพลี้ยแป้ง',           done:false},
-  {id:10, date:'2026-07-12',season:'ฝนมาก',    group:'โรค+บำรุง',        chem:'Fosetyl-Al + MIX-EDTA + Mg EDTA + อมิโนแอซิด',                      amt:'150+100+125+100 มล.',        ppe:'ถุงมือ',                  obs:'ใบจุด ขอบน้ำตาล แอนแทรคโนส',     done:false},
-  {id:11, date:'2026-07-19',season:'ฝนมาก',    group:'แมลง B+เพลี้ย',   chem:'Abamectin + Buprofezin + Zn EDTA',                                   amt:'75+100+50 มล.',              ppe:'ชุดเต็ม',                obs:'ใต้ใบ เพลี้ยไฟ หนอน',             done:false},
-  {id:12, date:'2026-07-26',season:'ฝนมาก',    group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด',                          amt:'200+125+100 มล.',            ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'เชื้อราใบ ราสนิม ใบไหม้',         done:false},
-  {id:13, date:'2026-08-02',season:'ฝนมาก',    group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + ฟลอนิคามิด + MIX-EDTA',                               amt:'150+ฉลาก+100 มล.',          ppe:'หน้ากาก+ถุงมือ',          obs:'หนอนม้วนใบ เพลี้ยหอย',            done:false},
-  {id:14, date:'2026-08-09',season:'ฝนมาก',    group:'โรค+บำรุง',        chem:'Fosetyl-Al + MIX-EDTA + Mg EDTA + Calcium Boron',                    amt:'150+100+125+ฉลาก',          ppe:'ถุงมือ',                  obs:'โคนต้น รอยแตก ยางไหล',            done:false},
-  {id:15, date:'2026-08-16',season:'ฝนมาก',    group:'แมลง C+เพลี้ย',   chem:'Indoxacarb + Buprofezin + MIX-EDTA',                                 amt:'75+100+100 มล.',             ppe:'หน้ากาก+ถุงมือ',          obs:'รูเจาะ ด้วง เพลี้ยแป้ง',           done:false},
-  {id:16, date:'2026-08-23',season:'ฝนมาก',    group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด',                          amt:'200+125+100 มล.',            ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'ราใบ ราสนิม ใบไหม้',               done:false},
-  {id:17, date:'2026-08-30',season:'ฝนมาก',    group:'แมลง B+เพลี้ย',   chem:'Abamectin + อะซีทามิพริด + Zn EDTA',                                amt:'75+ฉลาก+50 มล.',            ppe:'ชุดเต็ม',                obs:'ใต้ใบ เพลี้ยไฟ หนอน',             done:false},
-  {id:18, date:'2026-09-06',season:'ฝนชุก',    group:'โรค+บำรุง',        chem:'Fosetyl-Al + MIX-EDTA + Mg EDTA + อมิโนแอซิด',                      amt:'150+100+125+100 มล.',        ppe:'ถุงมือ',                  obs:'ใบจุด ขอบน้ำตาล แอนแทรคโนส',     done:false},
-  {id:19, date:'2026-09-13',season:'ฝนชุก',    group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + Buprofezin + MIX-EDTA',                               amt:'150+100+100 มล.',            ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน รอยกัด กิ่งเหี่ยว',          done:false},
-  {id:20, date:'2026-09-20',season:'ฝนชุก',    group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด + Calcium Boron',          amt:'200+125+100+ฉลาก',          ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'ป้องกันราปลายฝน',                  done:false},
-  {id:21, date:'2026-09-27',season:'ฝนชุก',    group:'แมลง C+เพลี้ย',   chem:'Indoxacarb + ฟลอนิคามิด + MIX-EDTA',                                amt:'75+ฉลาก+100 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'ด้วง รูเจาะ เพลี้ยแป้ง',           done:false},
-  {id:22, date:'2026-10-04',season:'ปลายฝน',   group:'โรค+บำรุง',        chem:'Fosetyl-Al + MIX-EDTA + Mg EDTA',                                    amt:'150+100+125 มล.',            ppe:'ถุงมือ',                  obs:'ป้องกันรากเน่าปลายฝน',             done:false},
-  {id:23, date:'2026-10-11',season:'ปลายฝน',   group:'แมลง B+เพลี้ย',   chem:'Abamectin + Buprofezin + Zn EDTA',                                   amt:'75+100+50 มล.',              ppe:'ชุดเต็ม',                obs:'ใต้ใบ เพลี้ย สะสมอาหาร',          done:false},
-  {id:24, date:'2026-10-18',season:'ปลายฝน',   group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                         amt:'100+125+150+100 มล.',        ppe:'ถุงมือ',                  obs:'สีใบรวม เตรียมรับหนาว',            done:false},
-  {id:25, date:'2026-10-25',season:'ปลายฝน',   group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + อะซีทามิพริด + MIX-EDTA',                             amt:'150+ฉลาก+100 มล.',          ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน เพลี้ยแป้ง ผงขาว',           done:false},
-  {id:26, date:'2026-11-01',season:'หนาว',      group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Zn EDTA + Calcium Boron',                       amt:'100+125+50+ฉลาก',           ppe:'ถุงมือ',                  obs:'ใบอ่อน สมบูรณ์ไหม',               done:false},
-  {id:27, date:'2026-11-08',season:'หนาว',      group:'แมลง C+เพลี้ย',   chem:'Indoxacarb + ฟลอนิคามิด + MIX-EDTA',                                amt:'75+ฉลาก+100 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'รูเจาะ ด้วง โคนต้น',              done:false},
-  {id:28, date:'2026-11-15',season:'หนาว',      group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                         amt:'100+125+150+100 มล.',        ppe:'ถุงมือ',                  obs:'ใบแก่ Mg เส้นใบเหลือง',           done:false},
-  {id:29, date:'2026-11-22',season:'หนาว',      group:'แมลง B+เพลี้ย',   chem:'Abamectin + Buprofezin + Zn EDTA',                                   amt:'75+100+50 มล.',              ppe:'ชุดเต็ม',                obs:'ใต้ใบ ไร เพลี้ยไฟ',               done:false},
-  {id:30, date:'2026-11-29',season:'หนาว',      group:'โรค+บำรุง',        chem:'Fosetyl-Al + MIX-EDTA + Mg EDTA + Calcium Boron',                    amt:'150+100+125+ฉลาก',          ppe:'ถุงมือ',                  obs:'โคนต้น ดูรอยเน่า',                done:false},
-  {id:31, date:'2026-12-06',season:'หนาวจัด',   group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + อะซีทามิพริด + MIX-EDTA',                             amt:'150+ฉลาก+100 มล.',          ppe:'หน้ากาก+ถุงมือ',          obs:'ทรงพุ่ม กิ่งแตกใหม่',              done:false},
-  {id:32, date:'2026-12-13',season:'หนาวจัด',   group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                         amt:'100+125+150+100 มล.',        ppe:'ถุงมือ',                  obs:'สีใบ การสะสมอาหาร',               done:false},
-  {id:33, date:'2026-12-20',season:'หนาวจัด',   group:'แมลง C+เพลี้ย',   chem:'Indoxacarb + Buprofezin + MIX-EDTA',                                 amt:'75+100+100 มล.',             ppe:'หน้ากาก+ถุงมือ',          obs:'ด้วง รูเจาะ กิ่งผิดปกติ',          done:false},
-  {id:34, date:'2026-12-27',season:'หนาวจัด',   group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Zn EDTA + Calcium Boron',                       amt:'100+125+50+ฉลาก',           ppe:'ถุงมือ',                  obs:'สีใบ การสะสมอาหาร',               done:false},
-  {id:35, date:'2027-01-03',season:'ไรแดง',     group:'ไรแดง+เพลี้ย',    chem:'Bifenazate + Buprofezin + Zn EDTA',                                   amt:'75+100+50 มล.',              ppe:'หน้ากาก+ถุงมือ',          obs:'ใต้ใบ จุดขาว เส้นใยไรแดง',        done:false},
-  {id:36, date:'2027-01-10',season:'ไรแดง',     group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                         amt:'100+125+150+100 มล.',        ppe:'ถุงมือ',                  obs:'ใบอ่อน การแตกยอดใหม่',            done:false},
-  {id:37, date:'2027-01-17',season:'ไรแดง',     group:'ไรแดง+แมลง B',    chem:'Bifenazate + Abamectin + Zn EDTA',                                    amt:'75+75+50 มล.',               ppe:'ชุดเต็ม',                obs:'ใต้ใบ ไรแดงสีแดงเข้ม',            done:false},
-  {id:38, date:'2027-01-24',season:'ไรแดง',     group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Calcium Boron',                                 amt:'100+125+ฉลาก',              ppe:'ถุงมือ',                  obs:'ใบอ่อนสมบูรณ์ ไม่หงิกงอ',         done:false},
-  {id:39, date:'2027-01-31',season:'ไรแดง',     group:'ไรแดง+เพลี้ย',    chem:'สไปโรไดโคชเฟน + เฮกซีไทอะซอกซ์ + Buprofezin',                      amt:'ฉลาก+ฉลาก+100 มล.',         ppe:'หน้ากาก+ถุงมือ',          obs:'ใต้ใบ เพลี้ยไฟ ไรแดง',            done:false},
-  {id:40, date:'2027-02-07',season:'เริ่มร้อน', group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                         amt:'100+125+150+100 มล.',        ppe:'ถุงมือ',                  obs:'สีใบ การเติบโตรวม',               done:false},
-  {id:41, date:'2027-02-14',season:'เริ่มร้อน', group:'ไรแดง+แมลง C',    chem:'Bifenazate + Indoxacarb + Zn EDTA',                                   amt:'75+75+50 มล.',               ppe:'หน้ากาก+ถุงมือ',          obs:'ใต้ใบ ไรแดง หนอน',               done:false},
-  {id:42, date:'2027-02-21',season:'เริ่มร้อน', group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Calcium Boron',                                 amt:'100+125+ฉลาก',              ppe:'ถุงมือ',                  obs:'ทรงพุ่ม กิ่งแตกใหม่',              done:false},
-  {id:43, date:'2027-02-28',season:'เริ่มร้อน', group:'ไรแดง+เพลี้ย',    chem:'สไปโรไดโคชเฟน + อะซีทามิพริด + Zn EDTA',                            amt:'ฉลาก+ฉลาก+50 มล.',          ppe:'หน้ากาก+ถุงมือ',          obs:'ไรแดง เพลี้ยแป้ง',                done:false},
-  {id:44, date:'2027-03-07',season:'ร้อนแล้ง',  group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                         amt:'100+125+150+100 มล.',        ppe:'ถุงมือ',                  obs:'ใบแก่ ขาดธาตุ stress ร้อน',       done:false},
-  {id:45, date:'2027-03-14',season:'ร้อนแล้ง',  group:'ไรแดง+แมลง A',    chem:'Bifenazate + Cypermethrin + MIX-EDTA',                                amt:'75+150+100 มล.',             ppe:'หน้ากาก+ถุงมือ',          obs:'ใต้ใบ ไรแดงระบาดสูงสุด',          done:false},
-  {id:46, date:'2027-03-21',season:'ร้อนแล้ง',  group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Calcium Boron',                                 amt:'100+125+ฉลาก',              ppe:'ถุงมือ',                  obs:'สภาพต้นรวม',                       done:false},
-  {id:47, date:'2027-03-28',season:'ร้อนแล้ง',  group:'ไรแดง+เพลี้ย',    chem:'เฮกซีไทอะซอกซ์ + Buprofezin + Zn EDTA',                             amt:'ฉลาก+100+50 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'ไรแดงระบาด เพลี้ยแป้ง',           done:false},
-  {id:48, date:'2027-04-04',season:'ร้อนจัด',   group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Zn EDTA + อมิโนแอซิด + Calcium Boron',          amt:'100+125+50+150+ฉลาก',       ppe:'ถุงมือ',                  obs:'สภาพต้นรวม เตรียมรับฝนปีหน้า',    done:false},
+  {id:1,  date:'2026-05-22',season:'เริ่มฝน',  group:'บำรุง+โรค',        chem:'Fosetyl-Al + MIX-EDTA + Mg EDTA + Zn EDTA + อมิโนแอซิด + สาหร่าย',  amt:'150+100+125+50+150+100 มล.',  ppe:'ถุงมือ',                  obs:'ตาใบแตกไหม กิ่งเขียวไหม',         done:false},
+  {id:2,  date:'2026-05-29',season:'เริ่มฝน',  group:'แมลง B+เพลี้ย',   chem:'Abamectin + Buprofezin + Zn EDTA + อมิโนแอซิด',                           amt:'75+100+50+150 มล.',           ppe:'ชุดเต็ม',                obs:'ใต้ใบ เพลี้ยไฟ หนอน',             done:false},
+  {id:3,  date:'2026-06-05',season:'ฝนชุก',    group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด + สาหร่าย + จับใบ',              amt:'200+125+150+100+50 มล.',      ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'ขอบใบ จุดน้ำตาล ราสนิม',          done:false},
+  {id:4,  date:'2026-06-12',season:'ฝนชุก',    group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + อะซีทามิพริด + MIX-EDTA + อมิโนแอซิด',                     amt:'150+ฉลาก+100+150 มล.',        ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน เพลี้ยแป้ง ผงขาว',           done:false},
+  {id:5,  date:'2026-06-19',season:'ฝนชุก',    group:'โรค+บำรุง',        chem:'Fosetyl-Al + MIX-EDTA + Mg EDTA + Calcium Boron + อมิโนแอซิด',             amt:'150+100+125+ฉลาก+150 มล.',    ppe:'ถุงมือ',                  obs:'โคนต้น รอยเน่า ยางไหล',           done:false},
+  {id:6,  date:'2026-06-26',season:'ฝนชุก',    group:'แมลง C+เพลี้ย',   chem:'Indoxacarb + ฟลอนิคามิด + MIX-EDTA',                                       amt:'75+ฉลาก+100 มล.',            ppe:'หน้ากาก+ถุงมือ',          obs:'ด้วง รูเจาะ เพลี้ยแป้ง',           done:false},
+  {id:7,  date:'2026-07-03',season:'ฝนมาก',    group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด + สาหร่าย + จับใบ',              amt:'200+125+150+100+50 มล.',      ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'ใบแก่ จุดสี ราแป้ง',              done:false},
+  {id:8,  date:'2026-07-10',season:'ฝนมาก',    group:'แมลง B+เพลี้ย',   chem:'Abamectin + Buprofezin + Zn EDTA',                                          amt:'75+100+50 มล.',               ppe:'ชุดเต็ม',                obs:'ใต้ใบ เพลี้ยไฟ หนอน',             done:false},
+  {id:9,  date:'2026-07-17',season:'ฝนมาก',    group:'โรค+บำรุง',        chem:'Fosetyl-Al + MIX-EDTA + Mg EDTA + Zn EDTA + อมิโนแอซิด',                  amt:'150+100+125+50+150 มล.',      ppe:'ถุงมือ',                  obs:'ใบจุด ขอบน้ำตาล แอนแทรคโนส',     done:false},
+  {id:10, date:'2026-07-24',season:'ฝนมาก',    group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + ฟลอนิคามิด + MIX-EDTA',                                     amt:'150+ฉลาก+100 มล.',            ppe:'หน้ากาก+ถุงมือ',          obs:'หนอนม้วนใบ เพลี้ยหอย',            done:false},
+  {id:11, date:'2026-07-31',season:'ฝนมาก',    group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด + Calcium Boron + จับใบ',         amt:'200+125+150+ฉลาก+50 มล.',    ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'เชื้อราใบ ราสนิม ใบไหม้',         done:false},
+  {id:12, date:'2026-08-07',season:'ฝนมาก',    group:'แมลง C+เพลี้ย',   chem:'Indoxacarb + Buprofezin + MIX-EDTA',                                        amt:'75+100+100 มล.',              ppe:'หน้ากาก+ถุงมือ',          obs:'รูเจาะ ด้วง เพลี้ยแป้ง',           done:false},
+  {id:13, date:'2026-08-14',season:'ฝนมาก',    group:'โรค+บำรุง',        chem:'Fosetyl-Al + MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                  amt:'150+100+125+150+100 มล.',     ppe:'ถุงมือ',                  obs:'โคนต้น รอยแตก ยางไหล',            done:false},
+  {id:14, date:'2026-08-21',season:'ฝนมาก',    group:'แมลง B+เพลี้ย',   chem:'Abamectin + อะซีทามิพริด + Zn EDTA',                                       amt:'75+ฉลาก+50 มล.',             ppe:'ชุดเต็ม',                obs:'ใต้ใบ เพลี้ยไฟ หนอน',             done:false},
+  {id:15, date:'2026-08-28',season:'ฝนมาก',    group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด + จับใบ',                        amt:'200+125+150+50 มล.',          ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'ราใบ ราสนิม ใบไหม้',               done:false},
+  {id:16, date:'2026-09-04',season:'ฝนชุก',    group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + Buprofezin + MIX-EDTA',                                      amt:'150+100+100 มล.',             ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน รอยกัด กิ่งเหี่ยว',          done:false},
+  {id:17, date:'2026-09-11',season:'ฝนชุก',    group:'โรค+บำรุง',        chem:'Fosetyl-Al + MIX-EDTA + Mg EDTA + Calcium Boron + อมิโนแอซิด',             amt:'150+100+125+ฉลาก+150 มล.',    ppe:'ถุงมือ',                  obs:'ใบจุด ขอบน้ำตาล แอนแทรคโนส',     done:false},
+  {id:18, date:'2026-09-18',season:'ฝนชุก',    group:'แมลง C+เพลี้ย',   chem:'Indoxacarb + ฟลอนิคามิด + MIX-EDTA',                                       amt:'75+ฉลาก+100 มล.',            ppe:'หน้ากาก+ถุงมือ',          obs:'ด้วง รูเจาะ เพลี้ยแป้ง',           done:false},
+  {id:19, date:'2026-09-25',season:'ฝนชุก',    group:'โรค+บำรุง',        chem:'Copper Oxychloride + Mg EDTA + อมิโนแอซิด + สาหร่าย + จับใบ',              amt:'200+125+150+100+50 มล.',      ppe:'หน้ากาก+ถุงมือ+แว่น',    obs:'ป้องกันราปลายฝน',                  done:false},
+  {id:20, date:'2026-10-02',season:'ปลายฝน',   group:'แมลง B+เพลี้ย',   chem:'Abamectin + Buprofezin + Zn EDTA',                                          amt:'75+100+50 มล.',               ppe:'ชุดเต็ม',                obs:'ใต้ใบ เพลี้ย สะสมอาหาร',          done:false},
+  {id:21, date:'2026-10-09',season:'ปลายฝน',   group:'โรค+บำรุง',        chem:'Fosetyl-Al + MIX-EDTA + Mg EDTA + Zn EDTA',                               amt:'150+100+125+50 มล.',          ppe:'ถุงมือ',                  obs:'ป้องกันรากเน่าปลายฝน',             done:false},
+  {id:22, date:'2026-10-16',season:'ปลายฝน',   group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + อะซีทามิพริด + MIX-EDTA',                                   amt:'150+ฉลาก+100 มล.',            ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน เพลี้ยแป้ง ผงขาว',           done:false},
+  {id:23, date:'2026-10-23',season:'ปลายฝน',   group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย + Calcium Boron',               amt:'100+125+150+100+ฉลาก',        ppe:'ถุงมือ',                  obs:'สีใบรวม เตรียมรับหนาว',            done:false},
+  {id:24, date:'2026-10-30',season:'ปลายฝน',   group:'แมลง C+เพลี้ย',   chem:'Indoxacarb + ฟลอนิคามิด + MIX-EDTA',                                       amt:'75+ฉลาก+100 มล.',            ppe:'หน้ากาก+ถุงมือ',          obs:'ด้วง รูเจาะ เพลี้ยแป้ง',           done:false},
+  {id:25, date:'2026-11-06',season:'หนาว',      group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Zn EDTA + Calcium Boron + อมิโนแอซิด',               amt:'100+125+50+ฉลาก+150 มล.',    ppe:'ถุงมือ',                  obs:'ใบอ่อน สมบูรณ์ไหม',               done:false},
+  {id:26, date:'2026-11-13',season:'หนาว',      group:'แมลง B+เพลี้ย',   chem:'Abamectin + Buprofezin + Zn EDTA',                                          amt:'75+100+50 มล.',               ppe:'ชุดเต็ม',                obs:'ใต้ใบ ไร เพลี้ยไฟ',               done:false},
+  {id:27, date:'2026-11-20',season:'หนาว',      group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                               amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'ใบแก่ Mg เส้นใบเหลือง',           done:false},
+  {id:28, date:'2026-11-27',season:'หนาว',      group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + อะซีทามิพริด + MIX-EDTA',                                   amt:'150+ฉลาก+100 มล.',            ppe:'หน้ากาก+ถุงมือ',          obs:'หนอน เพลี้ยแป้ง ผงขาวกิ่ง',       done:false},
+  {id:29, date:'2026-12-04',season:'หนาวจัด',   group:'โรค+บำรุง',        chem:'Fosetyl-Al + MIX-EDTA + Mg EDTA + Calcium Boron',                          amt:'150+100+125+ฉลาก',            ppe:'ถุงมือ',                  obs:'โคนต้น ดูรอยเน่า',                done:false},
+  {id:30, date:'2026-12-11',season:'หนาวจัด',   group:'แมลง C+เพลี้ย',   chem:'Indoxacarb + Buprofezin + MIX-EDTA',                                        amt:'75+100+100 มล.',              ppe:'หน้ากาก+ถุงมือ',          obs:'ทรงพุ่ม กิ่งแตกใหม่',              done:false},
+  {id:31, date:'2026-12-18',season:'หนาวจัด',   group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                               amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'สีใบ การสะสมอาหาร',               done:false},
+  {id:32, date:'2026-12-25',season:'หนาวจัด',   group:'แมลง B+เพลี้ย',   chem:'Abamectin + ฟลอนิคามิด + Zn EDTA',                                         amt:'75+ฉลาก+50 มล.',             ppe:'ชุดเต็ม',                obs:'ด้วง รูเจาะ กิ่งผิดปกติ',          done:false},
+  {id:33, date:'2027-01-01',season:'ไรแดง',     group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Zn EDTA + Calcium Boron',                             amt:'100+125+50+ฉลาก',            ppe:'ถุงมือ',                  obs:'สีใบ การสะสมอาหาร',               done:false},
+  {id:34, date:'2027-01-08',season:'ไรแดง',     group:'ไรแดง+เพลี้ย',    chem:'Bifenazate + Buprofezin + Zn EDTA',                                         amt:'75+100+50 มล.',               ppe:'หน้ากาก+ถุงมือ',          obs:'ใต้ใบ จุดขาว เส้นใยไรแดง',        done:false},
+  {id:35, date:'2027-01-15',season:'ไรแดง',     group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                               amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'ใบอ่อน การแตกยอดใหม่',            done:false},
+  {id:36, date:'2027-01-22',season:'ไรแดง',     group:'ไรแดง+แมลง B',    chem:'Bifenazate + Abamectin + Zn EDTA',                                          amt:'75+75+50 มล.',                ppe:'ชุดเต็ม',                obs:'ใต้ใบ ไรแดงสีแดงเข้ม',            done:false},
+  {id:37, date:'2027-01-29',season:'ไรแดง',     group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Calcium Boron + อมิโนแอซิด',                         amt:'100+125+ฉลาก+150 มล.',        ppe:'ถุงมือ',                  obs:'ใบอ่อนสมบูรณ์ ไม่หงิกงอ',         done:false},
+  {id:38, date:'2027-02-05',season:'เริ่มร้อน', group:'ไรแดง+เพลี้ย',    chem:'สไปโรไดโคชเฟน + เฮกซีไทอะซอกซ์ + Buprofezin',                            amt:'ฉลาก+ฉลาก+100 มล.',          ppe:'หน้ากาก+ถุงมือ',          obs:'ใต้ใบ เพลี้ยไฟ ไรแดง',            done:false},
+  {id:39, date:'2027-02-12',season:'เริ่มร้อน', group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                               amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'สีใบ การเติบโตรวม',               done:false},
+  {id:40, date:'2027-02-19',season:'เริ่มร้อน', group:'ไรแดง+แมลง C',    chem:'Bifenazate + Indoxacarb + Zn EDTA',                                         amt:'75+75+50 มล.',                ppe:'หน้ากาก+ถุงมือ',          obs:'ใต้ใบ ไรแดง หนอน',               done:false},
+  {id:41, date:'2027-02-26',season:'เริ่มร้อน', group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Calcium Boron + Zn EDTA',                             amt:'100+125+ฉลาก+50 มล.',         ppe:'ถุงมือ',                  obs:'ทรงพุ่ม กิ่งแตกใหม่',              done:false},
+  {id:42, date:'2027-03-05',season:'ร้อนแล้ง',  group:'ไรแดง+เพลี้ย',    chem:'สไปโรไดโคชเฟน + อะซีทามิพริด + Zn EDTA',                                  amt:'ฉลาก+ฉลาก+50 มล.',           ppe:'หน้ากาก+ถุงมือ',          obs:'ไรแดง เพลี้ยแป้ง',                done:false},
+  {id:43, date:'2027-03-12',season:'ร้อนแล้ง',  group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                               amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'ใบแก่ ขาดธาตุ stress ร้อน',       done:false},
+  {id:44, date:'2027-03-19',season:'ร้อนแล้ง',  group:'ไรแดง+แมลง A',    chem:'Bifenazate + Cypermethrin + MIX-EDTA',                                      amt:'75+150+100 มล.',              ppe:'หน้ากาก+ถุงมือ',          obs:'ใต้ใบ ไรแดงระบาดสูงสุด',          done:false},
+  {id:45, date:'2027-03-26',season:'ร้อนแล้ง',  group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + Calcium Boron + อมิโนแอซิด',                         amt:'100+125+ฉลาก+150 มล.',        ppe:'ถุงมือ',                  obs:'สภาพต้นรวม',                       done:false},
+  {id:46, date:'2027-04-02',season:'ร้อนจัด',   group:'ไรแดง+เพลี้ย',    chem:'เฮกซีไทอะซอกซ์ + Buprofezin + Zn EDTA',                                   amt:'ฉลาก+100+50 มล.',            ppe:'หน้ากาก+ถุงมือ',          obs:'ไรแดงระบาด เพลี้ยแป้ง',           done:false},
+  {id:47, date:'2027-04-09',season:'ร้อนจัด',   group:'บำรุง',            chem:'MIX-EDTA + Mg EDTA + อมิโนแอซิด + สาหร่าย',                               amt:'100+125+150+100 มล.',         ppe:'ถุงมือ',                  obs:'ใบเหลือง ขาด Mg/Zn',              done:false},
+  {id:48, date:'2027-04-16',season:'ร้อนจัด',   group:'แมลง A+เพลี้ย',   chem:'Cypermethrin + ฟลอนิคามิด + MIX-EDTA + อมิโนแอซิด',                       amt:'150+ฉลาก+100+150 มล.',        ppe:'หน้ากาก+ถุงมือ',          obs:'สภาพต้นรวม เตรียมรับฝนปีหน้า',    done:false},
 ];
 
 const DEFAULT_SOIL_SCHEDULE = [
-  {id:1,  month:'พ.ค. 2569', date:'2026-05-01', chem:'Metalaxyl',      group:'Phenylamide',       rate:'50ก./10ล./ต้น', ppe:'ชุดเต็ม+บูท', done:false},
-  {id:2,  month:'มิ.ย. 2569',date:'2026-06-01', chem:'Dimethomorph',   group:'CAA',               rate:'ตามฉลาก',       ppe:'ชุดเต็ม+บูท', done:false},
-  {id:3,  month:'ก.ค. 2569', date:'2026-07-01', chem:'Cymoxanil',      group:'Cyanoacetamide',    rate:'ตามฉลาก',       ppe:'ชุดเต็ม+บูท', done:false},
-  {id:4,  month:'ส.ค. 2569', date:'2026-08-01', chem:'Metalaxyl',      group:'Phenylamide',       rate:'50ก./10ล./ต้น', ppe:'ชุดเต็ม+บูท', done:false},
-  {id:5,  month:'ก.ย. 2569', date:'2026-09-01', chem:'Propamocarb',    group:'Carbamate',         rate:'ตามฉลาก',       ppe:'ชุดเต็ม+บูท', done:false},
-  {id:6,  month:'ต.ค. 2569', date:'2026-10-01', chem:'Dimethomorph',   group:'CAA',               rate:'ตามฉลาก',       ppe:'ชุดเต็ม+บูท', done:false},
-  {id:7,  month:'พ.ย. 2569', date:'2026-11-01', chem:'Metalaxyl',      group:'Phenylamide',       rate:'50ก./10ล./ต้น', ppe:'ชุดเต็ม+บูท', done:false},
-  {id:8,  month:'ธ.ค. 2569', date:'2026-12-01', chem:'ไทอะมีทอกแซม',  group:'Neonicotinoid',    rate:'2ก./ต้น',       ppe:'หน้ากาก+ถุงมือ',done:false},
-  {id:9,  month:'ม.ค. 2570', date:'2027-01-01', chem:'Cymoxanil',      group:'Cyanoacetamide',    rate:'ตามฉลาก',       ppe:'ชุดเต็ม+บูท', done:false},
-  {id:10, month:'ก.พ. 2570', date:'2027-02-01', chem:'ไทอะมีทอกแซม',  group:'Neonicotinoid',    rate:'2ก./ต้น',       ppe:'หน้ากาก+ถุงมือ',done:false},
-  {id:11, month:'มี.ค. 2570',date:'2027-03-01', chem:'Propamocarb',    group:'Carbamate',         rate:'ตามฉลาก',       ppe:'ชุดเต็ม+บูท', done:false},
-  {id:12, month:'เม.ย. 2570',date:'2027-04-01', chem:'Metalaxyl',      group:'Phenylamide',       rate:'50ก./10ล./ต้น', ppe:'ชุดเต็ม+บูท', done:false},
+  {id:1,  month:'พ.ค. 2569', date:'2026-05-01', chem:'Metalaxyl',      group:'Phenylamide',    rate:'50ก./10ล./ต้น', ppe:'ชุดเต็ม+บูท',    obs:'✅ ราดไปแล้ว',              done:false},
+  {id:2,  month:'มิ.ย. 2569',date:'2026-06-01', chem:'Dimethomorph',   group:'CAA',            rate:'ตามฉลาก',       ppe:'ชุดเต็ม+บูท',    obs:'ฝนชุก เสี่ยงรากเน่าสูง',  done:false},
+  {id:3,  month:'ก.ค. 2569', date:'2026-07-01', chem:'Cymoxanil',      group:'Cyanoacetamide', rate:'ตามฉลาก',       ppe:'ชุดเต็ม+บูท',    obs:'ดูรากหลังขุด',             done:false},
+  {id:4,  month:'ส.ค. 2569', date:'2026-08-01', chem:'Metalaxyl',      group:'Phenylamide',    rate:'50ก./10ล./ต้น', ppe:'ชุดเต็ม+บูท',    obs:'ราดซ้ำช่วงฝนมาก',          done:false},
+  {id:5,  month:'ก.ย. 2569', date:'2026-09-01', chem:'Propamocarb',    group:'Carbamate',      rate:'ตามฉลาก',       ppe:'ชุดเต็ม+บูท',    obs:'ดูโคนต้น น้ำขัง',          done:false},
+  {id:6,  month:'ต.ค. 2569', date:'2026-10-01', chem:'Dimethomorph',   group:'CAA',            rate:'ตามฉลาก',       ppe:'ชุดเต็ม+บูท',    obs:'ปลายฝน ป้องกันรากเน่า',    done:false},
+  {id:7,  month:'พ.ย. 2569', date:'2026-11-01', chem:'Metalaxyl',      group:'Phenylamide',    rate:'50ก./10ล./ต้น', ppe:'ชุดเต็ม+บูท',    obs:'เริ่มหนาว ดูโคนต้น',       done:false},
+  {id:8,  month:'ธ.ค. 2569', date:'2026-12-01', chem:'ไทอะมีทอกแซม',  group:'Neonicotinoid',  rate:'2ก./ต้น',       ppe:'หน้ากาก+ถุงมือ', obs:'ราดเพลี้ยดิน ช่วงหนาว',    done:false},
+  {id:9,  month:'ม.ค. 2570', date:'2027-01-01', chem:'Cymoxanil',      group:'Cyanoacetamide', rate:'ตามฉลาก',       ppe:'ชุดเต็ม+บูท',    obs:'ดูรากช่วงแล้ง',             done:false},
+  {id:10, month:'ก.พ. 2570', date:'2027-02-01', chem:'ไทอะมีทอกแซม',  group:'Neonicotinoid',  rate:'2ก./ต้น',       ppe:'หน้ากาก+ถุงมือ', obs:'ราดเพลี้ยดินก่อนร้อน',     done:false},
+  {id:11, month:'มี.ค. 2570',date:'2027-03-01', chem:'Propamocarb',    group:'Carbamate',      rate:'ตามฉลาก',       ppe:'ชุดเต็ม+บูท',    obs:'เตรียมรับฝนปีหน้า',        done:false},
+  {id:12, month:'เม.ย. 2570',date:'2027-04-01', chem:'Metalaxyl',      group:'Phenylamide',    rate:'50ก./10ล./ต้น', ppe:'ชุดเต็ม+บูท',    obs:'ดูรากก่อนฝนมา',            done:false},
 ];
 
 const DEFAULT_FERTILIZER_SCHEDULE = [
-  {id:1,  month:'17 พ.ค. 2569', date:'2026-05-17', season:'เริ่มฝน',      main:'9-3-3',    mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'เร่งยอดอ่อน',             done:false},
-  {id:2,  month:'31 พ.ค. 2569', date:'2026-05-31', season:'เริ่มฝน',      main:'46-0-0',   mainRate:'25 ก.',  extra:'ฮิวมิก', timing:'เสริม N เร่งใบ',           done:false},
-  {id:3,  month:'14 มิ.ย. 2569',date:'2026-06-14', season:'ฝนชุก',        main:'9-3-3',    mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'เร่งโต',                   done:false},
-  {id:4,  month:'28 มิ.ย. 2569',date:'2026-06-28', season:'ฝนชุก',        main:'46-0-0',   mainRate:'25 ก.',  extra:'ฮิวมิก', timing:'เสริม N',                  done:false},
-  {id:5,  month:'12 ก.ค. 2569', date:'2026-07-12', season:'ฝนมาก',        main:'9-3-3',    mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'เร่งโต',                   done:false},
-  {id:6,  month:'26 ก.ค. 2569', date:'2026-07-26', season:'ฝนมาก',        main:'46-0-0',   mainRate:'25 ก.',  extra:'ฮิวมิก', timing:'เสริม N',                  done:false},
-  {id:7,  month:'9 ส.ค. 2569',  date:'2026-08-09', season:'ฝนมาก',        main:'9-3-3',    mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'เร่งยอดอ่อน',             done:false},
-  {id:8,  month:'23 ส.ค. 2569', date:'2026-08-23', season:'ฝนมาก',        main:'46-0-0',   mainRate:'25 ก.',  extra:'ฮิวมิก', timing:'เสริม N',                  done:false},
-  {id:9,  month:'6 ก.ย. 2569',  date:'2026-09-06', season:'ฝนชุก',        main:'9-3-3',    mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'เร่งโต',                   done:false},
-  {id:10, month:'20 ก.ย. 2569', date:'2026-09-20', season:'ฝนชุก',        main:'15-15-15', mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'เริ่มสะสมอาหาร',           done:false},
-  {id:11, month:'4 ต.ค. 2569',  date:'2026-10-04', season:'ปลายฝน',       main:'15-15-15', mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'สะสมอาหาร',                done:false},
-  {id:12, month:'18 ต.ค. 2569', date:'2026-10-18', season:'ปลายฝน',       main:'15-15-15', mainRate:'100 ก.', extra:'ฮิวมิก', timing:'เตรียมรับหนาว',            done:false},
-  {id:13, month:'1 พ.ย. 2569',  date:'2026-11-01', season:'หนาว',         main:'15-15-15', mainRate:'100 ก.', extra:'ฮิวมิก', timing:'บำรุงช่วงหนาว',            done:false},
-  {id:14, month:'15 พ.ย. 2569', date:'2026-11-15', season:'หนาว',         main:'15-15-15', mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'สะสมอาหาร',                done:false},
-  {id:15, month:'29 พ.ย. 2569', date:'2026-11-29', season:'หนาว',         main:'15-15-15', mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'บำรุงรวม',                 done:false},
-  {id:16, month:'13 ธ.ค. 2569', date:'2026-12-13', season:'หนาวจัด',      main:'15-15-15', mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'บำรุงช่วงหนาวจัด',         done:false},
-  {id:17, month:'27 ธ.ค. 2569', date:'2026-12-27', season:'หนาวจัด',      main:'15-15-15', mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'สะสมอาหาร',                done:false},
-  {id:18, month:'10 ม.ค. 2570', date:'2027-01-10', season:'ไรแดง/แล้ง',  main:'15-15-15', mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'ประคองต้นช่วงแล้ง',        done:false},
-  {id:19, month:'24 ม.ค. 2570', date:'2027-01-24', season:'ไรแดง/แล้ง',  main:'15-15-15', mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'สะสมอาหาร',                done:false},
-  {id:20, month:'7 ก.พ. 2570',  date:'2027-02-07', season:'เริ่มร้อน',    main:'9-3-3',    mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'เร่งยอดก่อนร้อน',          done:false},
-  {id:21, month:'21 ก.พ. 2570', date:'2027-02-21', season:'เริ่มร้อน',    main:'46-0-0',   mainRate:'25 ก.',  extra:'ฮิวมิก', timing:'เสริม N',                  done:false},
-  {id:22, month:'7 มี.ค. 2570', date:'2027-03-07', season:'ร้อนแล้ง',     main:'15-15-15', mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'ประคอง stress ร้อน',       done:false},
-  {id:23, month:'21 มี.ค. 2570',date:'2027-03-21', season:'ร้อนแล้ง',     main:'15-15-15', mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'ประคองต้น',                done:false},
-  {id:24, month:'4 เม.ย. 2570', date:'2027-04-04', season:'ร้อนจัด',      main:'9-3-3',    mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'เตรียมรับฝนปีหน้า',        done:false},
+  {id:1,  month:'15 พ.ค. 2569', date:'2026-05-15', season:'เริ่มฝน',     main:'9-3-3',    mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'เร่งยอดอ่อน ต้นฟื้นตัว',   done:false},
+  {id:2,  month:'29 พ.ค. 2569', date:'2026-05-29', season:'เริ่มฝน',     main:'46-0-0',   mainRate:'25 ก.',  extra:'ฮิวมิก', timing:'เสริม N เร่งใบ',            done:false},
+  {id:3,  month:'12 มิ.ย. 2569',date:'2026-06-12', season:'ฝนชุก',       main:'9-3-3',    mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'เร่งโต',                    done:false},
+  {id:4,  month:'26 มิ.ย. 2569',date:'2026-06-26', season:'ฝนชุก',       main:'46-0-0',   mainRate:'25 ก.',  extra:'ฮิวมิก', timing:'เสริม N',                   done:false},
+  {id:5,  month:'10 ก.ค. 2569', date:'2026-07-10', season:'ฝนมาก',       main:'9-3-3',    mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'เร่งโต',                    done:false},
+  {id:6,  month:'24 ก.ค. 2569', date:'2026-07-24', season:'ฝนมาก',       main:'46-0-0',   mainRate:'25 ก.',  extra:'ฮิวมิก', timing:'เสริม N',                   done:false},
+  {id:7,  month:'7 ส.ค. 2569',  date:'2026-08-07', season:'ฝนมาก',       main:'9-3-3',    mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'เร่งยอดอ่อน',               done:false},
+  {id:8,  month:'21 ส.ค. 2569', date:'2026-08-21', season:'ฝนมาก',       main:'46-0-0',   mainRate:'25 ก.',  extra:'ฮิวมิก', timing:'เสริม N',                   done:false},
+  {id:9,  month:'4 ก.ย. 2569',  date:'2026-09-04', season:'ฝนชุก',       main:'9-3-3',    mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'เร่งโต',                    done:false},
+  {id:10, month:'18 ก.ย. 2569', date:'2026-09-18', season:'ฝนชุก',       main:'15-15-15', mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'เริ่มสะสมอาหาร',            done:false},
+  {id:11, month:'2 ต.ค. 2569',  date:'2026-10-02', season:'ปลายฝน',      main:'15-15-15', mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'สะสมอาหาร',                 done:false},
+  {id:12, month:'16 ต.ค. 2569', date:'2026-10-16', season:'ปลายฝน',      main:'15-15-15', mainRate:'100 ก.', extra:'ฮิวมิก', timing:'เตรียมรับหนาว',             done:false},
+  {id:13, month:'30 ต.ค. 2569', date:'2026-10-30', season:'ปลายฝน',      main:'15-15-15', mainRate:'100 ก.', extra:'ฮิวมิก', timing:'บำรุงช่วงปลายฝน',           done:false},
+  {id:14, month:'13 พ.ย. 2569', date:'2026-11-13', season:'หนาว',        main:'15-15-15', mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'บำรุงช่วงหนาว',             done:false},
+  {id:15, month:'27 พ.ย. 2569', date:'2026-11-27', season:'หนาว',        main:'15-15-15', mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'สะสมอาหาร',                 done:false},
+  {id:16, month:'11 ธ.ค. 2569', date:'2026-12-11', season:'หนาวจัด',     main:'15-15-15', mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'บำรุงรวม',                  done:false},
+  {id:17, month:'25 ธ.ค. 2569', date:'2026-12-25', season:'หนาวจัด',     main:'15-15-15', mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'บำรุงช่วงหนาวจัด',          done:false},
+  {id:18, month:'8 ม.ค. 2570',  date:'2027-01-08', season:'ไรแดง/แล้ง', main:'15-15-15', mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'ประคองต้นช่วงแล้ง',         done:false},
+  {id:19, month:'22 ม.ค. 2570', date:'2027-01-22', season:'ไรแดง/แล้ง', main:'15-15-15', mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'สะสมอาหาร',                 done:false},
+  {id:20, month:'5 ก.พ. 2570',  date:'2027-02-05', season:'เริ่มร้อน',   main:'9-3-3',    mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'เร่งยอดก่อนร้อน',           done:false},
+  {id:21, month:'19 ก.พ. 2570', date:'2027-02-19', season:'เริ่มร้อน',   main:'46-0-0',   mainRate:'25 ก.',  extra:'ฮิวมิก', timing:'เสริม N',                   done:false},
+  {id:22, month:'5 มี.ค. 2570', date:'2027-03-05', season:'ร้อนแล้ง',    main:'15-15-15', mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'ประคอง stress ร้อน',        done:false},
+  {id:23, month:'19 มี.ค. 2570',date:'2027-03-19', season:'ร้อนแล้ง',    main:'15-15-15', mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'ประคองต้น',                 done:false},
+  {id:24, month:'2 เม.ย. 2570', date:'2027-04-02', season:'ร้อนจัด',     main:'9-3-3',    mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'เตรียมรับฝนปีหน้า',         done:false},
 ];
 // ==============================================================
 //  APP STATE
@@ -653,7 +665,7 @@ const DEFAULT_FERTILIZER_SCHEDULE = [
 let db = null;
 let farmCode = '';
 let currentPage = 'dashboard';
-let cache = { records: [], meds: [...DEFAULT_MEDS], trees: [...DEFAULT_TREES], completedRounds: [1], completedSoilRounds: [], completedFertRounds: [] };
+let cache = { records: [], meds: [...DEFAULT_MEDS], trees: [...DEFAULT_TREES], completedRounds: [], completedSoilRounds: [1], completedFertRounds: [], spraySchedule: [...DEFAULT_SCHEDULE], soilSchedule: [...DEFAULT_SOIL_SCHEDULE], fertSchedule: [...DEFAULT_FERTILIZER_SCHEDULE] };
 let listeners = [];
 let pendingCode = '';
 let userRole = 'owner'; // 'owner'=เจ้าของฟาร์ม | 'member'=สมาชิก
@@ -686,7 +698,7 @@ async function _createFarmInternal(code) { // internal use only
     DEFAULT_MEDS.forEach(m => {
       batch.set(db.doc(`farms/${code}/meds/${m.id}`), m);
     });
-    batch.set(db.doc(`farms/${code}/config/plan`), { completedRounds: [1] });
+    batch.set(db.doc(`farms/${code}/config/plan`), { completedRounds: [], completedSoilRounds: [1], completedFertRounds: [] });
     batch.set(db.doc(`farms/${code}/config/settings`), {
       trees: DEFAULT_TREES,
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -790,7 +802,23 @@ function startListeners() {
     } else { cache.completedRounds = [1]; }
     if(currentPage==='plan') renderPlan();
   }, () => {});
-  listeners = [u1, u2, u3, u4];
+  const u5 = db.doc(`${fp}/config/schedules`).onSnapshot(doc => {
+    if(doc.exists) {
+      const d = doc.data();
+      if(d.spray && d.spray.length) cache.spraySchedule = d.spray;
+      else cache.spraySchedule = [...DEFAULT_SCHEDULE];
+      if(d.soil && d.soil.length) cache.soilSchedule = d.soil;
+      else cache.soilSchedule = [...DEFAULT_SOIL_SCHEDULE];
+      if(d.fert && d.fert.length) cache.fertSchedule = d.fert;
+      else cache.fertSchedule = [...DEFAULT_FERTILIZER_SCHEDULE];
+    } else {
+      cache.spraySchedule = [...DEFAULT_SCHEDULE];
+      cache.soilSchedule = [...DEFAULT_SOIL_SCHEDULE];
+      cache.fertSchedule = [...DEFAULT_FERTILIZER_SCHEDULE];
+    }
+    if(currentPage==='plan') { renderPlan(); renderSoilPlan(); renderFertilizerPlan(); }
+  }, () => {});
+  listeners = [u1, u2, u3, u4, u5];
 }
 function rerenderCurrent() {
   if (currentPage === 'dashboard') renderDashboard();
@@ -882,9 +910,12 @@ function findScheduleAmt(medName, group) {
   const doneSpray = cache.completedRounds || [];
   const doneSoil = cache.completedSoilRounds || [];
   const doneFert = cache.completedFertRounds || [];
+  const spraySchedSrc = cache.spraySchedule || DEFAULT_SCHEDULE;
+  const soilSchedSrc  = cache.soilSchedule  || DEFAULT_SOIL_SCHEDULE;
+  const fertSchedSrc  = cache.fertSchedule  || DEFAULT_FERTILIZER_SCHEDULE;
   // foliar spray — ค้น chem ที่มีชื่อยานี้
   if(group !== 'ปุ๋ย') {
-    const sprayRound = DEFAULT_SCHEDULE.find(r => !doneSpray.includes(r.id) && r.chem.includes(medName));
+    const sprayRound = spraySchedSrc.find(r => !doneSpray.includes(r.id) && r.chem.includes(medName));
     if(sprayRound) {
       // ดึง amt ของยานี้จาก combined string "75+100+50 มล."
       const chems = sprayRound.chem.split(' + ');
@@ -895,10 +926,10 @@ function findScheduleAmt(medName, group) {
     }
   }
   // soil drench
-  const soilRound = DEFAULT_SOIL_SCHEDULE.find(r => !doneSoil.includes(r.id) && r.chem.includes(medName));
+  const soilRound = soilSchedSrc.find(r => !doneSoil.includes(r.id) && r.chem.includes(medName));
   if(soilRound) return soilRound.rate;
   // fertilizer
-  const fertRound = DEFAULT_FERTILIZER_SCHEDULE.find(r => !doneFert.includes(r.id) && r.main.includes(medName));
+  const fertRound = fertSchedSrc.find(r => !doneFert.includes(r.id) && r.main.includes(medName));
   if(fertRound) return fertRound.mainRate;
   return '';
 }
@@ -908,17 +939,17 @@ function getUpcomingScheduleItems(days) {
   const doneSoil = cache.completedSoilRounds || [];
   const doneFert = cache.completedFertRounds || [];
   const items = [];
-  DEFAULT_SCHEDULE.forEach(r => {
+  (cache.spraySchedule||DEFAULT_SCHEDULE).forEach(r => {
     if(doneSpray.includes(r.id)) return;
     const dys = Math.round((new Date(r.date) - todayDate) / 86400000);
     if(dys <= days) items.push({type:'spray', label:`🌿 ฉีดพ่นรอบ ${r.id}`, detail:r.group, date:r.date, days:dys, roundId:r.id});
   });
-  DEFAULT_SOIL_SCHEDULE.forEach(r => {
+  (cache.soilSchedule||DEFAULT_SOIL_SCHEDULE).forEach(r => {
     if(doneSoil.includes(r.id)) return;
     const dys = Math.round((new Date(r.date) - todayDate) / 86400000);
     if(dys <= days) items.push({type:'soil', label:`🪣 ราดโคนรอบ ${r.id}`, detail:r.chem, date:r.date, days:dys, roundId:r.id});
   });
-  DEFAULT_FERTILIZER_SCHEDULE.forEach(r => {
+  (cache.fertSchedule||DEFAULT_FERTILIZER_SCHEDULE).forEach(r => {
     if(doneFert.includes(r.id)) return;
     const dys = Math.round((new Date(r.date) - todayDate) / 86400000);
     if(dys <= days) items.push({type:'fert', label:`🌱 ใส่ปุ๋ยรอบ ${r.id}`, detail:r.main, date:r.date, days:dys, roundId:r.id});
@@ -928,13 +959,13 @@ function getUpcomingScheduleItems(days) {
 function openPlanLog(type, roundId) {
   let med='', amt='', method='', dateStr='';
   if(type==='spray') {
-    const r=DEFAULT_SCHEDULE.find(x=>x.id===roundId); if(!r) return;
+    const r=(cache.spraySchedule||DEFAULT_SCHEDULE).find(x=>x.id===roundId); if(!r) return;
     med=r.chem; amt=r.amt; method='พ่นทางใบ'; dateStr=r.date;
   } else if(type==='soil') {
-    const r=DEFAULT_SOIL_SCHEDULE.find(x=>x.id===roundId); if(!r) return;
+    const r=(cache.soilSchedule||DEFAULT_SOIL_SCHEDULE).find(x=>x.id===roundId); if(!r) return;
     med=r.chem; amt=r.rate; method='ราดโคนต้น'; dateStr=r.date;
   } else if(type==='fert') {
-    const r=DEFAULT_FERTILIZER_SCHEDULE.find(x=>x.id===roundId); if(!r) return;
+    const r=(cache.fertSchedule||DEFAULT_FERTILIZER_SCHEDULE).find(x=>x.id===roundId); if(!r) return;
     med=r.main+(r.extra?' + '+r.extra:''); amt=r.mainRate; method='ใส่รอบโคน'; dateStr=r.date;
   }
   document.getElementById('planLogMed').value=med;
@@ -1328,10 +1359,20 @@ function switchPlanTab(n) {
   });
   if(n===2) renderSoilPlan();
   if(n===3) renderFertilizerPlan();
+  // show reset button for owner
+  const typeMap = {1:'spray',2:'soil',3:'fert'};
+  const resetDiv = document.getElementById('planResetBtn');
+  const resetBtn = document.getElementById('planResetBtnInner');
+  if(userRole==='owner' && resetDiv && resetBtn) {
+    resetDiv.style.display = '';
+    resetBtn.onclick = () => resetScheduleToDefault(typeMap[n]);
+  } else if(resetDiv) {
+    resetDiv.style.display = 'none';
+  }
 }
 
 function renderPlan() {
-  const done = cache.completedRounds || [1];
+  const done = cache.completedRounds || [];
   const today = todayStr();
   document.getElementById('planActionTh').textContent = userRole==='owner' ? 'สถานะ' : '';
   const seasonColor = {
@@ -1339,7 +1380,7 @@ function renderPlan() {
     'ปลายฝน':'#fff3e0','หนาว':'#f3e5f5','หนาวจัด':'#ede7f6',
     'ไรแดง':'#fff8e1','เริ่มร้อน':'#fff9c4','ร้อนแล้ง':'#ffe0b2','ร้อนจัด':'#ffccbc'
   };
-  document.getElementById('planBody').innerHTML = DEFAULT_SCHEDULE.map(r => {
+  document.getElementById('planBody').innerHTML = (cache.spraySchedule||DEFAULT_SCHEDULE).map(r => {
     const isDone = done.includes(r.id);
     const dys = daysFrom(r.date);
     const isToday = (dys === 0);
@@ -1362,9 +1403,10 @@ function renderPlan() {
       ? `<td style="text-decoration:line-through;color:#90a4ae">${r.id}</td>`
       : `<td style="font-weight:700;color:var(--gd)">${r.id}</td>`;
     const logBtn = isDone ? '' : `<button class="btn btn-s btn-xs" onclick="openPlanLog('spray',${r.id})" title="บันทึกประวัติการฉีด">📝</button> `;
+    const editBtn = userRole==='owner' ? `<button class="btn btn-w btn-xs" onclick="openEditScheduleRow('spray',${r.id})" title="แก้ไขรอบนี้">✏️</button> ` : '';
     const actionCell = `<td>${logBtn}${userRole==='owner' ? (isDone
       ? `<button class="btn btn-s btn-xs" onclick="unmarkRound(${r.id})">↩️</button>`
-      : `<button class="btn btn-p btn-xs" onclick="markRoundDone(${r.id})">✅ ทำแล้ว</button>`) : ''}</td>`;
+      : `<button class="btn btn-p btn-xs" onclick="markRoundDone(${r.id})">✅ ทำแล้ว</button>`) : ''} ${editBtn}</td>`;
     return `<tr style="${rowStyle}">
       ${numCell}
       <td style="white-space:nowrap;font-size:.8rem">${dateStr}</td>
@@ -1381,7 +1423,7 @@ function renderPlan() {
 function renderSoilPlan() {
   const doneSoil = cache.completedSoilRounds || [];
   document.getElementById('soilActionTh').textContent = userRole==='owner' ? 'สถานะ' : '';
-  document.getElementById('soilPlanBody').innerHTML = DEFAULT_SOIL_SCHEDULE.map(r => {
+  document.getElementById('soilPlanBody').innerHTML = (cache.soilSchedule||DEFAULT_SOIL_SCHEDULE).map(r => {
     const isDone = doneSoil.includes(r.id);
     const dys = daysFrom(r.date);
     const isOverdue = (dys !== null && dys < 0 && !isDone);
@@ -1391,9 +1433,10 @@ function renderSoilPlan() {
       : isOverdue ? `<span style="color:#c62828;font-weight:700">⚠️ เลยกำหนด</span>`
       : `<span style="color:#546e7a;font-size:.78rem">รอดำเนินการ</span>`;
     const logBtnSoil = isDone ? '' : `<button class="btn btn-s btn-xs" onclick="openPlanLog('soil',${r.id})" title="บันทึกประวัติการราด">📝</button> `;
+    const editBtnSoil = userRole==='owner' ? `<button class="btn btn-w btn-xs" onclick="openEditScheduleRow('soil',${r.id})" title="แก้ไขรอบนี้">✏️</button> ` : '';
     const actionCell = `<td>${logBtnSoil}${userRole==='owner' ? (isDone
       ? `<button class="btn btn-s btn-xs" onclick="unmarkSoilRound(${r.id})">↩️</button>`
-      : `<button class="btn btn-p btn-xs" onclick="markSoilRoundDone(${r.id})">✅ ทำแล้ว</button>`) : ''}</td>`;
+      : `<button class="btn btn-p btn-xs" onclick="markSoilRoundDone(${r.id})">✅ ทำแล้ว</button>`) : ''} ${editBtnSoil}</td>`;
     const numCell = isDone
       ? `<td style="text-decoration:line-through;color:#90a4ae">${r.id}</td>`
       : `<td style="font-weight:700;color:var(--pu)">${r.id}</td>`;
@@ -1404,6 +1447,7 @@ function renderSoilPlan() {
       <td><span style="font-size:.72rem;background:#f3e5f5;padding:1px 7px;border-radius:9px;color:#6a1b9a">${r.group}</span></td>
       <td style="font-size:.82rem">${r.rate}</td>
       <td style="font-size:.75rem;color:var(--o)">${r.ppe}</td>
+      <td style="font-size:.75rem;color:var(--gr);max-width:110px">${r.obs||''}</td>
       <td>${statusBadge}</td>
       ${actionCell}</tr>`;
   }).join('');
@@ -1414,7 +1458,7 @@ function renderFertilizerPlan() {
   const done = cache.completedFertRounds || [];
   document.getElementById('fertActionTh').textContent = userRole==='owner' ? 'จัดการ' : '';
   const mainColor = {'9-3-3':'#e8f5e9','15-15-15':'#e3f2fd','46-0-0':'#fff9c4'};
-  document.getElementById('fertPlanBody').innerHTML = DEFAULT_FERTILIZER_SCHEDULE.map(r => {
+  document.getElementById('fertPlanBody').innerHTML = (cache.fertSchedule||DEFAULT_FERTILIZER_SCHEDULE).map(r => {
     const isDone = done.includes(r.id);
     const dys = daysFrom(r.date);
     const isOverdue = (dys !== null && dys < 0 && !isDone);
@@ -1428,9 +1472,10 @@ function renderFertilizerPlan() {
       ? `<td style="text-decoration:line-through;color:#90a4ae">${r.id}</td>`
       : `<td style="font-weight:700;color:#f57f17">${r.id}</td>`;
     const logBtnFert = isDone ? '' : `<button class="btn btn-s btn-xs" onclick="openPlanLog('fert',${r.id})" title="บันทึกประวัติการใส่ปุ๋ย">📝</button> `;
+    const editBtnFert = userRole==='owner' ? `<button class="btn btn-w btn-xs" onclick="openEditScheduleRow('fert',${r.id})" title="แก้ไขรอบนี้">✏️</button> ` : '';
     const actionCell = `<td>${logBtnFert}${userRole==='owner' ? (isDone
       ? `<button class="btn btn-s btn-xs" onclick="unmarkFertRound(${r.id})">↩️</button>`
-      : `<button class="btn btn-p btn-xs" onclick="markFertRoundDone(${r.id})">✅ ใส่แล้ว</button>`) : ''}</td>`;
+      : `<button class="btn btn-p btn-xs" onclick="markFertRoundDone(${r.id})">✅ ใส่แล้ว</button>`) : ''} ${editBtnFert}</td>`;
     return `<tr style="${rowStyle}">
       ${numCell}
       <td style="font-weight:700;font-size:.82rem">${r.month}</td>
@@ -1473,7 +1518,7 @@ async function markRoundDone(id) {
 }
 async function unmarkRound(id) {
   if(!confirm('ยกเลิกสถานะรอบที่ '+id+'?')) return;
-  const done = (cache.completedRounds||[1]).filter(x=>x!==id);
+  const done = (cache.completedRounds||[]).filter(x=>x!==id);
   try {
     await db.doc(`farms/${farmCode}/config/plan`).set({completedRounds:done},{merge:true});
     cache.completedRounds = done; renderPlan(); showToast('ยกเลิกรอบที่ '+id);
@@ -1494,6 +1539,114 @@ async function unmarkSoilRound(id) {
     await db.doc(`farms/${farmCode}/config/plan`).set({completedSoilRounds:done},{merge:true});
     cache.completedSoilRounds = done; renderSoilPlan(); showToast('ยกเลิกแล้ว');
   } catch(e){showToast('เกิดข้อผิดพลาด');}
+}
+// ==============================================================
+//  EDIT SCHEDULE ROW (owner only)
+// ==============================================================
+function openEditScheduleRow(type, id) {
+  document.getElementById('schedEditType').value = type;
+  document.getElementById('schedEditId').value = id;
+  const fieldsEl = document.getElementById('schedEditFields');
+  const esc = s => (s||'').replace(/"/g,'&quot;');
+  if(type === 'spray') {
+    const r = (cache.spraySchedule||DEFAULT_SCHEDULE).find(x=>x.id===id); if(!r) return;
+    const cleanAmt = (r.amt||'').includes('✅') ? '' : (r.amt||'');
+    fieldsEl.innerHTML = `
+      <div class="form-grid">
+        <div class="fg"><label>วันที่</label><input type="date" id="seDate" value="${esc(r.date)}"></div>
+        <div class="fg"><label>ฤดู</label><input type="text" id="seSeason" value="${esc(r.season)}"></div>
+        <div class="fg full"><label>กลุ่ม</label><input type="text" id="seGroup" value="${esc(r.group)}"></div>
+        <div class="fg full"><label>สารที่ใช้</label><input type="text" id="seChem" value="${esc(r.chem)}"></div>
+        <div class="fg full"><label>ปริมาณ</label><input type="text" id="seAmt" value="${esc(cleanAmt)}" placeholder="เช่น 75+100+50 มล."></div>
+        <div class="fg"><label>PPE</label><input type="text" id="sePpe" value="${esc(r.ppe)}"></div>
+        <div class="fg"><label>สิ่งที่ต้องสังเกต</label><input type="text" id="seObs" value="${esc(r.obs)}"></div>
+      </div>`;
+  } else if(type === 'soil') {
+    const r = (cache.soilSchedule||DEFAULT_SOIL_SCHEDULE).find(x=>x.id===id); if(!r) return;
+    fieldsEl.innerHTML = `
+      <div class="form-grid">
+        <div class="fg"><label>เดือน (แสดงผล)</label><input type="text" id="seMonth" value="${esc(r.month)}"></div>
+        <div class="fg"><label>วันที่</label><input type="date" id="seDate" value="${esc(r.date)}"></div>
+        <div class="fg full"><label>สาร</label><input type="text" id="seChem" value="${esc(r.chem)}"></div>
+        <div class="fg"><label>กลุ่มสาร</label><input type="text" id="seGroup" value="${esc(r.group)}"></div>
+        <div class="fg"><label>อัตรา/ต้น</label><input type="text" id="seRate" value="${esc(r.rate)}"></div>
+        <div class="fg"><label>PPE</label><input type="text" id="sePpe" value="${esc(r.ppe)}"></div>
+      </div>`;
+  } else if(type === 'fert') {
+    const r = (cache.fertSchedule||DEFAULT_FERTILIZER_SCHEDULE).find(x=>x.id===id); if(!r) return;
+    fieldsEl.innerHTML = `
+      <div class="form-grid">
+        <div class="fg"><label>วันที่แสดง</label><input type="text" id="seMonth" value="${esc(r.month)}"></div>
+        <div class="fg"><label>วันที่จริง</label><input type="date" id="seDate" value="${esc(r.date)}"></div>
+        <div class="fg"><label>ฤดู</label><input type="text" id="seSeason" value="${esc(r.season)}"></div>
+        <div class="fg"><label>ปุ๋ยหลัก</label><input type="text" id="seMain" value="${esc(r.main)}"></div>
+        <div class="fg"><label>อัตรา/ต้น</label><input type="text" id="seMainRate" value="${esc(r.mainRate)}"></div>
+        <div class="fg"><label>ปุ๋ยเสริม</label><input type="text" id="seExtra" value="${esc(r.extra)}"></div>
+        <div class="fg full"><label>หมายเหตุ/จุดประสงค์</label><input type="text" id="seTiming" value="${esc(r.timing)}"></div>
+      </div>`;
+  }
+  document.getElementById('schedEditTitle').textContent =
+    type==='spray' ? `✏️ แก้ไขตารางฉีดพ่น รอบที่ ${id}` :
+    type==='soil'  ? `✏️ แก้ไขตารางราดโคน รอบที่ ${id}` :
+                     `✏️ แก้ไขตารางใส่ปุ๋ย รอบที่ ${id}`;
+  document.getElementById('schedEditModal').classList.add('open');
+}
+
+async function saveEditScheduleRow() {
+  const type = document.getElementById('schedEditType').value;
+  const id = parseInt(document.getElementById('schedEditId').value);
+  let schedule, updated;
+  const g = id2 => { const el=document.getElementById(id2); return el ? el.value.trim() : ''; };
+
+  if(type === 'spray') {
+    schedule = (cache.spraySchedule||[...DEFAULT_SCHEDULE]).map(r => r.id===id ? {
+      ...r,
+      date: g('seDate'), season: g('seSeason'), group: g('seGroup'),
+      chem: g('seChem'), amt: g('seAmt'), ppe: g('sePpe'), obs: g('seObs'),
+    } : r);
+    cache.spraySchedule = schedule;
+    updated = {spray: schedule};
+  } else if(type === 'soil') {
+    schedule = (cache.soilSchedule||[...DEFAULT_SOIL_SCHEDULE]).map(r => r.id===id ? {
+      ...r,
+      month: g('seMonth'), date: g('seDate'), chem: g('seChem'),
+      group: g('seGroup'), rate: g('seRate'), ppe: g('sePpe'),
+    } : r);
+    cache.soilSchedule = schedule;
+    updated = {soil: schedule};
+  } else if(type === 'fert') {
+    schedule = (cache.fertSchedule||[...DEFAULT_FERTILIZER_SCHEDULE]).map(r => r.id===id ? {
+      ...r,
+      month: g('seMonth'), date: g('seDate'), season: g('seSeason'),
+      main: g('seMain'), mainRate: g('seMainRate'), extra: g('seExtra'), timing: g('seTiming'),
+    } : r);
+    cache.fertSchedule = schedule;
+    updated = {fert: schedule};
+  }
+
+  try {
+    await db.doc(`farms/${farmCode}/config/schedules`).set(updated, {merge: true});
+    closeModal('schedEditModal');
+    showToast('✅ แก้ไขตารางสำเร็จ!');
+    if(type==='spray') renderPlan();
+    else if(type==='soil') renderSoilPlan();
+    else if(type==='fert') renderFertilizerPlan();
+  } catch(e) { showToast('เกิดข้อผิดพลาด'); }
+}
+
+async function resetScheduleToDefault(type) {
+  if(!confirm('รีเซ็ตตารางนี้กลับเป็นค่าเริ่มต้น? ข้อมูลที่แก้ไขจะหายหมด')) return;
+  let updated = {};
+  if(type==='spray') { cache.spraySchedule=[...DEFAULT_SCHEDULE]; updated={spray:DEFAULT_SCHEDULE}; }
+  else if(type==='soil') { cache.soilSchedule=[...DEFAULT_SOIL_SCHEDULE]; updated={soil:DEFAULT_SOIL_SCHEDULE}; }
+  else if(type==='fert') { cache.fertSchedule=[...DEFAULT_FERTILIZER_SCHEDULE]; updated={fert:DEFAULT_FERTILIZER_SCHEDULE}; }
+  try {
+    await db.doc(`farms/${farmCode}/config/schedules`).set(updated, {merge: true});
+    showToast('✅ รีเซ็ตตารางแล้ว!');
+    if(type==='spray') renderPlan();
+    else if(type==='soil') renderSoilPlan();
+    else if(type==='fert') renderFertilizerPlan();
+  } catch(e) { showToast('เกิดข้อผิดพลาด'); }
 }
 // ==============================================================
 //  INIT
