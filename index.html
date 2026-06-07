@@ -370,9 +370,10 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
   <div class="ph"><h2>📅 แผนฉีดยาประจำปี</h2><div id="planResetBtn" style="display:none"><button class="btn btn-s btn-sm" id="planResetBtnInner" onclick="">🔄 รีเซ็ตตาราง</button></div></div>
   <!-- sub-tabs -->
   <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap">
-    <button id="planTab1" class="btn btn-p btn-sm" onclick="switchPlanTab(1)">🌿 ฉีดพ่นใบ (48 รอบ)</button>
-    <button id="planTab2" class="btn btn-s btn-sm" onclick="switchPlanTab(2)">🪣 ราดโคนต้น (12 เดือน)</button>
-    <button id="planTab3" class="btn btn-s btn-sm" onclick="switchPlanTab(3)">🌱 ใส่ปุ๋ย (24 รอบ)</button>
+    <button id="planTab1" class="btn btn-p btn-sm" onclick="switchPlanTab(1)">🌿 ฉีดพ่นใบ (33 รอบ)</button>
+    <button id="planTab2" class="btn btn-s btn-sm" onclick="switchPlanTab(2)">🪣 ราดโคนต้น (8 รอบ)</button>
+    <button id="planTab3" class="btn btn-s btn-sm" onclick="switchPlanTab(3)">🌱 ใส่ปุ๋ย (11 รอบ)</button>
+    <button id="planTab4" class="btn btn-s btn-sm" onclick="switchPlanTab(4)">🌿 ฮิวมิก+หมัก (3 รอบ)</button>
   </div>
   <!-- ตารางฉีดพ่นใบ -->
   <div id="planSection1">
@@ -415,7 +416,7 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
     <div class="card" style="padding:0;overflow:hidden">
       <div class="tw"><table style="min-width:500px">
         <thead><tr>
-          <th>#</th><th>เดือน</th><th>สาร</th><th>กลุ่มสาร</th><th>อัตรา/ต้น</th><th>PPE</th><th>สังเกต</th><th>สถานะ</th><th id="soilActionTh"></th>
+          <th>#</th><th>รอบ / วันที่</th><th>สาร</th><th>ประเภท</th><th>ต้นสวย / ต้นโทรม</th><th>PPE</th><th>สังเกต</th><th>สถานะ</th><th id="soilActionTh"></th>
         </tr></thead>
         <tbody id="soilPlanBody"></tbody>
       </table></div>
@@ -437,7 +438,7 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
     <div class="card" style="padding:0;overflow:hidden">
       <div class="tw"><table style="min-width:600px">
         <thead><tr>
-          <th>#</th><th>วันที่</th><th>ฤดู</th><th>ปุ๋ย</th><th>อัตรา/ต้น</th><th>ฮิวมิก</th><th>หมายเหตุ</th><th>สถานะ</th><th id="fertActionTh"></th>
+          <th>#</th><th>วันที่</th><th>ฤดู</th><th>ปุ๋ย</th><th>ต้นสวย / ต้นโทรม</th><th>ฮิวมิกแม่เมาะ</th><th>หมายเหตุ</th><th>สถานะ</th><th id="fertActionTh"></th>
         </tr></thead>
         <tbody id="fertPlanBody"></tbody>
       </table></div>
@@ -448,6 +449,25 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
         9-3-3: 525 ก. (7 ครั้ง) &nbsp;|&nbsp; 15-15-15: 1,050 ก. (14 ครั้ง) &nbsp;|&nbsp; 46-0-0: 75 ก. (3 ครั้ง) &nbsp;|&nbsp; ฮิวมิก: ตามฉลาก × 24 ครั้ง<br>
         <span style="font-size:.75rem">🌧️ พ.ค.-ต.ค.: 9-3-3 + 46-0-0 เร่งโต &nbsp;|&nbsp; ❄️ พ.ย.-ม.ค.: 15-15-15 ห้ามใส่ N สูง &nbsp;|&nbsp; ☀️ มี.ค.-เม.ย.: ลด N ประคองต้น</span>
       </div>
+    </div>
+  </div>
+  <!-- ตารางฮิวมิกแม่เมาะ + ปุ๋ยหมัก -->
+  <div id="planSection4" style="display:none">
+    <div class="card" style="background:#f1f8e9;border:1.5px solid #a5d6a7;padding:11px 14px;margin-bottom:14px">
+      <div style="font-size:.82rem;line-height:1.85;color:#1b5e20">
+        <strong style="display:block;margin-bottom:4px;font-size:.9rem">🌿 ฮิวมิกแม่เมาะ + ปุ๋ยหมัก (ปีละ 3 รอบ)</strong>
+        📦 ปุ๋ยหมัก: 5 กก./ต้น | โรยรอบทรงพุ่ม แล้วคลุมทับด้วยฟาง/หญ้า 10-15 ซม. เว้นโคน 20 ซม.<br>
+        🌱 ฮิวมิกแม่เมาะ: ต้นสวย 200 ก. / ต้นโทรม 300 ก. | โรยพร้อมปุ๋ยหมัก แล้วรดน้ำ<br>
+        ⏰ ใส่ช่วงเช้า อย่าใส่ตอนดินแห้งจัด หรือแดดเที่ยง
+      </div>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <div class="tw"><table style="min-width:520px">
+        <thead><tr>
+          <th>#</th><th>เดือน</th><th>ฮิวมิกแม่เมาะ</th><th>ปุ๋ยหมัก</th><th>สังเกต</th><th>สถานะ</th><th id="humicActionTh"></th>
+        </tr></thead>
+        <tbody id="humicPlanBody"></tbody>
+      </table></div>
     </div>
   </div>
   </div>
@@ -567,63 +587,76 @@ const DEFAULT_MEDS = [
 // ==============================================================
 //  DEFAULT SPRAY SCHEDULE
 // ==============================================================
+// รอบบำรุง A=Mg+อมิโน+สาหร่าย | B=CaB+Mg | C=MIX-EDTA+อมิโน+สาหร่าย
+// ⚠️ ไม่พบแมลง → ข้ามยาแมลง เพิ่มรอบบำรุง A/B/C แทน
 const DEFAULT_SCHEDULE = [
-  {id:1,  date:'2026-06-04',season:'ฝนชุก',    group:'หนอน+โรค',      chem:'Chlorantraniliprole+Fosetyl-Al+จับใบ',          amt:'ฉลาก+ครึ่งโดส+50 มล.',        ppe:'หน้ากาก+ถุงมือ',      obs:'ยอดอ่อน หนอนเล็ก',                               done:false},
-  {id:2,  date:'2026-06-11',season:'ฝนชุก',    group:'เพลี้ย+บำรุง',  chem:'ฟลอนิคามิด+MIX-EDTA+อมิโน+จับใบ',              amt:'ฉลาก+100+100+50 มล.',          ppe:'หน้ากาก+ถุงมือ',      obs:'เพลี้ยไฟ ผงขาว',                                 done:false},
-  {id:3,  date:'2026-06-18',season:'ฝนชุก',    group:'โรค',            chem:'Copper+จับใบ',                                   amt:'200+50 มล.',                   ppe:'หน้ากาก+แว่น+ถุงมือ', obs:'แอนแทรคโนส ราสนิม | ใบแดงทั้งต้น→เลื่อน 7 วัน', done:false},
-  {id:4,  date:'2026-06-25',season:'ฝนชุก',    group:'หนอน+บำรุง',    chem:'Indoxacarb+Mg+CaB+จับใบ',                       amt:'75+125+ฉลาก+50 มล.',           ppe:'หน้ากาก+ถุงมือ',      obs:'ตัด Zn ถ้าใบเพี้ยน ยอดค้าง',                     done:false},
-  {id:5,  date:'2026-07-02',season:'ฝนมาก',    group:'เพลี้ย+บำรุง',  chem:'อะซีทามิพริด+MIX-EDTA+จับใบ',                  amt:'ฉลาก+100+50 มล.',              ppe:'หน้ากาก+ถุงมือ',      obs:'เพลี้ยแป้ง เพลี้ยไฟ',                             done:false},
-  {id:6,  date:'2026-07-09',season:'ฝนมาก',    group:'โรค',            chem:'Fosetyl-Al+จับใบ',                               amt:'ตามฉลาก+50 มล.',               ppe:'ถุงมือ',               obs:'จุดดำ ใบร่วง | ฝนติด 4-5 วัน+โรคเพิ่ม→เพิ่ม Fosetyl-Al ฉุกเฉิน', done:false},
-  {id:7,  date:'2026-07-16',season:'ฝนมาก',    group:'หนอน+บำรุง',    chem:'Indoxacarb+CaB+จับใบ',                          amt:'75+ฉลาก+50 มล.',               ppe:'หน้ากาก+ถุงมือ',      obs:'ด้วงกัดยอด',                                      done:false},
-  {id:8,  date:'2026-07-23',season:'ฝนมาก',    group:'เพลี้ย+บำรุง',  chem:'ฟลอนิคามิด+Buprofezin+MIX-EDTA+จับใบ',         amt:'ฉลาก+100+100+50 มล.',          ppe:'หน้ากาก+ถุงมือ',      obs:'เพลี้ยรุ่นใหม่',                                  done:false},
-  {id:9,  date:'2026-07-30',season:'ฝนมาก',    group:'โรค',            chem:'Copper+จับใบ',                                   amt:'200+50 มล.',                   ppe:'หน้ากาก+แว่น+ถุงมือ', obs:'ราใบ จุดดำ | ใบแดงทั้งต้น→เลื่อน 7 วัน',         done:false},
-  {id:10, date:'2026-08-06',season:'ฝนมาก',    group:'หนอน+บำรุง',    chem:'Chlorantraniliprole+Mg+อมิโน+จับใบ',            amt:'ฉลาก+125+50+50 มล.',           ppe:'หน้ากาก+ถุงมือ',      obs:'หนอนม้วนใบ',                                      done:false},
-  {id:11, date:'2026-08-13',season:'ฝนมาก',    group:'เพลี้ย+บำรุง',  chem:'อะซีทามิพริด+MIX-EDTA+จับใบ',                  amt:'ฉลาก+100+50 มล.',              ppe:'หน้ากาก+ถุงมือ',      obs:'เพลี้ยแป้ง',                                      done:false},
-  {id:12, date:'2026-08-20',season:'ฝนมาก',    group:'โรค',            chem:'ไซม็อกซิเมท+จับใบ',                             amt:'30ก.+50 มล.',                  ppe:'หน้ากาก+ถุงมือ',      obs:'ฝนชุก จุดดำลาม',                                 done:false},
-  {id:13, date:'2026-08-27',season:'ฝนมาก',    group:'หนอน+โรค',      chem:'Indoxacarb+Fosetyl-Al+CaB+จับใบ',               amt:'75+ครึ่ง-2/3โดส+ฉลาก+50 มล.', ppe:'หน้ากาก+ถุงมือ',      obs:'ต้นยังล้า ใช้ครึ่งโดส | ฝนติด 4-5 วัน+โรคเพิ่ม→เพิ่ม Fosetyl-Al ฉุกเฉิน', done:false},
-  {id:14, date:'2026-09-03',season:'ฝนชุก',    group:'เพลี้ย+บำรุง',  chem:'ฟลอนิคามิด+MIX-EDTA+อมิโน+จับใบ',              amt:'ฉลาก+100+100+50 มล.',          ppe:'หน้ากาก+ถุงมือ',      obs:'เพลี้ยไฟ ผงขาว',                                 done:false},
-  {id:15, date:'2026-09-10',season:'ฝนชุก',    group:'โรค',            chem:'Fosetyl-Al+จับใบ',                               amt:'ตามฉลาก+50 มล.',               ppe:'ถุงมือ',               obs:'ป้องกันรากเน่าปลายฝน',                            done:false},
-  {id:16, date:'2026-09-17',season:'ฝนชุก',    group:'หนอน+บำรุง',    chem:'Chlorantraniliprole+Mg+CaB+จับใบ',              amt:'ฉลาก+125+ฉลาก+50 มล.',         ppe:'หน้ากาก+ถุงมือ',      obs:'หนอน ด้วง',                                       done:false},
-  {id:17, date:'2026-09-24',season:'ฝนชุก',    group:'โรค',            chem:'Copper+จับใบ',                                   amt:'200+50 มล.',                   ppe:'หน้ากาก+แว่น+ถุงมือ', obs:'ราใบ แอนแทรคโนส | ใบแดงทั้งต้น→เลื่อน 7 วัน',   done:false},
-  {id:18, date:'2026-10-01',season:'ปลายฝน',   group:'เพลี้ย+บำรุง',  chem:'อะซีทามิพริด+MIX-EDTA+จับใบ',                  amt:'ฉลาก+100+50 มล.',              ppe:'หน้ากาก+ถุงมือ',      obs:'เพลี้ยแป้ง',                                      done:false},
-  {id:19, date:'2026-10-08',season:'ปลายฝน',   group:'โรค+บำรุง',     chem:'Fosetyl-Al+Mg+Zn+จับใบ',                        amt:'ตามฉลาก+125+50+50 มล.',        ppe:'ถุงมือ',               obs:'สะสมอาหารปลายฝน',                                done:false},
-  {id:20, date:'2026-10-15',season:'ปลายฝน',   group:'หนอน+บำรุง',    chem:'Indoxacarb+Mg+Zn+CaB+จับใบ',                   amt:'75+125+50+ฉลาก+50 มล.',        ppe:'หน้ากาก+ถุงมือ',      obs:'เตรียมรับหนาว',                                   done:false},
-  {id:21, date:'2026-10-22',season:'ปลายฝน',   group:'โรค',            chem:'ไซม็อกซิเมท+จับใบ',                             amt:'30ก.+50 มล.',                  ppe:'หน้ากาก+ถุงมือ',      obs:'โรคปลายฝน',                                       done:false},
-  {id:22, date:'2026-11-05',season:'หนาว',      group:'เพลี้ย+บำรุง',  chem:'ฟลอนิคามิด+Buprofezin+MIX-EDTA+จับใบ',         amt:'ฉลาก+100+100+50 มล.',          ppe:'หน้ากาก+ถุงมือ',      obs:'ลมหนาวระลอกแรก',                                  done:false},
-  {id:23, date:'2026-11-19',season:'หนาว',      group:'โรค',            chem:'Fosetyl-Al+จับใบ',                               amt:'ตามฉลาก+50 มล.',               ppe:'ถุงมือ',               obs:'เปลี่ยนฤดู',                                       done:false},
-  {id:24, date:'2026-12-03',season:'หนาวจัด',   group:'หนอน+บำรุง',    chem:'Chlorantraniliprole+CaB+จับใบ',                 amt:'ฉลาก+ฉลาก+50 มล.',             ppe:'หน้ากาก+ถุงมือ',      obs:'หนอนช่วงหนาว',                                    done:false},
-  {id:25, date:'2026-12-17',season:'หนาวจัด',   group:'โรค',            chem:'Copper+จับใบ',                                   amt:'200+50 มล.',                   ppe:'หน้ากาก+แว่น+ถุงมือ', obs:'ราใบหนาวจัด | ใบแดงทั้งต้น→เลื่อน 7 วัน',        done:false},
-  {id:26, date:'2026-12-31',season:'หนาวจัด',   group:'เพลี้ย+บำรุง',  chem:'อะซีทามิพริด+MIX-EDTA+จับใบ',                  amt:'ฉลาก+100+50 มล.',              ppe:'หน้ากาก+ถุงมือ',      obs:'เพลี้ยแป้งส่งท้ายปี',                             done:false},
-  {id:27, date:'2027-01-14',season:'ไรแดง',     group:'ไรแดง',          chem:'Bifenazate+Zn+อมิโน+จับใบ',                     amt:'75+50+100+50 มล.',             ppe:'หน้ากาก+ถุงมือ',      obs:'ใต้ใบ จุดขาว',                                    done:false},
-  {id:28, date:'2027-01-28',season:'ไรแดง',     group:'โรค',            chem:'Fosetyl-Al+จับใบ',                               amt:'ตามฉลาก+50 มล.',               ppe:'ถุงมือ',               obs:'แดดจัด ดูราก',                                    done:false},
-  {id:29, date:'2027-02-11',season:'เริ่มร้อน', group:'ไรแดง',          chem:'สไปโร+MIX-EDTA+จับใบ',                          amt:'ฉลาก+100+50 มล.',              ppe:'หน้ากาก+ถุงมือ',      obs:'ไรแดงระบาด',                                      done:false},
-  {id:30, date:'2027-02-25',season:'เริ่มร้อน', group:'โรค',            chem:'Copper+จับใบ',                                   amt:'200+50 มล.',                   ppe:'หน้ากาก+แว่น+ถุงมือ', obs:'ล้างกิ่งก้าน | ใบแดงทั้งต้น→เลื่อน 7 วัน',        done:false},
-  {id:31, date:'2027-03-11',season:'ร้อนแล้ง',  group:'ไรแดง',          chem:'เฮกซี+Zn+จับใบ',                                amt:'ฉลาก+50+50 มล.',               ppe:'หน้ากาก+ถุงมือ',      obs:'ไรแดงสูงสุด',                                     done:false},
-  {id:32, date:'2027-03-25',season:'ร้อนแล้ง',  group:'โรค',            chem:'ไซม็อกซิเมท+จับใบ',                             amt:'30ก.+50 มล.',                  ppe:'หน้ากาก+ถุงมือ',      obs:'กิ่งแห้งแดดเผา',                                  done:false},
-  {id:33, date:'2027-04-08',season:'ร้อนจัด',   group:'โรค+บำรุง',     chem:'Fosetyl-Al+Mg+อมิโน+จับใบ',                    amt:'ตามฉลาก+125+100+50 มล.',       ppe:'ถุงมือ',               obs:'เตรียมรับฝนปีหน้า',                               done:false},
+  {id:1,  date:'2026-06-04',season:'ฝนชุก',    group:'หนอน+โรค',        chem:'Chlorantraniliprole+Fosetyl-Al+จับใบ',                   amt:'ฉลาก+ครึ่งโดส+50 มล.',           ppe:'หน้ากาก+ถุงมือ',      obs:'ยอดอ่อน หนอนเล็ก',                                               done:false},
+  {id:2,  date:'2026-06-11',season:'ฝนชุก',    group:'เพลี้ย+บำรุง',    chem:'ฟลอนิคามิด+Mg+MIX-EDTA+อมิโน+สาหร่าย+จับใบ',            amt:'ฉลาก+125+100+100+100+50 มล.',    ppe:'หน้ากาก+ถุงมือ',      obs:'เพลี้ยไฟ ผงขาว',                                                 done:false},
+  {id:3,  date:'2026-06-18',season:'ฝนชุก',    group:'โรค',              chem:'Copper+จับใบ',                                            amt:'200+50 มล.',                      ppe:'หน้ากาก+แว่น+ถุงมือ', obs:'แอนแทรคโนส ราสนิม | ใบแดงทั้งต้น→เลื่อน 7 วัน',                 done:false},
+  {id:4,  date:'2026-06-25',season:'ฝนชุก',    group:'หนอน+บำรุง B',    chem:'Indoxacarb+CaB+Mg+จับใบ',                                amt:'75+ฉลาก+125+50 มล.',              ppe:'หน้ากาก+ถุงมือ',      obs:'ดูใบเพี้ยนไหม ยอดค้างไหม',                                       done:false},
+  {id:5,  date:'2026-07-02',season:'ฝนมาก',    group:'เพลี้ย+บำรุง C',  chem:'อะซีทามิพริด+MIX-EDTA+อมิโน+สาหร่าย+จับใบ',             amt:'ฉลาก+100+100+100+50 มล.',        ppe:'หน้ากาก+ถุงมือ',      obs:'ตัด Zn ออกแล้ว | เพลี้ยแป้ง เพลี้ยไฟ',                          done:false},
+  {id:6,  date:'2026-07-09',season:'ฝนมาก',    group:'โรค',              chem:'Fosetyl-Al+จับใบ',                                        amt:'ตามฉลาก+50 มล.',                  ppe:'ถุงมือ',               obs:'จุดดำ ใบร่วง | ฝนติด 4-5 วัน+โรคเพิ่ม→เพิ่ม Fosetyl-Al ฉุกเฉิน',done:false},
+  {id:7,  date:'2026-07-16',season:'ฝนมาก',    group:'หนอน+บำรุง B',    chem:'Indoxacarb+CaB+Mg+จับใบ',                                amt:'75+ฉลาก+125+50 มล.',              ppe:'หน้ากาก+ถุงมือ',      obs:'ด้วงกัดยอด',                                                      done:false},
+  {id:8,  date:'2026-07-23',season:'ฝนมาก',    group:'เพลี้ย+บำรุง A',  chem:'ฟลอนิคามิด+Buprofezin+Mg+อมิโน+สาหร่าย+จับใบ',          amt:'ฉลาก+100+125+100+100+50 มล.',    ppe:'หน้ากาก+ถุงมือ',      obs:'เพลี้ยรุ่นใหม่',                                                  done:false},
+  {id:9,  date:'2026-07-30',season:'ฝนมาก',    group:'โรค',              chem:'Copper+จับใบ',                                            amt:'200+50 มล.',                      ppe:'หน้ากาก+แว่น+ถุงมือ', obs:'ราใบ จุดดำ | ใบแดงทั้งต้น→เลื่อน 7 วัน',                         done:false},
+  {id:10, date:'2026-08-06',season:'ฝนมาก',    group:'หนอน+บำรุง A',    chem:'Chlorantraniliprole+Mg+อมิโน+สาหร่าย+จับใบ',             amt:'ฉลาก+125+100+100+50 มล.',        ppe:'หน้ากาก+ถุงมือ',      obs:'หนอนม้วนใบ',                                                      done:false},
+  {id:11, date:'2026-08-13',season:'ฝนมาก',    group:'เพลี้ย+บำรุง B',  chem:'อะซีทามิพริด+CaB+Mg+จับใบ',                             amt:'ฉลาก+ฉลาก+125+50 มล.',           ppe:'หน้ากาก+ถุงมือ',      obs:'เพลี้ยแป้ง',                                                      done:false},
+  {id:12, date:'2026-08-20',season:'ฝนมาก',    group:'โรค',              chem:'ไซม็อกซิเมท+จับใบ',                                      amt:'30ก.+50 มล.',                     ppe:'หน้ากาก+ถุงมือ',      obs:'ฝนชุก จุดดำลาม',                                                 done:false},
+  {id:13, date:'2026-08-27',season:'ฝนมาก',    group:'หนอน+โรค',        chem:'Indoxacarb+Fosetyl-Al+CaB+จับใบ',                        amt:'75+ครึ่ง-2/3โดส+ฉลาก+50 มล.',   ppe:'หน้ากาก+ถุงมือ',      obs:'โคนต้น ใบอ่อน | Fosetyl-Al ต้นล้า→ใช้ครึ่งโดส',                done:false},
+  {id:14, date:'2026-09-03',season:'ฝนชุก',    group:'เพลี้ย+บำรุง A',  chem:'ฟลอนิคามิด+MIX-EDTA+อมิโน+สาหร่าย+Mg+จับใบ',           amt:'ฉลาก+100+100+100+125+50 มล.',    ppe:'หน้ากาก+ถุงมือ',      obs:'เพลี้ยไฟ ผงขาว',                                                 done:false},
+  {id:15, date:'2026-09-10',season:'ฝนชุก',    group:'โรค',              chem:'Fosetyl-Al+จับใบ',                                        amt:'ตามฉลาก+50 มล.',                  ppe:'ถุงมือ',               obs:'ป้องกันรากเน่าปลายฝน',                                            done:false},
+  {id:16, date:'2026-09-17',season:'ฝนชุก',    group:'หนอน+บำรุง B',    chem:'Chlorantraniliprole+CaB+Mg+จับใบ',                       amt:'ฉลาก+ฉลาก+125+50 มล.',           ppe:'หน้ากาก+ถุงมือ',      obs:'หนอน ด้วง',                                                       done:false},
+  {id:17, date:'2026-09-24',season:'ฝนชุก',    group:'โรค',              chem:'Copper+จับใบ',                                            amt:'200+50 มล.',                      ppe:'หน้ากาก+แว่น+ถุงมือ', obs:'ราใบ แอนแทรคโนส | ใบแดงทั้งต้น→เลื่อน 7 วัน',                   done:false},
+  {id:18, date:'2026-10-01',season:'ปลายฝน',   group:'เพลี้ย+บำรุง C',  chem:'อะซีทามิพริด+MIX-EDTA+อมิโน+สาหร่าย+จับใบ',             amt:'ฉลาก+100+100+100+50 มล.',        ppe:'หน้ากาก+ถุงมือ',      obs:'ตัด Zn ออกแล้ว | เพลี้ยแป้ง',                                    done:false},
+  {id:19, date:'2026-10-08',season:'ปลายฝน',   group:'โรค+บำรุง A',     chem:'Fosetyl-Al+Mg+อมิโน+สาหร่าย+จับใบ',                     amt:'ตามฉลาก+125+100+100+50 มล.',     ppe:'ถุงมือ',               obs:'สะสมอาหารปลายฝน',                                                done:false},
+  {id:20, date:'2026-10-15',season:'ปลายฝน',   group:'หนอน+บำรุง B',    chem:'Indoxacarb+CaB+Mg+จับใบ',                                amt:'75+ฉลาก+125+50 มล.',              ppe:'หน้ากาก+ถุงมือ',      obs:'เตรียมรับหนาว',                                                   done:false},
+  {id:21, date:'2026-10-22',season:'ปลายฝน',   group:'โรค',              chem:'ไซม็อกซิเมท+จับใบ',                                      amt:'30ก.+50 มล.',                     ppe:'หน้ากาก+ถุงมือ',      obs:'โรคปลายฝน',                                                       done:false},
+  {id:22, date:'2026-11-05',season:'หนาว',      group:'เพลี้ย+บำรุง A',  chem:'ฟลอนิคามิด+Buprofezin+Mg+อมิโน+สาหร่าย+จับใบ',          amt:'ฉลาก+100+125+100+100+50 มล.',    ppe:'หน้ากาก+ถุงมือ',      obs:'ลมหนาวระลอกแรก',                                                  done:false},
+  {id:23, date:'2026-11-19',season:'หนาว',      group:'โรค+บำรุง',       chem:'Fosetyl-Al+Mg+จับใบ',                                    amt:'ตามฉลาก+125+50 มล.',              ppe:'ถุงมือ',               obs:'แทนราด Fosetyl-Al ดิน | เปลี่ยนฤดู',                              done:false},
+  {id:24, date:'2026-12-03',season:'หนาวจัด',   group:'หนอน+บำรุง B',    chem:'Chlorantraniliprole+CaB+Mg+จับใบ',                       amt:'ฉลาก+ฉลาก+125+50 มล.',           ppe:'หน้ากาก+ถุงมือ',      obs:'หนอนช่วงหนาว',                                                    done:false},
+  {id:25, date:'2026-12-17',season:'หนาวจัด',   group:'โรค',              chem:'Copper+จับใบ',                                            amt:'200+50 มล.',                      ppe:'หน้ากาก+แว่น+ถุงมือ', obs:'ราใบหนาวจัด | ใบแดงทั้งต้น→เลื่อน 7 วัน',                        done:false},
+  {id:26, date:'2026-12-31',season:'หนาวจัด',   group:'เพลี้ย+บำรุง C',  chem:'อะซีทามิพริด+MIX-EDTA+อมิโน+สาหร่าย+จับใบ',             amt:'ฉลาก+100+100+100+50 มล.',        ppe:'หน้ากาก+ถุงมือ',      obs:'เพลี้ยส่งท้ายปี',                                                done:false},
+  {id:27, date:'2027-01-14',season:'ไรแดง',     group:'ไรแดง',            chem:'Bifenazate+Zn+อมิโน+จับใบ',                              amt:'75+50+100+50 มล.',                ppe:'หน้ากาก+ถุงมือ',      obs:'ใต้ใบ จุดขาว',                                                    done:false},
+  {id:28, date:'2027-01-28',season:'ไรแดง',     group:'โรค+บำรุง A',     chem:'Fosetyl-Al+Mg+อมิโน+สาหร่าย+จับใบ',                     amt:'ตามฉลาก+125+100+100+50 มล.',     ppe:'ถุงมือ',               obs:'แดดจัด ดูราก',                                                    done:false},
+  {id:29, date:'2027-02-11',season:'เริ่มร้อน', group:'ไรแดง',            chem:'สไปโร+MIX-EDTA+จับใบ',                                   amt:'ฉลาก+100+50 มล.',                 ppe:'หน้ากาก+ถุงมือ',      obs:'ไรแดงระบาด',                                                      done:false},
+  {id:30, date:'2027-02-25',season:'เริ่มร้อน', group:'โรค',              chem:'Copper+จับใบ',                                            amt:'200+50 มล.',                      ppe:'หน้ากาก+แว่น+ถุงมือ', obs:'ล้างกิ่งก้าน | ใบแดงทั้งต้น→เลื่อน 7 วัน',                       done:false},
+  {id:31, date:'2027-03-11',season:'ร้อนแล้ง',  group:'ไรแดง',            chem:'เฮกซี+Zn+จับใบ',                                         amt:'ฉลาก+50+50 มล.',                  ppe:'หน้ากาก+ถุงมือ',      obs:'ไรแดงสูงสุด',                                                     done:false},
+  {id:32, date:'2027-03-25',season:'ร้อนแล้ง',  group:'โรค',              chem:'ไซม็อกซิเมท+จับใบ',                                      amt:'30ก.+50 มล.',                     ppe:'หน้ากาก+ถุงมือ',      obs:'กิ่งแห้งแดดเผา',                                                  done:false},
+  {id:33, date:'2027-04-08',season:'ร้อนจัด',   group:'โรค+บำรุง A',     chem:'Fosetyl-Al+Mg+อมิโน+สาหร่าย+จับใบ',                     amt:'ตามฉลาก+125+100+100+50 มล.',     ppe:'ถุงมือ',               obs:'เตรียมรับฝนปีหน้า',                                               done:false},
 ];
 
+// ฮิวอัพ 30 ซีซี/น้ำ 20 ล. | ต้นสวย=5-10 ล./ต้น | ต้นโทรม=10-15 ล./ต้น | ราดรอบโคน 1 ม. ห่างโคน 20 ซม.
 const DEFAULT_SOIL_SCHEDULE = [
-  {id:1, month:'พ.ค. 2569',   date:'2026-05-01', chem:'Metalaxyl',      group:'Phenylamide', rate:'ตามฉลาก', ppe:'ชุดเต็ม+บูท', obs:'✅ ราดแล้ว',              done:false},
-  {id:2, month:'2 ก.ค. 2569', date:'2026-07-02', chem:'Dimethomorph',   group:'CAA',         rate:'ตามฉลาก', ppe:'ชุดเต็ม+บูท', obs:'ฝนชุก ดูราก',            done:false},
-  {id:3, month:'3 ก.ย. 2569', date:'2026-09-03', chem:'Propamocarb',    group:'Carbamate',   rate:'ตามฉลาก', ppe:'ชุดเต็ม+บูท', obs:'ปลายฝน ดูโคน',           done:false},
-  {id:4, month:'5 พ.ย. 2569', date:'2026-11-05', chem:'Fosetyl-Al ราด', group:'Phosphonate', rate:'ตามฉลาก', ppe:'ชุดเต็ม+บูท', obs:'เข้าหนาว กระตุ้นภูมิ',   done:false},
-  {id:5, month:'ม.ค. 2570',   date:'2027-01-01', chem:'พัก',            group:'—',           rate:'—',        ppe:'—',            obs:'แล้งจัด งดราด',           done:false},
-  {id:6, month:'4 มี.ค. 2570',date:'2027-03-04', chem:'พัก/ชีวภัณฑ์',  group:'—',           rate:'—',        ppe:'ถุงมือ',       obs:'ก่อนฝนใหม่ ราดเฉพาะต้นมีปัญหา', done:false},
+  {id:1, month:'ฮิว 1 • 4 มิ.ย. 2569',   date:'2026-06-04', chem:'ฮิวอัพ 30ซีซี/น้ำ20ล.',       group:'ฮิวอัพ',        rate:'สวย 5-10ล./โทรม 10-15ล.', ppe:'ถุงมือ',        obs:'เริ่มระบบราก',                              done:false},
+  {id:2, month:'ดิน 1 • 2 ก.ค. 2569',    date:'2026-07-02', chem:'Dimethomorph+ฮิวอัพ',          group:'CAA+ฮิว',       rate:'สวย 5-10ล./โทรม 10-15ล.', ppe:'ชุดเต็ม+บูท',  obs:'ฝนชุก ดูราก',                               done:false},
+  {id:3, month:'ฮิว 2 • 30 ก.ค. 2569',   date:'2026-07-30', chem:'ฮิวอัพ 30ซีซี/น้ำ20ล.',       group:'ฮิวอัพ',        rate:'สวย 5-10ล./โทรม 10-15ล.', ppe:'ถุงมือ',        obs:'ดูรากเดินไหม',                              done:false},
+  {id:4, month:'ดิน 2 • 3 ก.ย. 2569',    date:'2026-09-03', chem:'Propamocarb+ฮิวอัพ',           group:'Carbamate+ฮิว', rate:'สวย 5-10ล./โทรม 10-15ล.', ppe:'ชุดเต็ม+บูท',  obs:'ปลายฝน ดูโคน',                              done:false},
+  {id:5, month:'ฮิว 3 • 1 ต.ค. 2569',    date:'2026-10-01', chem:'ฮิวอัพ 30ซีซี/น้ำ20ล.',       group:'ฮิวอัพ',        rate:'สวย 5-10ล./โทรม 10-15ล.', ppe:'ถุงมือ',        obs:'เตรียมรับหนาว',                             done:false},
+  {id:6, month:'ดิน 3 • พ.ย. 2569',      date:'2026-11-01', chem:'พัก',                          group:'พัก',           rate:'—',                         ppe:'—',             obs:'ดินแห้ง งดราด',                             done:false},
+  {id:7, month:'ดิน 4 • ม.ค. 2570',      date:'2027-01-01', chem:'พัก',                          group:'พัก',           rate:'—',                         ppe:'—',             obs:'แล้งจัด งดราด',                             done:false},
+  {id:8, month:'ดิน 5 • 4 มี.ค. 2570',   date:'2027-03-04', chem:'พัก/ชีวภัณฑ์',                group:'—',             rate:'—',                         ppe:'ถุงมือ',        obs:'ก่อนฝนใหม่ ราดเฉพาะต้นมีปัญหา',            done:false},
 ];
 
+// ทุกครั้ง: ฮิวมิกแม่เมาะ + รดน้ำทันทีหลังใส่ | ต้นโทรม = ครึ่งหนึ่งของต้นสวย
 const DEFAULT_FERTILIZER_SCHEDULE = [
-  {id:1,  month:'25 มิ.ย. 2569', date:'2026-06-25', season:'ฝนชุก',     main:'9-3-3',        mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'เร่งยอดอ่อน',              done:false},
-  {id:2,  month:'23 ก.ค. 2569',  date:'2026-07-23', season:'ฝนมาก',     main:'15-15-15',     mainRate:'35 ก.',  extra:'ฮิวมิก', timing:'บำรุงรวม',                  done:false},
-  {id:3,  month:'20 ส.ค. 2569',  date:'2026-08-20', season:'ฝนมาก',     main:'9-3-3',        mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'เร่งยอดสุดท้าย',            done:false},
-  {id:4,  month:'17 ก.ย. 2569',  date:'2026-09-17', season:'ฝนชุก',     main:'15-15-15',     mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'สะสมอาหาร',                 done:false},
-  {id:5,  month:'15 ต.ค. 2569',  date:'2026-10-15', season:'ปลายฝน',    main:'13-13-21',     mainRate:'100 ก.', extra:'ฮิวมิก', timing:'K สูง เตรียมหนาว',          done:false},
-  {id:6,  month:'12 พ.ย. 2569',  date:'2026-11-12', season:'หนาว',      main:'13-13-21',     mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'สะสม K',                    done:false},
-  {id:7,  month:'10 ธ.ค. 2569',  date:'2026-12-10', season:'หนาวจัด',   main:'15-15-15',     mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'บำรุงรวม',                  done:false},
-  {id:8,  month:'ม.ค. 2570',     date:'2027-01-01', season:'แล้งจัด',   main:'งดปุ๋ยเม็ด',   mainRate:'—',      extra:'—',       timing:'แล้งจัด ดินแห้ง ราดน้ำอย่างเดียว', done:false},
-  {id:9,  month:'4 ก.พ. 2570',   date:'2027-02-04', season:'เริ่มร้อน', main:'15-15-15',     mainRate:'35 ก.',  extra:'ฮิวมิก', timing:'ประคองช่วงร้อน',             done:false},
-  {id:10, month:'มี.ค. 2570',    date:'2027-03-01', season:'ร้อนแล้ง',  main:'งดปุ๋ยเม็ด',   mainRate:'—',      extra:'—',       timing:'ร้อนแล้ง ดินแห้ง',           done:false},
-  {id:11, month:'1 เม.ย. 2570',  date:'2027-04-01', season:'ร้อนจัด',   main:'9-3-3',        mainRate:'75 ก.',  extra:'ฮิวมิก', timing:'เตรียมรับฝนปีหน้า',          done:false},
+  {id:1,  month:'25 มิ.ย. 2569', date:'2026-06-25', season:'ฝนชุก',     main:'9-3-3',        mainRate:'สวย 100ก./โทรม 50ก.',   extra:'ฮิวมิกแม่เมาะ', timing:'เร่งยอดอ่อน',                     done:false},
+  {id:2,  month:'23 ก.ค. 2569',  date:'2026-07-23', season:'ฝนมาก',     main:'15-15-15',     mainRate:'สวย 150ก./โทรม 75ก.',   extra:'ฮิวมิกแม่เมาะ', timing:'บำรุงรวม',                         done:false},
+  {id:3,  month:'20 ส.ค. 2569',  date:'2026-08-20', season:'ฝนมาก',     main:'9-3-3',        mainRate:'สวย 150ก./โทรม 75ก.',   extra:'ฮิวมิกแม่เมาะ', timing:'เร่งยอดสุดท้าย',                   done:false},
+  {id:4,  month:'17 ก.ย. 2569',  date:'2026-09-17', season:'ฝนชุก',     main:'15-15-15',     mainRate:'สวย 200ก./โทรม 100ก.',  extra:'ฮิวมิกแม่เมาะ', timing:'สะสมอาหาร',                        done:false},
+  {id:5,  month:'15 ต.ค. 2569',  date:'2026-10-15', season:'ปลายฝน',    main:'15-15-15',     mainRate:'สวย 200ก./โทรม 100ก.',  extra:'ฮิวมิกแม่เมาะ', timing:'สะสมอาหาร',                        done:false},
+  {id:6,  month:'12 พ.ย. 2569',  date:'2026-11-12', season:'หนาว',      main:'13-13-21',     mainRate:'สวย 150ก./โทรม 75ก.',   extra:'ฮิวมิกแม่เมาะ', timing:'K สูง เตรียมหนาว',                 done:false},
+  {id:7,  month:'10 ธ.ค. 2569',  date:'2026-12-10', season:'หนาวจัด',   main:'15-15-15',     mainRate:'สวย 150ก./โทรม 75ก.',   extra:'ฮิวมิกแม่เมาะ', timing:'บำรุงรวม',                         done:false},
+  {id:8,  month:'ม.ค. 2570',     date:'2027-01-01', season:'แล้งจัด',   main:'งดปุ๋ยเม็ด',   mainRate:'—',                      extra:'—',               timing:'แล้งจัด ดินแห้ง ราดน้ำอย่างเดียว', done:false},
+  {id:9,  month:'4 ก.พ. 2570',   date:'2027-02-04', season:'เริ่มร้อน', main:'15-15-15',     mainRate:'สวย 100ก./โทรม 50ก.',   extra:'ฮิวมิกแม่เมาะ', timing:'ประคองช่วงร้อน',                   done:false},
+  {id:10, month:'มี.ค. 2570',    date:'2027-03-01', season:'ร้อนแล้ง',  main:'งดปุ๋ยเม็ด',   mainRate:'—',                      extra:'—',               timing:'ร้อนแล้ง ดินแห้ง',                 done:false},
+  {id:11, month:'1 เม.ย. 2570',  date:'2027-04-01', season:'ร้อนจัด',   main:'9-3-3',        mainRate:'สวย 100ก./โทรม 50ก.',   extra:'ฮิวมิกแม่เมาะ', timing:'เตรียมรับฝนปีหน้า',                done:false},
+];
+
+// ตารางที่ 4 — ฮิวมิกแม่เมาะ + ปุ๋ยหมัก (ทุก 3 เดือน ปีละ 3 ครั้ง)
+const DEFAULT_HUMIC_SCHEDULE = [
+  {id:1, month:'มิ.ย. 2569', date:'2026-06-01', humic:'สวย 200ก./โทรม 300ก.', compost:'5 กก./ต้น', obs:'คลุมฟาง 10-15ซม. เว้นโคน 20ซม.', done:false},
+  {id:2, month:'ก.ย. 2569',  date:'2026-09-01', humic:'สวย 200ก./โทรม 300ก.', compost:'5 กก./ต้น', obs:'ปลายฝน ฟื้นรากฝอย',               done:false},
+  {id:3, month:'ธ.ค. 2569',  date:'2026-12-01', humic:'สวย 200ก./โทรม 300ก.', compost:'5 กก./ต้น', obs:'หนาวจัด รักษาความชื้น',             done:false},
 ];
 // ==============================================================
 //  APP STATE
@@ -631,7 +664,7 @@ const DEFAULT_FERTILIZER_SCHEDULE = [
 let db = null;
 let farmCode = '';
 let currentPage = 'dashboard';
-let cache = { records: [], meds: [...DEFAULT_MEDS], trees: [...DEFAULT_TREES], completedRounds: [], completedSoilRounds: [1], completedFertRounds: [], spraySchedule: [...DEFAULT_SCHEDULE], soilSchedule: [...DEFAULT_SOIL_SCHEDULE], fertSchedule: [...DEFAULT_FERTILIZER_SCHEDULE] };
+let cache = { records: [], meds: [...DEFAULT_MEDS], trees: [...DEFAULT_TREES], completedRounds: [], completedSoilRounds: [], completedFertRounds: [], completedHumicRounds: [], spraySchedule: [...DEFAULT_SCHEDULE], soilSchedule: [...DEFAULT_SOIL_SCHEDULE], fertSchedule: [...DEFAULT_FERTILIZER_SCHEDULE], humicSchedule: [...DEFAULT_HUMIC_SCHEDULE] };
 let listeners = [];
 let pendingCode = '';
 let userRole = 'owner'; // 'owner'=เจ้าของฟาร์ม | 'member'=สมาชิก
@@ -777,12 +810,15 @@ function startListeners() {
       else cache.soilSchedule = [...DEFAULT_SOIL_SCHEDULE];
       if(d.fert && d.fert.length) cache.fertSchedule = d.fert;
       else cache.fertSchedule = [...DEFAULT_FERTILIZER_SCHEDULE];
+      if(d.humic && d.humic.length) cache.humicSchedule = d.humic;
+      else cache.humicSchedule = [...DEFAULT_HUMIC_SCHEDULE];
     } else {
       cache.spraySchedule = [...DEFAULT_SCHEDULE];
       cache.soilSchedule = [...DEFAULT_SOIL_SCHEDULE];
       cache.fertSchedule = [...DEFAULT_FERTILIZER_SCHEDULE];
+      cache.humicSchedule = [...DEFAULT_HUMIC_SCHEDULE];
     }
-    if(currentPage==='plan') { renderPlan(); renderSoilPlan(); renderFertilizerPlan(); }
+    if(currentPage==='plan') { renderPlan(); renderSoilPlan(); renderFertilizerPlan(); renderHumicPlan(); }
   }, () => {});
   listeners = [u1, u2, u3, u4, u5];
 }
@@ -1319,12 +1355,13 @@ function openClearModal(type){
 //  PLAN
 // ==============================================================
 function switchPlanTab(n) {
-  [1,2,3].forEach(i => {
+  [1,2,3,4].forEach(i => {
     document.getElementById('planSection'+i).style.display = n===i ? '' : 'none';
     document.getElementById('planTab'+i).className = n===i ? 'btn btn-p btn-sm' : 'btn btn-s btn-sm';
   });
   if(n===2) renderSoilPlan();
   if(n===3) renderFertilizerPlan();
+  if(n===4) renderHumicPlan();
   // show reset button for owner
   const typeMap = {1:'spray',2:'soil',3:'fert'};
   const resetDiv = document.getElementById('planResetBtn');
@@ -1504,6 +1541,51 @@ async function unmarkSoilRound(id) {
   try {
     await db.doc(`farms/${farmCode}/config/plan`).set({completedSoilRounds:done},{merge:true});
     cache.completedSoilRounds = done; renderSoilPlan(); showToast('ยกเลิกแล้ว');
+  } catch(e){showToast('เกิดข้อผิดพลาด');}
+}
+
+function renderHumicPlan() {
+  const done = cache.completedHumicRounds || [];
+  document.getElementById('humicActionTh').textContent = userRole==='owner' ? 'จัดการ' : '';
+  document.getElementById('humicPlanBody').innerHTML = (cache.humicSchedule||DEFAULT_HUMIC_SCHEDULE).map(r => {
+    const isDone = done.includes(r.id);
+    const dys = daysFrom(r.date);
+    const isOverdue = (dys !== null && dys < 0 && !isDone);
+    const rowStyle = isDone ? 'background:#f1f8e9;opacity:.7' : isOverdue ? 'background:#fff3e0' : 'background:#f9fbe7';
+    const statusBadge = isDone ? '<span style="color:#2d8b45;font-weight:700">✅ ใส่แล้ว</span>'
+      : isOverdue ? '<span style="color:#e65100;font-weight:700">⚠️ เลยกำหนด</span>'
+      : '<span style="color:#546e7a;font-size:.78rem">รอดำเนินการ</span>';
+    const numCell = isDone
+      ? `<td style="text-decoration:line-through;color:#90a4ae">${r.id}</td>`
+      : `<td style="font-weight:700;color:#388e3c">${r.id}</td>`;
+    const actionCell = userRole==='owner' ? `<td>${isDone
+      ? `<button class="btn btn-s btn-xs" onclick="unmarkHumicRound(${r.id})">↩️</button>`
+      : `<button class="btn btn-p btn-xs" onclick="markHumicRoundDone(${r.id})">✅ ใส่แล้ว</button>`}</td>` : '<td></td>';
+    return `<tr style="${rowStyle}">
+      ${numCell}
+      <td style="font-weight:700">${r.month}</td>
+      <td style="font-size:.82rem;color:#1b5e20"><strong>${r.humic}</strong></td>
+      <td style="font-size:.82rem;color:#4e342e">${r.compost}</td>
+      <td style="font-size:.75rem;color:var(--gr)">${r.obs||''}</td>
+      <td>${statusBadge}</td>
+      ${actionCell}</tr>`;
+  }).join('');
+}
+async function markHumicRoundDone(id) {
+  const done = [...(cache.completedHumicRounds||[])];
+  if(!done.includes(id)) done.push(id);
+  try {
+    await db.doc(`farms/${farmCode}/config/plan`).set({completedHumicRounds:done},{merge:true});
+    cache.completedHumicRounds = done; renderHumicPlan();
+    showToast('✅ ใส่ฮิวมิก+หมัก รอบ '+id+' แล้ว!');
+  } catch(e){showToast('เกิดข้อผิดพลาด');}
+}
+async function unmarkHumicRound(id) {
+  if(!confirm('ยกเลิกสถานะฮิวมิก+หมักเดือนนี้?')) return;
+  const done = (cache.completedHumicRounds||[]).filter(x=>x!==id);
+  try {
+    await db.doc(`farms/${farmCode}/config/plan`).set({completedHumicRounds:done},{merge:true});
+    cache.completedHumicRounds = done; renderHumicPlan(); showToast('ยกเลิกแล้ว');
   } catch(e){showToast('เกิดข้อผิดพลาด');}
 }
 // ==============================================================
