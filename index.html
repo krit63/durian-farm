@@ -374,6 +374,7 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
     <button id="planTab2" class="btn btn-s btn-sm" onclick="switchPlanTab(2)">🪣 ราดโคนต้น (8 รอบ)</button>
     <button id="planTab3" class="btn btn-s btn-sm" onclick="switchPlanTab(3)">🌱 ใส่ปุ๋ย (11 รอบ)</button>
     <button id="planTab4" class="btn btn-s btn-sm" onclick="switchPlanTab(4)">🌿 ฮิวมิก+หมัก (3 รอบ)</button>
+    <button id="planTab5" class="btn btn-s btn-sm" onclick="switchPlanTab(5)">🎯 SOP ตามอาการ</button>
   </div>
   <!-- ตารางฉีดพ่นใบ -->
   <div id="planSection1">
@@ -451,6 +452,179 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
       </div>
     </div>
   </div>
+  <!-- SOP ตามอาการ (Condition-based) -->
+  <div id="planSection5" style="display:none">
+    <!-- หัวข้อ -->
+    <div class="card" style="background:linear-gradient(135deg,#e8f5e9,#f1f8e9);border:1.5px solid #66bb6a;padding:13px 16px;margin-bottom:12px">
+      <strong style="font-size:.95rem;color:#1b5e20">🎯 SOP ตามอาการ — Condition-based IPM</strong>
+      <p style="font-size:.78rem;color:#388e3c;margin:5px 0 0">ดูต้นก่อน แล้วเลือกสูตรตามอาการที่เจอ ไม่ต้องรอวันในปฏิทิน</p>
+    </div>
+
+    <!-- ระยะใบ -->
+    <div class="card" style="padding:12px 16px;margin-bottom:10px">
+      <strong style="font-size:.88rem;color:#1565c0;display:block;margin-bottom:8px">🌱 ระยะใบ — ใช้สูตรให้ตรงระยะ</strong>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;font-size:.78rem">
+        <span style="background:#fce4ec;border:1px solid #f48fb1;padding:4px 10px;border-radius:20px">🔴 แตกตา / หูหนู<br><span style="color:#c62828;font-size:.72rem">ห้าม Copper, Fosetyl-Al เข้มข้น</span></span>
+        <span style="background:#fff3e0;border:1px solid #ffb74d;padding:4px 10px;border-radius:20px">🟠 ก้ามปู / แดง<br><span style="color:#e65100;font-size:.72rem">อมิโน+Mg+สาหร่าย+อโทนิค</span></span>
+        <span style="background:#fff9c4;border:1px solid #f9a825;padding:4px 10px;border-radius:20px">🟡 เขียวอ่อน<br><span style="color:#f57f17;font-size:.72rem">CaB+Mg / เพลี้ย OK</span></span>
+        <span style="background:#e8f5e9;border:1px solid #81c784;padding:4px 10px;border-radius:20px">🟢 เพสลาด<br><span style="color:#2e7d32;font-size:.72rem">Copper OK / ยาส่วนใหญ่ OK</span></span>
+        <span style="background:#e3f2fd;border:1px solid #64b5f6;padding:4px 10px;border-radius:20px">🔵 แก่<br><span style="color:#1565c0;font-size:.72rem">Copper ดีที่สุด / โรค OK</span></span>
+      </div>
+    </div>
+
+    <!-- ตาราง SOP หลัก -->
+    <div class="card" style="padding:0;overflow:hidden;margin-bottom:10px">
+      <div style="background:#1565c0;padding:8px 14px"><strong style="color:#fff;font-size:.88rem">⚡ เมื่อพบอาการ → ทำตามนี้</strong></div>
+      <div class="tw"><table style="min-width:560px">
+        <thead><tr style="background:#e3f2fd">
+          <th style="color:#0d47a1">อาการ / เงื่อนไข</th>
+          <th style="color:#0d47a1">สูตรที่ใช้</th>
+          <th style="color:#0d47a1">ปริมาณ/100ล.</th>
+          <th style="color:#0d47a1">หมายเหตุ</th>
+        </tr></thead>
+        <tbody>
+          <!-- โรค -->
+          <tr style="background:#fff9c4"><td colspan="4" style="font-weight:700;font-size:.78rem;color:#f57f17;padding:5px 10px">🦠 โรค (FRAC)</td></tr>
+          <tr>
+            <td>ฝนตกติด 4–5 วัน / เริ่มเห็นจุดโรค</td>
+            <td><strong>Fosetyl-Al + จับใบ</strong></td>
+            <td>ตามฉลาก + 50 มล.</td>
+            <td style="font-size:.75rem;color:var(--gr)">Emergency — ไม่ต้องรอรอบ<br>ต้นล้า → ใช้ครึ่ง-2/3 โดส</td>
+          </tr>
+          <tr style="background:#fafafa">
+            <td>ใบแก่ มีจุดน้ำตาล แอนแทรคโนส</td>
+            <td><strong>Copper + จับใบ</strong></td>
+            <td>200 + 50 มล.</td>
+            <td style="font-size:.75rem;color:#c62828">⚠️ ใบแดง/แตกตา → เลื่อนออกไป</td>
+          </tr>
+          <tr>
+            <td>พบอาการโรคใบชัดเจน (จุดดำ ลาม)</td>
+            <td><strong>ไซม็อกซิเมท + จับใบ</strong></td>
+            <td>30 ก. + 50 มล.</td>
+            <td style="font-size:.75rem;color:var(--gr)">Curative เท่านั้น ไม่ใช้กันล่วงหน้า</td>
+          </tr>
+          <!-- แมลง -->
+          <tr style="background:#fce4ec"><td colspan="4" style="font-weight:700;font-size:.78rem;color:#c62828;padding:5px 10px">🐛 แมลง (IRAC)</td></tr>
+          <tr>
+            <td>เพลี้ยไฟ &gt;10% ของยอด / ผงขาวใต้ใบ</td>
+            <td><strong>ฟลอนิคามิด + MIX-EDTA + จับใบ</strong></td>
+            <td>ฉลาก + 100 + 50 มล.</td>
+            <td style="font-size:.75rem;color:var(--gr)">IRAC 29 — สลับกับ 4A ครั้งถัดไป</td>
+          </tr>
+          <tr style="background:#fafafa">
+            <td>เพลี้ยแป้ง / เพลี้ยหอย</td>
+            <td><strong>อะซีทามิพริด หรือ Buprofezin + จับใบ</strong></td>
+            <td>ฉลาก + 50 มล.</td>
+            <td style="font-size:.75rem;color:var(--gr)">IRAC 4A/16 — สลับกลุ่มทุกครั้ง</td>
+          </tr>
+          <tr>
+            <td>พบด้วงกัดยอด / หนอนม้วนใบ</td>
+            <td><strong>Indoxacarb + จับใบ</strong></td>
+            <td>75 + 50 มล.</td>
+            <td style="font-size:.75rem;color:var(--gr)">IRAC 22A — ใช้เฉพาะพบตัวจริง</td>
+          </tr>
+          <tr style="background:#fafafa">
+            <td>หนอนกัดใบ / รูเจาะกิ่ง</td>
+            <td><strong>Chlorantraniliprole + จับใบ</strong></td>
+            <td>ฉลาก + 50 มล.</td>
+            <td style="font-size:.75rem;color:var(--gr)">IRAC 28 — เว้น 6+ สัปดาห์/ครั้ง</td>
+          </tr>
+          <!-- ไรแดง -->
+          <tr style="background:#f3e5f5"><td colspan="4" style="font-weight:700;font-size:.78rem;color:#6a1b9a;padding:5px 10px">🔴 ไรแดง (IRAC สลับกลุ่ม)</td></tr>
+          <tr>
+            <td>พบจุดขาวใต้ใบ / เส้นใยไรแดง (ครั้งแรก)</td>
+            <td><strong>Bifenazate + Zn + จับใบ</strong></td>
+            <td>75 + 50 + 50 มล.</td>
+            <td style="font-size:.75rem;color:var(--gr)">IRAC 25 — ใช้ก่อน</td>
+          </tr>
+          <tr style="background:#fafafa">
+            <td>ไรแดงรุนแรง / สลับรอบถัดไป</td>
+            <td><strong>สไปโร + MIX-EDTA + จับใบ</strong></td>
+            <td>ฉลาก + 100 + 50 มล.</td>
+            <td style="font-size:.75rem;color:var(--gr)">IRAC 23 — สลับกับ 25 และ 10A</td>
+          </tr>
+          <tr>
+            <td>ไรแดงหน้าแล้ง / รอบที่ 3</td>
+            <td><strong>เฮกซี + Zn + จับใบ</strong></td>
+            <td>ฉลาก + 50 + 50 มล.</td>
+            <td style="font-size:.75rem;color:var(--gr)">IRAC 10A — เว้น 3+ สัปดาห์</td>
+          </tr>
+          <tr style="background:#fafafa">
+            <td>เพลี้ยไฟ + ไรแดง พร้อมกัน (หน้าแล้ง)</td>
+            <td><strong>Abamectin + Buprofezin + จับใบ</strong></td>
+            <td>75 + 100 + 50 มล.</td>
+            <td style="font-size:.75rem;color:#c62828">IRAC 6 — ห้ามผสม Copper<br>ใบอ่อนแดง &gt;50% → งด</td>
+          </tr>
+          <!-- บำรุง -->
+          <tr style="background:#e8f5e9"><td colspan="4" style="font-weight:700;font-size:.78rem;color:#1b5e20;padding:5px 10px">🌿 บำรุง (ตามระยะใบ)</td></tr>
+          <tr>
+            <td>ใบแตกใหม่ทั้งสวน (ก้ามปู–แดง)</td>
+            <td><strong>สูตร A: อมิโน + Mg + สาหร่าย + อโทนิค + จับใบ</strong></td>
+            <td>ฉลาก+100+100+25+50 มล.</td>
+            <td style="font-size:.75rem;color:var(--gr)">เน้นใบแตกเร็ว ไม่เครียด</td>
+          </tr>
+          <tr style="background:#fafafa">
+            <td>ใบเขียวอ่อน → เพสลาด (ทุก 3–4 สัปดาห์)</td>
+            <td><strong>สูตร B: CaB + Mg + จับใบ</strong></td>
+            <td>ฉลาก+125+50 มล.</td>
+            <td style="font-size:.75rem;color:var(--gr)">ใบแข็ง ลดยอดไหม้ ผนังเซลล์แข็งแรง</td>
+          </tr>
+          <tr>
+            <td>แตกยอด / ต้องการกระตุ้น</td>
+            <td><strong>สูตร C: MIX-EDTA + อมิโน + สาหร่าย + จับใบ</strong></td>
+            <td>100+100+100+50 มล.</td>
+            <td style="font-size:.75rem;color:var(--gr)">เดือนละครั้ง ไม่บ่อยกว่านี้</td>
+          </tr>
+          <tr style="background:#fafafa">
+            <td>ขาด Zn (ใบหงิก แตกยอดผิดปกติ)</td>
+            <td><strong>Zn + จับใบ</strong></td>
+            <td>50 + 50 มล.</td>
+            <td style="font-size:.75rem;color:#f57f17">⚠️ ปีละ 2–3 ครั้ง ไม่ใส่ประจำ</td>
+          </tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <!-- กฎห้าม/ต้องทำ -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+      <div class="card" style="padding:12px 14px;border-left:4px solid #e53935">
+        <strong style="font-size:.85rem;color:#b71c1c;display:block;margin-bottom:6px">❌ ห้ามทำ</strong>
+        <div style="font-size:.78rem;line-height:1.9;color:#3e2723">
+          Copper ตอนใบแดง/แตกตา<br>
+          Copper + Abamectin ผสมกัน<br>
+          ไซม็อกซิเมท แบบกันล่วงหน้า<br>
+          MIX-EDTA รอบ Copper/Fosetyl-Al เดี่ยว<br>
+          Zn ทุกรอบ (ปีละ 2–3 ครั้งพอ)<br>
+          อโทนิค ทุกรอบ (ใช้เฉพาะแตกใบ)<br>
+          ราดดินตอนดินแฉะ
+        </div>
+      </div>
+      <div class="card" style="padding:12px 14px;border-left:4px solid #43a047">
+        <strong style="font-size:.85rem;color:#1b5e20;display:block;margin-bottom:6px">✅ กฎเหล็ก</strong>
+        <div style="font-size:.78rem;line-height:1.9;color:#1b5e20">
+          พ่นหลัง 16:00 น. ทุกครั้ง<br>
+          PPE ครบ อาบน้ำทันทีหลังพ่น<br>
+          ฝนตกใน 1 ชม. → พ่นซ้ำ<br>
+          ฝนตกหลัง 4+ ชม. → ไม่ต้องพ่นซ้ำ<br>
+          ลมแรง → เลื่อนพ่น<br>
+          ไม่พบแมลง → ข้ามยาแมลง<br>
+          สลับกลุ่ม IRAC/FRAC ทุกครั้ง
+        </div>
+      </div>
+    </div>
+
+    <!-- สูตรฉุกเฉิน -->
+    <div class="card" style="padding:12px 14px;background:#fff3e0;border:1.5px solid #fb8c00">
+      <strong style="font-size:.85rem;color:#e65100;display:block;margin-bottom:6px">🚨 สูตรฉุกเฉิน (เฉพาะต้นมีปัญหา)</strong>
+      <div style="font-size:.78rem;line-height:2;color:#4e342e">
+        <span style="font-weight:700">รากเน่า →</span> Hymexazol ราดดิน<br>
+        <span style="font-weight:700">ปลวก / มด →</span> Fipronil ราดดิน<br>
+        <span style="font-weight:700">หอยทาก →</span> Metaldehyde หว่านโคน<br>
+        <span style="font-weight:700">เพลี้ยระบาดหนัก (ฉุกเฉิน) →</span> ไทอะมีทอกแซม (ไม่ใช้ประจำ)
+      </div>
+    </div>
+  </div>
+
   <!-- ตารางฮิวมิกแม่เมาะ + ปุ๋ยหมัก -->
   <div id="planSection4" style="display:none">
     <div class="card" style="background:#f1f8e9;border:1.5px solid #a5d6a7;padding:11px 14px;margin-bottom:14px">
@@ -1355,7 +1529,7 @@ function openClearModal(type){
 //  PLAN
 // ==============================================================
 function switchPlanTab(n) {
-  [1,2,3,4].forEach(i => {
+  [1,2,3,4,5].forEach(i => {
     document.getElementById('planSection'+i).style.display = n===i ? '' : 'none';
     document.getElementById('planTab'+i).className = n===i ? 'btn btn-p btn-sm' : 'btn btn-s btn-sm';
   });
@@ -1688,12 +1862,14 @@ async function resetScheduleToDefault(type) {
   if(type==='spray') { cache.spraySchedule=[...DEFAULT_SCHEDULE]; updated={spray:DEFAULT_SCHEDULE}; }
   else if(type==='soil') { cache.soilSchedule=[...DEFAULT_SOIL_SCHEDULE]; updated={soil:DEFAULT_SOIL_SCHEDULE}; }
   else if(type==='fert') { cache.fertSchedule=[...DEFAULT_FERTILIZER_SCHEDULE]; updated={fert:DEFAULT_FERTILIZER_SCHEDULE}; }
+  else if(type==='humic') { cache.humicSchedule=[...DEFAULT_HUMIC_SCHEDULE]; updated={humic:DEFAULT_HUMIC_SCHEDULE}; }
   try {
     await db.doc(`farms/${farmCode}/config/schedules`).set(updated, {merge: true});
     showToast('✅ รีเซ็ตตารางแล้ว!');
     if(type==='spray') renderPlan();
     else if(type==='soil') renderSoilPlan();
     else if(type==='fert') renderFertilizerPlan();
+    else if(type==='humic') renderHumicPlan();
   } catch(e) { showToast('เกิดข้อผิดพลาด'); }
 }
 // ==============================================================
