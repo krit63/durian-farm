@@ -436,6 +436,153 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
       </div>
     </div>
 
+    <!-- ===== WHAT IF TOOL ===== -->
+    <div class="card" id="whatIfCard" style="padding:14px 16px;margin-bottom:14px;background:linear-gradient(135deg,#e8eaf6,#ede7f6);border:1.5px solid #5c6bc0">
+      <strong style="display:block;font-size:.9rem;color:#283593;margin-bottom:12px">🧪 What If — กดเลือกเงื่อนไข → ได้สูตรทันที</strong>
+      <div style="margin-bottom:10px">
+        <div style="font-size:.74rem;font-weight:700;color:#455a64;margin-bottom:7px">1️⃣ ระยะใบ (เลือก 1)</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px" id="wiStages"></div>
+      </div>
+      <div style="margin-bottom:12px">
+        <div style="font-size:.74rem;font-weight:700;color:#455a64;margin-bottom:7px">2️⃣ สภาพที่พบ (เลือกได้หลายอย่าง)</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px" id="wiConds"></div>
+      </div>
+      <div id="wiResult" style="display:none;background:#fff;border-radius:10px;padding:12px 14px;border:2.5px solid #5c6bc0"></div>
+      <div id="wiEmpty" style="font-size:.78rem;color:#9e9e9e;text-align:center;padding:6px 0">← เลือกระยะใบก่อน</div>
+    </div>
+    <script>
+    (function(){
+      const STAGES=[
+        {key:'A',label:'🔴 ฝักดาบ', color:'#c62828',bg:'#fce4ec',border:'#e53935'},
+        {key:'B',label:'🟠 หางปลา', color:'#e65100',bg:'#fff3e0',border:'#ef6c00'},
+        {key:'C',label:'🟡 ตั้งเขี้ยว',color:'#f57f17',bg:'#fff9c4',border:'#f9a825'},
+        {key:'D',label:'🟢 ใบกาง',   color:'#2e7d32',bg:'#e8f5e9',border:'#43a047'},
+        {key:'E',label:'🔵 เพสลาด',  color:'#0d47a1',bg:'#e3f2fd',border:'#1565c0'},
+        {key:'F',label:'⚫ ใบแก่',   color:'#37474f',bg:'#eceff1',border:'#78909c'},
+      ];
+      const CONDS=[
+        {key:'pest',label:'🐜 พบเพลี้ย'},
+        {key:'worm',label:'🐛 พบหนอน'},
+        {key:'mite',label:'🕷 พบไรแดง'},
+        {key:'rain',label:'🌧 ฝนชุก'},
+        {key:'disease',label:'🍂 พบโรคใบ'},
+        {key:'cab2',label:'💊 CaB ครั้งที่ 2'},
+        {key:'edta',label:'💜 รอบ MIX EDTA'},
+      ];
+      const BASE={
+        A:[{n:'Mg EDTA',a:'100 มล.'},{n:'Amino',a:'100 มล.'},{n:'Seaweed',a:'100 มล.'},{n:'Atonik',a:'25 มล.'},{n:'จับใบ',a:'50 มล.'}],
+        B:[{n:'Mg EDTA',a:'100 มล.'},{n:'Amino',a:'100 มล.'},{n:'Seaweed',a:'100 มล.'},{n:'Atonik',a:'25 มล.'},{n:'จับใบ',a:'50 มล.'}],
+        C:[{n:'Mg EDTA',a:'100 มล.'},{n:'Seaweed',a:'100 มล.'},{n:'CaB',a:'ตามฉลาก (ครั้งที่ 1/Flush)'},{n:'จับใบ',a:'50 มล.'}],
+        D:[{n:'Mg EDTA',a:'100 มล.'},{n:'Seaweed',a:'100 มล.'},{n:'จับใบ',a:'50 มล.'}],
+        E:[{n:'Mg EDTA',a:'100 มล.'},{n:'Seaweed',a:'100 มล.'},{n:'จับใบ',a:'50 มล.'}],
+        F:[{n:'Mg EDTA',a:'100 มล.'},{n:'จับใบ',a:'50 มล.'}],
+        G:[{n:'Mg EDTA',a:'100 มล.'},{n:'MIX EDTA',a:'100 มล.'},{n:'Zn EDTA',a:'50 มล.'},{n:'จับใบ',a:'50 มล.'}],
+      };
+      const NOTES={
+        A:['✅ Amino + Atonik — ใช้ได้ระยะนี้','🔄 สลับ IRAC ทุกรอบถ้าพบเพลี้ยต่อเนื่อง'],
+        B:['✅ Amino + Atonik — ใบกำลังแข็งตัว OK','🔄 สลับกลุ่มยาแมลงทุกรอบ'],
+        C:['❌ ห้าม Amino + Atonik — ระยะสะสม Ca เข้าเซลล์','💊 CaB รอบที่ 1 ของ Flush นี้','⚠️ ถ้าจะให้รอบ 2 → ทำในระยะใบกาง (สูตร D) เท่านั้น'],
+        D:['💊 CaB ครั้งที่ 2 ให้ก็ต่อเมื่อจำเป็น','🛑 หลังจากนี้ หยุด CaB ตลอด Flush','❌ ห้าม Amino + Atonik'],
+        E:['❌ ห้าม Amino · Atonik · CaB ทั้งหมด','💡 ใบแก่มีโรค → เพิ่ม Copper 200 มล. (ใบแก่เท่านั้น)'],
+        F:['❌ ห้าม Amino · Atonik · CaB · Seaweed','💡 ระยะนี้ใบสังเคราะห์แสงเต็มที่ — ไม่กระตุ้น'],
+      };
+      const CADD={
+        pest:{tag:'ยาเพลี้ย',rows:[{n:'Flonicamid (IRAC 29)',a:'ตามฉลาก',note:'รอบนี้'},{n:'→ รอบต่อไป: Acetamiprid (4A)',a:'ตามฉลาก'},{n:'→ รอบต่อไป: Buprofezin (16)',a:'ตามฉลาก'}],warn:'🔄 สลับ IRAC 29 → 4A → 16 ทุกรอบ'},
+        worm:{tag:'ยาหนอน',rows:[{n:'Chlorantraniliprole (IRAC 28)',a:'ตามฉลาก',note:'รอบนี้'},{n:'→ สลับ: Indoxacarb (22A)',a:'75 มล.'}],warn:'🔄 สลับระหว่าง IRAC 28 ↔ 22A'},
+        mite:{tag:'ยาไร',rows:[{n:'Bifenazate (IRAC 25)',a:'ตามฉลาก',note:'รอบนี้'},{n:'→ Spirodiclofen (23)',a:'ตามฉลาก'},{n:'→ Hexythiazox (10A)',a:'ตามฉลาก'}],warn:'🔄 สลับ 25 → 23 → 10A'},
+        rain:{tag:'ป้องกันโรค (ฝนชุก)',rows:[{n:'Fosetyl-Al (FRAC 33)',a:'ตามฉลาก'}],warn:null},
+        disease:{tag:'โรคใบ',rows:[],warn:null},
+      };
+      let selStage=null, selConds=new Set();
+      const sEl=document.getElementById('wiStages');
+      const cEl=document.getElementById('wiConds');
+      STAGES.forEach(s=>{
+        const b=document.createElement('button');
+        b.id='wiS_'+s.key; b.textContent=s.label;
+        b.style.cssText=`padding:6px 13px;border-radius:20px;border:2px solid ${s.border};background:${s.bg};color:${s.color};font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s`;
+        b.onclick=()=>{selStage=(selStage===s.key)?null:s.key; selConds.delete('cab2'); upd(); calc();};
+        sEl.appendChild(b);
+      });
+      CONDS.forEach(c=>{
+        const b=document.createElement('button');
+        b.id='wiC_'+c.key; b.textContent=c.label;
+        b.style.cssText='padding:5px 11px;border-radius:20px;border:2px solid #b0bec5;background:#fff;color:#546e7a;font-size:.76rem;cursor:pointer;transition:all .15s';
+        b.onclick=()=>{
+          if(c.key==='cab2'&&selStage!=='D') return;
+          selConds.has(c.key)?selConds.delete(c.key):selConds.add(c.key);
+          upd(); calc();
+        };
+        cEl.appendChild(b);
+      });
+      function upd(){
+        STAGES.forEach(s=>{
+          const b=document.getElementById('wiS_'+s.key);
+          if(selStage===s.key){b.style.background=s.color;b.style.color='#fff';b.style.boxShadow='0 2px 8px rgba(0,0,0,.28)';}
+          else{b.style.background=s.bg;b.style.color=s.color;b.style.boxShadow='';}
+        });
+        CONDS.forEach(c=>{
+          const b=document.getElementById('wiC_'+c.key);
+          const dis=c.key==='cab2'&&selStage!=='D';
+          b.disabled=dis; b.style.opacity=dis?'0.3':'1';
+          if(selConds.has(c.key)){b.style.background='#3949ab';b.style.color='#fff';b.style.borderColor='#3949ab';b.style.boxShadow='0 2px 6px rgba(57,73,171,.3)';}
+          else{b.style.background='#fff';b.style.color='#546e7a';b.style.borderColor='#b0bec5';b.style.boxShadow='';}
+        });
+      }
+      function calc(){
+        const res=document.getElementById('wiResult');
+        const emp=document.getElementById('wiEmpty');
+        if(!selStage){res.style.display='none';emp.style.display='block';return;}
+        const useEdta=selConds.has('edta');
+        const eff=useEdta?'G':selStage;
+        const s=STAGES.find(x=>x.key===selStage);
+        let items=[...BASE[eff]];
+        if(!useEdta&&selStage==='D'&&selConds.has('cab2')) items.splice(2,0,{n:'CaB',a:'ตามฉลาก (ครั้งที่ 2 — รอบสุดท้าย)'});
+        // disease + F stage → Copper
+        const addCopper=!useEdta&&selConds.has('disease')&&selStage==='F';
+        if(addCopper) items.push({n:'Copper',a:'200 มล. (ใบแก่เท่านั้น ❗)',extra:true});
+        // disease + E warning only
+        const diseaseEWarn=!useEdta&&selConds.has('disease')&&selStage==='E';
+        const cRows=[];
+        if(!useEdta) ['pest','worm','mite','rain'].forEach(k=>{if(selConds.has(k)&&CADD[k]) cRows.push(CADD[k]);});
+        const notes=useEdta?['💡 รอบ MIX EDTA แทนสูตรปกติ — ใช้ได้ทุกระยะใบ']:(NOTES[selStage]||[]);
+        const title=useEdta?` → 💜 สูตร G (MIX EDTA)`:`→ สูตร ${eff}`;
+        let h=`<div style="border-left:4px solid ${s.color};padding-left:11px">`;
+        h+=`<div style="font-size:.86rem;font-weight:800;color:${s.color};margin-bottom:9px">${s.label} ${title}</div>`;
+        h+=`<div style="font-size:.73rem;font-weight:700;color:#2e7d32;margin-bottom:4px">✅ ส่วนผสม (ต่อถัง 100 ลิตร)</div>`;
+        h+=`<table style="width:100%;border-collapse:collapse;font-size:.76rem;margin-bottom:9px">`;
+        items.forEach((it,i)=>{
+          const bg=it.extra?'#fff3e0':(i%2?'#f5f5f5':'#fff');
+          const clr=it.extra?'#e65100':'#1565c0';
+          h+=`<tr style="background:${bg}"><td style="padding:3px 8px;font-weight:600;color:#37474f;width:55%">${it.n}</td><td style="padding:3px 8px;color:${clr};font-weight:700">${it.a}</td></tr>`;
+        });
+        if(cRows.length){
+          h+=`<tr><td colspan="2" style="padding:5px 8px 3px;font-size:.71rem;font-weight:700;color:#b71c1c;background:#fff8f8">+ เพิ่มตามสภาพที่พบ</td></tr>`;
+          cRows.forEach(cr=>{
+            cr.rows.forEach((it,idx)=>{
+              const clr=idx===0?'#b71c1c':'#9e9e9e';
+              h+=`<tr style="background:#fff8f8"><td style="padding:2px 8px;color:${clr};font-size:.72rem">${it.n}${it.note?` <em style="color:#9e9e9e">(${it.note})</em>`:''}</td><td style="padding:2px 8px;color:${clr};font-size:.72rem">${idx===0?it.a:''}</td></tr>`;
+            });
+            if(cr.warn) h+=`<tr style="background:#fff8f8"><td colspan="2" style="padding:2px 8px 5px;font-size:.70rem;color:#e65100">${cr.warn}</td></tr>`;
+          });
+        }
+        h+=`</table>`;
+        if(diseaseEWarn) h+=`<div style="background:#fff3e0;border-radius:7px;padding:7px 10px;font-size:.73rem;color:#e65100;margin-bottom:7px">⚠️ โรคใบในระยะเพสลาด: ถ้าใบแก่ข้างๆ มีโรค → ใช้ Copper 200 มล. ได้เฉพาะใบแก่ 100% เท่านั้น</div>`;
+        if(selConds.has('disease')&&selStage!=='E'&&selStage!=='F') h+=`<div style="background:#fff3e0;border-radius:7px;padding:7px 10px;font-size:.73rem;color:#e65100;margin-bottom:7px">⚠️ Copper ใช้ได้เฉพาะ <strong>ใบแก่ 100%</strong> เท่านั้น ❌ ระยะ${s.label}นี้ยังใช้ไม่ได้</div>`;
+        if(notes.length){
+          h+=`<div style="background:#fffde7;border-radius:7px;padding:7px 10px;font-size:.73rem;line-height:1.75;color:#5d4037">`;
+          notes.forEach(n=>{h+=n+'<br>';});
+          h+=`</div>`;
+        }
+        h+=`</div>`;
+        res.innerHTML=h;
+        res.style.borderColor=s.color;
+        res.style.display='block';
+        emp.style.display='none';
+      }
+      upd();
+    })();
+    </script>
+
     <!-- ===== FORMULA CARDS A–I ===== -->
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px">
       <div style="background:#fff8f8;border:1.5px solid #e53935;border-top:4px solid #e53935;border-radius:10px;padding:11px 12px">
