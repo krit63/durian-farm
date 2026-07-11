@@ -384,7 +384,7 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
         ❌ ห้ามผสม Copper + Abamectin<br>
         ❌ Copper ใช้เฉพาะ <strong>ใบแก่ 100%</strong> เท่านั้น ❌ ฝักดาบ/หางปลา/ตั้งเขี้ยว<br>
         💊 <strong>CaB: 1–2 รอบ/Flush</strong> — ตั้งเขี้ยว (ครั้งที่ 1) / ใบกาง (ครั้งที่ 2 ถ้าจำเป็น) ❌ ฝักดาบ/หางปลา/เพสลาด/ใบแก่<br>
-        ⏰ ฉีดพ่นหลัง <strong>16:00 น.</strong> เสมอ · ถัง 100 ลิตร · <strong>ทุก 10 วัน</strong> (ลดเหลือ 7 วันถ้าฝนชุก >3 วัน หรือพบโรค/แมลง)<br>
+        ⏰ ฉีดพ่นหลัง <strong>16:00 น.</strong> เสมอ · ถัง 100 ลิตร · <strong>ทุก 7 วัน (วันจันทร์)</strong><br>
         🌧️ ฝนตกภายใน 4 ชม. — ฉีดซ้ำวันถัดไป<br>
         🔄 สลับกลุ่มยาทุกครั้ง ป้องกันดื้อยา · 💊 PPE ครบทุกครั้ง อาบน้ำทันทีหลังฉีด
       </div>
@@ -937,7 +937,7 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
           6. Seaweed หน้าหนาว/แล้ง → 50 มล.<br>
           7. ไม่พบแมลง/หนอน → ไม่พ่นยานั้น<br>
           8. MIX EDTA ทุก 2 เดือน (ไม่ต้องทุกรอบ)<br>
-          9. ดูระยะใบก่อน ค่อยเลือกสูตร — พ่นทุก 10 วัน (7 วันถ้าฝนชุก/มีแมลง)
+          9. ดูระยะใบก่อน ค่อยเลือกสูตร — พ่นทุก 7 วัน (วันจันทร์)
         </div>
       </div>
     </div>
@@ -1084,20 +1084,20 @@ const DEFAULT_MEDS = [
   {id:'f2', name:'15-15-15',           group:'ปุ๋ย',     uses:'บำรุงรวม สะสมอาหาร ช่วงหนาว',   total:0,current:0,minAlert:0,unit:'กก.',  notes:'ใส่ ต.ค.-ม.ค./มี.ค.',status:'owned'},
   {id:'f3', name:'46-0-0 (ยูเรีย)',    group:'ปุ๋ย',     uses:'เสริม N เร่งใบ ช่วงฝนชุก',       total:0,current:0,minAlert:0,unit:'กก.',  notes:'ห้ามใส่ช่วงหนาว พ.ย.-ม.ค.',status:'owned'},
   {id:'f4', name:'ฮิวมิก',             group:'ปุ๋ย',     uses:'เพิ่มประสิทธิภาพปุ๋ยเคมี 20-30%',total:0,current:0,minAlert:0,unit:'กก.',  notes:'ใส่คู่กับปุ๋ยเคมีทุกครั้ง',status:'owned'},
-  {id:'m25',name:'Calcium Boron',       group:'ธาตุอาหาร',uses:'ผนังเซลล์ ลำเลียง Ca เข้าต้น',total:0,current:0,minAlert:0,unit:'มล.',  notes:'ใส่ทุก 3-4 สัปดาห์',status:'owned'},
+  {id:'m25',name:'Calcium Boron',       group:'ธาตุอาหาร',uses:'ผนังเซลล์ ลำเลียง Ca เข้าต้น',total:0,current:0,minAlert:0,unit:'มล.',  notes:'1-2 รอบ/Flush | สูตร C (ตั้งเขี้ยว) · สูตร D (ใบกาง ถ้าจำเป็น) | ❌ ระยะอื่น',status:'owned'},
 ];
 
 // ==============================================================
 //  DEFAULT SPRAY SCHEDULE
 // ==============================================================
-// รอบบำรุง A=Mg+อมิโน+สาหร่าย | B=CaB+Mg | C=MIX-EDTA+อมิโน+สาหร่าย
-// ⚠️ ไม่พบแมลง → ข้ามยาแมลง เพิ่มรอบบำรุง A/B/C แทน
+// Master Program: A=ฝักดาบ B=หางปลา C=ตั้งเขี้ยว(+CaB) D=ใบกาง E=เพสลาด F=ใบแก่ G=MIX EDTA H=สะสมอาหาร I=ก่อนฝนแรก
+// ⚠️ ไม่พบแมลง → ข้ามยาแมลง | เลือกสูตรตามระยะใบ (A-F) | พ่นทุก 7 วัน วันจันทร์
 const DEFAULT_SCHEDULE = [
-  {id:1,  date:'2026-06-04',season:'ฝนชุก',    group:'หนอน+โรค',        chem:'Chlorantraniliprole+Fosetyl-Al+จับใบ',                   amt:'ฉลาก+ครึ่งโดส+50 มล.',           ppe:'หน้ากาก+ถุงมือ',      obs:'ยอดอ่อน หนอนเล็ก',                                               done:false},
-  {id:2,  date:'2026-06-11',season:'ฝนชุก',    group:'เพลี้ย+บำรุง',    chem:'ฟลอนิคามิด+Mg+MIX-EDTA+อมิโน+สาหร่าย+จับใบ',            amt:'ฉลาก+125+100+100+100+50 มล.',    ppe:'หน้ากาก+ถุงมือ',      obs:'เพลี้ยไฟ ผงขาว',                                                 done:false},
+  {id:1,  date:'2026-06-08',season:'ฝนชุก',    group:'หนอน+โรค',        chem:'Chlorantraniliprole+Fosetyl-Al+จับใบ',                   amt:'ฉลาก+ครึ่งโดส+50 มล.',           ppe:'หน้ากาก+ถุงมือ',      obs:'ยอดอ่อน หนอนเล็ก',                                               done:false},
+  {id:2,  date:'2026-06-15',season:'ฝนชุก',    group:'เพลี้ย+บำรุง',    chem:'ฟลอนิคามิด+Mg+MIX-EDTA+อมิโน+สาหร่าย+จับใบ',            amt:'ฉลาก+125+100+100+100+50 มล.',    ppe:'หน้ากาก+ถุงมือ',      obs:'เพลี้ยไฟ ผงขาว',                                                 done:false},
   {id:3,  date:'2026-06-22',season:'ฝนชุก',    group:'เพลี้ย+บำรุง',    chem:'อะซีทามิพริด+Mg+MIX-EDTA+สาหร่าย+อมิโน+CaB+จับใบ',       amt:'ฉลาก+100+100+100+100+100+ฉลาก',  ppe:'หน้ากาก+ถุงมือ',      obs:'เพลี้ยแป้ง เพลี้ยไฟ ดูใต้ใบ',                                    done:false},
   {id:4,  date:'2026-06-29',season:'ฝนชุก',    group:'บำรุงใบอ่อน',     chem:'ฟลอนิคามิด+อมิโน+Mg+สาหร่าย+อโทนิค+จับใบ',             amt:'ฉลาก+ฉลาก+100+100+25+50 มล.',    ppe:'หน้ากาก+ถุงมือ',      obs:'ใบอ่อนแตก ดูยอด สีใบ',                                           done:false},
-  {id:5,  date:'2026-07-07',season:'ฝนมาก',    group:'โรค+เพลี้ย+บำรุง', chem:'Fosetyl-Al+ฟลอนิคามิด+Mg EDTA+อมิโน+สาหร่าย+อโทนิค+จับใบ', amt:'ตามฉลาก+ฉลาก+100+100+100+25+50 มล.', ppe:'หน้ากาก+ถุงมือ', obs:'✅ ฉีดแล้ว | ยอดอ่อน ดูเพลี้ยไฟ', done:false},
+  {id:5,  date:'2026-07-06',season:'ฝนมาก',    group:'โรค+เพลี้ย+บำรุง', chem:'Fosetyl-Al+ฟลอนิคามิด+Mg EDTA+อมิโน+สาหร่าย+อโทนิค+จับใบ', amt:'ตามฉลาก+ฉลาก+100+100+100+25+50 มล.', ppe:'หน้ากาก+ถุงมือ', obs:'✅ ฉีดแล้ว | ยอดอ่อน ดูเพลี้ยไฟ', done:false},
   {id:6,  date:'2026-07-13',season:'ฝนมาก',    group:'บำรุง A (เพลี้ยเมื่อพบ)', chem:'Acetamiprid+Mg EDTA+Amino+Seaweed+Atonik+จับใบ', amt:'ฉลาก+100+100+100+25+50 มล.',    stage:'🔴ฝักดาบ', ppe:'หน้ากาก+ถุงมือ', obs:'ระยะฝักดาบ: Amino+Atonik OK | ไม่พบเพลี้ย→ข้าม Acetamiprid | IRAC 4A', done:false},
   {id:7,  date:'2026-07-20',season:'ฝนมาก',    group:'โรค+บำรุง',         chem:'Fosetyl-Al+Mg EDTA+Seaweed+จับใบ',                        amt:'ตามฉลาก+100+100+50 มล.',         stage:'🔴ฝักดาบ', ppe:'หน้ากาก+ถุงมือ', obs:'ฝนชุก/ดินแฉะ→OK | แห้ง→ข้าม Fosetyl-Al | พบหนอน→เพิ่ม Indoxacarb 75มล. | FRAC 33', done:false},
   {id:8,  date:'2026-07-27',season:'ฝนมาก',    group:'บำรุง B (เพลี้ยเมื่อพบ)', chem:'Buprofezin+Mg EDTA+Seaweed+Amino+จับใบ',         amt:'ฉลาก+100+100+100+50 มล.',        stage:'🟠หางปลา', ppe:'หน้ากาก+ถุงมือ', obs:'ระยะหางปลา: Amino OK | ไม่พบเพลี้ย→ข้าม Buprofezin | IRAC 16', done:false},
@@ -1114,18 +1114,18 @@ const DEFAULT_SCHEDULE = [
   {id:19, date:'2026-10-12',season:'ปลายฝน',   group:'โรค+บำรุง B',       chem:'Fosetyl-Al+Mg EDTA+Seaweed+จับใบ',                        amt:'ตามฉลาก+100+50+50 มล.',          stage:'⚫ใบแก่', ppe:'ถุงมือ', obs:'ปลายฝน | ฝนชุก→OK | แห้ง→ข้าม Fosetyl-Al | Seaweed ลด 50มล. (โปรแกรม B) | MIX EDTA ดูรอบ R21',done:false},
   {id:20, date:'2026-10-19',season:'ปลายฝน',   group:'สะสม B (เพลี้ยเมื่อพบ)', chem:'Buprofezin+Mg EDTA+Seaweed+จับใบ',               amt:'ฉลาก+100+50+50 มล.',              stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'โปรแกรม B | Seaweed 50มล. | ไม่พบเพลี้ย→ข้าม Buprofezin | IRAC 16',done:false},
   {id:21, date:'2026-10-26',season:'ปลายฝน',   group:'สะสมอาหาร B',       chem:'Mg EDTA+MIX EDTA+Zn+จับใบ',                              amt:'100+100+50+50 มล.',               stage:'⚫ใบแก่', ppe:'ถุงมือ', obs:'เข้าโปรแกรม B เต็มตัว | MIX EDTA+Zn รอบเดียว (ทุก 2 เดือน) | ใบแก่+โรค→เพิ่ม Copper 200มล. | เตรียมรับหนาว',done:false},
-  {id:22, date:'2026-11-09',season:'หนาว',      group:'สะสม B (เพลี้ยเมื่อพบ)',   chem:'Flonicamid+Mg EDTA+Zn+จับใบ',                            amt:'ฉลาก+80-100+50+50 มล.',          stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'โปรแกรม B สะสม | Seaweed/Amino/Atonik หยุด | ไม่พบเพลี้ย→ข้าม Flonicamid | Zn ทุก 2-3 เดือน | IRAC 29',done:false},
-  {id:23, date:'2026-11-23',season:'หนาว',      group:'โรค (conditional)', chem:'Fosetyl-Al+Mg EDTA+จับใบ',                               amt:'ตามฉลาก+80-100+50 มล.',          stage:'⚫ใบแก่', ppe:'ถุงมือ', obs:'ใช้เมื่อ: ฝนชุก/ดินแฉะ/ก่อนฝนแรก | ข้ามได้ถ้าอากาศแห้ง | เป้า 7-8 รอบ/ปี | MIX EDTA ดูรอบ R26 | FRAC 33',done:false},
-  {id:24, date:'2026-12-07',season:'หนาวจัด',   group:'MIX EDTA+Zn (หนอนเมื่อพบ)', chem:'Chlorantraniliprole+Mg EDTA+MIX EDTA+Zn+จับใบ',          amt:'ฉลาก+80-100+100+50+50 มล.',      stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'ไม่พบหนอน→ข้าม Chlorantraniliprole | MIX EDTA+Zn รอบเดียว (ทุก 2 เดือน) | IRAC 28',done:false},
-  {id:25, date:'2026-12-21',season:'หนาวจัด',   group:'โรค (conditional)', chem:'Copper+Mg EDTA+จับใบ',                                  amt:'200+80-100+50 มล.',               stage:'⚫ใบแก่', ppe:'หน้ากาก+แว่น+ถุงมือ', obs:'ใบแก่ 100% เท่านั้น ❌ฝักดาบ/หางปลา/ตั้งเขี้ยว | ข้ามได้ถ้าไม่มีโรค | M1',done:false},
-  {id:26, date:'2027-01-04',season:'หนาวจัด',   group:'สะสม B (เพลี้ยเมื่อพบ)',   chem:'Acetamiprid+Mg EDTA+MIX EDTA+Zn+จับใบ',                  amt:'ฉลาก+80-100+100+50+50 มล.',      stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'ไม่พบเพลี้ย→ข้าม Acetamiprid | MIX EDTA+Zn รอบเดียว (ทุก 2 เดือน) | IRAC 4A',done:false},
-  {id:27, date:'2027-01-18',season:'ไรแดง',     group:'ไรแดง (เมื่อพบ)',            chem:'Bifenazate+Mg EDTA+จับใบ',                                amt:'75+80-100+50 มล.',                stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'ดูใต้ใบ จุดขาว/เส้นใย | ไม่พบ→ข้าม | ❌Amino/Atonik (โปรแกรม B) | IRAC 25',done:false},
-  {id:28, date:'2027-02-01',season:'ไรแดง',     group:'โรค (conditional)', chem:'Fosetyl-Al+Mg EDTA+Zn+จับใบ',                            amt:'ตามฉลาก+80-100+50+50 มล.',       stage:'⚫ใบแก่', ppe:'ถุงมือ', obs:'ใช้เมื่อ: ฝนชุก/ดินแฉะ | ข้ามได้ถ้าอากาศแห้ง | Zn ทุก 2-3 เดือน | FRAC 33',done:false},
-  {id:29, date:'2027-02-15',season:'เริ่มร้อน', group:'ไรแดง (เมื่อพบ)',            chem:'Spirodiclofen+Mg EDTA+จับใบ',                             amt:'ฉลาก+80-100+50 มล.',              stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'สลับจาก Bifenazate | ไม่พบ→ข้าม | IRAC 23',                      done:false},
-  {id:30, date:'2027-03-01',season:'เริ่มร้อน', group:'โรค (conditional)', chem:'Copper+Mg EDTA+MIX EDTA+Zn+จับใบ',                       amt:'200+100+100+50+50 มล.',           stage:'⚫ใบแก่', ppe:'หน้ากาก+แว่น+ถุงมือ', obs:'ใบแก่ 100% เท่านั้น ❌ฝักดาบ/หางปลา/ตั้งเขี้ยว | ข้ามได้ถ้าไม่มีโรค | MIX EDTA+Zn รอบเดียว (ทุก 2 เดือน)',done:false},
-  {id:31, date:'2027-03-15',season:'ร้อนแล้ง',  group:'ไรแดง (เมื่อพบ)',            chem:'Hexythiazox+Mg EDTA+จับใบ',                               amt:'ฉลาก+100+50 มล.',                 stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'สลับจาก Spirodiclofen | ไม่พบ→ข้าม | IRAC 10A',                  done:false},
-  {id:32, date:'2027-03-29',season:'ร้อนแล้ง',  group:'สะสม B (เพลี้ยเมื่อพบ)',   chem:'Buprofezin+Mg EDTA+จับใบ',                                 amt:'ฉลาก+100+50 มล.',                stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'ไม่พบเพลี้ย→ข้าม Buprofezin | Zn+MIX EDTA ดูรอบ R30 | IRAC 16',done:false},
-  {id:33, date:'2027-04-12',season:'ร้อนจัด',   group:'โรค+เตรียมฝน',    chem:'Fosetyl-Al+Mg EDTA+MIX EDTA+Zn+จับใบ',                    amt:'ตามฉลาก+100+100+50+50 มล.',       stage:'⚫ใบแก่', ppe:'ถุงมือ', obs:'เตรียมรับฝนปีใหม่ | MIX EDTA+Zn รอบสุดท้าย (ทุก 2 เดือน) | FRAC 33', done:false},
+  {id:22, date:'2026-11-02',season:'หนาว',      group:'สะสม B (เพลี้ยเมื่อพบ)',   chem:'Flonicamid+Mg EDTA+Zn+จับใบ',                            amt:'ฉลาก+80-100+50+50 มล.',          stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'โปรแกรม B สะสม | Seaweed/Amino/Atonik หยุด | ไม่พบเพลี้ย→ข้าม Flonicamid | Zn ทุก 2-3 เดือน | IRAC 29',done:false},
+  {id:23, date:'2026-11-09',season:'หนาว',      group:'โรค (conditional)', chem:'Fosetyl-Al+Mg EDTA+จับใบ',                               amt:'ตามฉลาก+80-100+50 มล.',          stage:'⚫ใบแก่', ppe:'ถุงมือ', obs:'ใช้เมื่อ: ฝนชุก/ดินแฉะ/ก่อนฝนแรก | ข้ามได้ถ้าอากาศแห้ง | เป้า 7-8 รอบ/ปี | MIX EDTA ดูรอบ R26 | FRAC 33',done:false},
+  {id:24, date:'2026-11-16',season:'หนาวจัด',   group:'MIX EDTA+Zn (หนอนเมื่อพบ)', chem:'Chlorantraniliprole+Mg EDTA+MIX EDTA+Zn+จับใบ',          amt:'ฉลาก+80-100+100+50+50 มล.',      stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'ไม่พบหนอน→ข้าม Chlorantraniliprole | MIX EDTA+Zn รอบเดียว (ทุก 2 เดือน) | IRAC 28',done:false},
+  {id:25, date:'2026-11-23',season:'หนาวจัด',   group:'โรค (conditional)', chem:'Copper+Mg EDTA+จับใบ',                                  amt:'200+80-100+50 มล.',               stage:'⚫ใบแก่', ppe:'หน้ากาก+แว่น+ถุงมือ', obs:'ใบแก่ 100% เท่านั้น ❌ฝักดาบ/หางปลา/ตั้งเขี้ยว | ข้ามได้ถ้าไม่มีโรค | M1',done:false},
+  {id:26, date:'2026-11-30',season:'หนาวจัด',   group:'สะสม B (เพลี้ยเมื่อพบ)',   chem:'Acetamiprid+Mg EDTA+MIX EDTA+Zn+จับใบ',                  amt:'ฉลาก+80-100+100+50+50 มล.',      stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'ไม่พบเพลี้ย→ข้าม Acetamiprid | MIX EDTA+Zn รอบเดียว (ทุก 2 เดือน) | IRAC 4A',done:false},
+  {id:27, date:'2026-12-07',season:'ไรแดง',     group:'ไรแดง (เมื่อพบ)',            chem:'Bifenazate+Mg EDTA+จับใบ',                                amt:'75+80-100+50 มล.',                stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'ดูใต้ใบ จุดขาว/เส้นใย | ไม่พบ→ข้าม | ❌Amino/Atonik (โปรแกรม B) | IRAC 25',done:false},
+  {id:28, date:'2026-12-14',season:'ไรแดง',     group:'โรค (conditional)', chem:'Fosetyl-Al+Mg EDTA+Zn+จับใบ',                            amt:'ตามฉลาก+80-100+50+50 มล.',       stage:'⚫ใบแก่', ppe:'ถุงมือ', obs:'ใช้เมื่อ: ฝนชุก/ดินแฉะ | ข้ามได้ถ้าอากาศแห้ง | Zn ทุก 2-3 เดือน | FRAC 33',done:false},
+  {id:29, date:'2026-12-21',season:'เริ่มร้อน', group:'ไรแดง (เมื่อพบ)',            chem:'Spirodiclofen+Mg EDTA+จับใบ',                             amt:'ฉลาก+80-100+50 มล.',              stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'สลับจาก Bifenazate | ไม่พบ→ข้าม | IRAC 23',                      done:false},
+  {id:30, date:'2026-12-28',season:'เริ่มร้อน', group:'โรค (conditional)', chem:'Copper+Mg EDTA+MIX EDTA+Zn+จับใบ',                       amt:'200+100+100+50+50 มล.',           stage:'⚫ใบแก่', ppe:'หน้ากาก+แว่น+ถุงมือ', obs:'ใบแก่ 100% เท่านั้น ❌ฝักดาบ/หางปลา/ตั้งเขี้ยว | ข้ามได้ถ้าไม่มีโรค | MIX EDTA+Zn รอบเดียว (ทุก 2 เดือน)',done:false},
+  {id:31, date:'2027-01-04',season:'ร้อนแล้ง',  group:'ไรแดง (เมื่อพบ)',            chem:'Hexythiazox+Mg EDTA+จับใบ',                               amt:'ฉลาก+100+50 มล.',                 stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'สลับจาก Spirodiclofen | ไม่พบ→ข้าม | IRAC 10A',                  done:false},
+  {id:32, date:'2027-01-11',season:'ร้อนแล้ง',  group:'สะสม B (เพลี้ยเมื่อพบ)',   chem:'Buprofezin+Mg EDTA+จับใบ',                                 amt:'ฉลาก+100+50 มล.',                stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'ไม่พบเพลี้ย→ข้าม Buprofezin | Zn+MIX EDTA ดูรอบ R30 | IRAC 16',done:false},
+  {id:33, date:'2027-01-18',season:'ร้อนจัด',   group:'โรค+เตรียมฝน',    chem:'Fosetyl-Al+Mg EDTA+MIX EDTA+Zn+จับใบ',                    amt:'ตามฉลาก+100+100+50+50 มล.',       stage:'⚫ใบแก่', ppe:'ถุงมือ', obs:'เตรียมรับฝนปีใหม่ | MIX EDTA+Zn รอบสุดท้าย (ทุก 2 เดือน) | FRAC 33', done:false},
 ];
 
 // ฮิวอัพ 30 ซีซี/น้ำ 20 ล. | ต้นสวย=5-10 ล./ต้น | ต้นโทรม=10-15 ล./ต้น | ราดรอบโคน 1 ม. ห่างโคน 20 ซม.
