@@ -383,7 +383,7 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
         <strong style="display:block;margin-bottom:5px;font-size:.9rem">⚠️ ข้อห้ามสำคัญ — ฉีดพ่นใบ (เริ่ม 4 มิ.ย. 2569 · ทุก 7 วัน วันจันทร์)</strong>
         ❌ ห้ามผสม Copper + Abamectin<br>
         ❌ Copper ใช้เฉพาะ <strong>ใบแก่ 100%</strong> เท่านั้น ❌ ตั้งเขี้ยว/หางปลา/ใบกาง/เพสลาด<br>
-        💊 <strong>CaB: 1–2 รอบ/Flush</strong> — หางปลา (ครั้งที่ 1) / ใบกาง (ครั้งที่ 2) ❌ ตั้งเขี้ยว/เพสลาด/ใบแก่<br>
+        💊 <strong>CaB: 1–2 รอบ/Flush</strong> — ตั้งเขี้ยว (ครั้งที่ 1 ✅) / ใบกาง (ครั้งที่ 2 conditional) ❌ หางปลา/เพสลาด/ใบแก่<br>
         ⏰ ฉีดพ่นหลัง <strong>16:00 น.</strong> เสมอ · ถัง 100 ลิตร · <strong>ทุก 7 วัน (วันจันทร์)</strong><br>
         🌧️ ฝนตกภายใน 4 ชม. — ฉีดซ้ำวันถัดไป<br>
         🔄 สลับกลุ่มยาทุกครั้ง ป้องกันดื้อยา · 💊 PPE ครบทุกครั้ง อาบน้ำทันทีหลังฉีด
@@ -417,9 +417,9 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
             <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
               <span style="font-size:.78rem;color:#2e7d32;font-weight:600;min-width:52px">✅ มี</span>
               <span style="color:#bbb">→ ระยะไหน?</span>
-              <div style="background:#fff9c4;border:1.5px solid #f9a825;border-radius:8px;padding:4px 11px;font-size:.78rem">🟡 ตั้งเขี้ยว → <strong>สูตร A</strong></div>
-              <div style="background:#fff3e0;border:1.5px solid #ef6c00;border-radius:8px;padding:4px 11px;font-size:.78rem">🟠 หางปลา → <strong>สูตร B</strong> (+CaB✅)</div>
-              <div style="background:#e8f5e9;border:1.5px solid #43a047;border-radius:8px;padding:4px 11px;font-size:.78rem">🟢 ใบกาง → <strong>สูตร C</strong> (+CaB✅)</div>
+              <div style="background:#fff9c4;border:1.5px solid #f9a825;border-radius:8px;padding:4px 11px;font-size:.78rem">🟡 ตั้งเขี้ยว → <strong>สูตร A</strong> (+CaB✅ ครั้ง1)</div>
+              <div style="background:#fff3e0;border:1.5px solid #ef6c00;border-radius:8px;padding:4px 11px;font-size:.78rem">🟠 หางปลา → <strong>สูตร B</strong> (❌CaB)</div>
+              <div style="background:#e8f5e9;border:1.5px solid #43a047;border-radius:8px;padding:4px 11px;font-size:.78rem">🟢 ใบกาง → <strong>สูตร C</strong> (CaB⚠️ conditional)</div>
             </div>
           </div>
         </div>
@@ -468,12 +468,12 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
         {key:'edta',   label:'💜 รอบ MIX EDTA'},
       ];
       const BASE={
-        // A=ตั้งเขี้ยว: Amino+Atonik+Seaweed ❌CaB
-        A:[{n:'Mg EDTA',a:'100 มล.'},{n:'Amino',a:'100 มล.'},{n:'Seaweed',a:'100 มล.'},{n:'Atonik',a:'25 มล.'},{n:'จับใบ',a:'50 มล.'}],
-        // B=หางปลา: Amino+Atonik+Seaweed+CaB ครั้ง1
-        B:[{n:'Mg EDTA',a:'100 มล.'},{n:'Amino',a:'100 มล.'},{n:'Seaweed',a:'100 มล.'},{n:'Atonik',a:'25 มล.'},{n:'CaB',a:'ตามฉลาก (ครั้งที่ 1/Flush)'},{n:'จับใบ',a:'50 มล.'}],
-        // C=ใบกาง: CaB ครั้ง2+Mg+Zn ❌Amino ❌Atonik (Seaweed conditional)
-        C:[{n:'Mg EDTA',a:'100 มล.'},{n:'CaB',a:'ตามฉลาก (ครั้งที่ 2/Flush)'},{n:'Zn EDTA',a:'50 มล.'},{n:'จับใบ',a:'50 มล.'}],
+        // A=ตั้งเขี้ยว: Amino+Atonik+Seaweed+CaB ครั้ง1 (เซลล์แบ่งเร็วสุด)
+        A:[{n:'Mg EDTA',a:'100 มล.'},{n:'Amino',a:'100 มล.'},{n:'Seaweed',a:'100 มล.'},{n:'Atonik',a:'25 มล.'},{n:'CaB',a:'ตามฉลาก (ครั้งที่ 1/Flush)'},{n:'จับใบ',a:'50 มล.'}],
+        // B=หางปลา: Amino+Seaweed ❌CaB (R10 ให้แล้ว)
+        B:[{n:'Mg EDTA',a:'100 มล.'},{n:'Amino',a:'100 มล.'},{n:'Seaweed',a:'100 มล.'},{n:'จับใบ',a:'50 มล.'}],
+        // C=ใบกาง: Mg+Zn ❌Amino ❌Atonik | CaB conditional (ต้นโทรม/ไม่สม่ำเสมอ เท่านั้น)
+        C:[{n:'Mg EDTA',a:'100 มล.'},{n:'Zn EDTA',a:'50 มล.'},{n:'จับใบ',a:'50 มล.'}],
         // D=เพสลาด: Mg เท่านั้น (MIX EDTA ตามรอบ 2 เดือน)
         D:[{n:'Mg EDTA',a:'100 มล.'},{n:'จับใบ',a:'50 มล.'}],
         // E=ใบแก่: Mg เท่านั้น
@@ -482,9 +482,9 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
         F:[{n:'Mg EDTA',a:'100 มล.'},{n:'MIX EDTA',a:'100 มล.'},{n:'Zn EDTA',a:'50 มล.'},{n:'จับใบ',a:'50 มล.'}],
       };
       const NOTES={
-        A:['✅ Amino + Atonik + Seaweed — ระยะกระตุ้นใบเต็มที่','❌ CaB — ใบยังอ่อนเกินไป เสี่ยงไหม้','🔄 สลับ IRAC ทุกรอบถ้าพบเพลี้ยต่อเนื่อง'],
-        B:['✅ Amino + Atonik + Seaweed + CaB ครั้งที่ 1','💊 CaB เริ่มสร้างผนังเซลล์ใบ — ใบยังดูดซึมได้ดี','🔄 สลับกลุ่มยาแมลงทุกรอบ'],
-        C:['💊 CaB ครั้งที่ 2 — เสริมก่อนเข้าเพสลาด','❌ ห้าม Amino · Atonik — หยุดกระตุ้นแล้ว','⚠️ Seaweed conditional — ใส่เฉพาะต้นโทรม/ฟื้นตัว','🛑 หลังจากนี้ หยุด CaB ตลอด Flush'],
+        A:['✅ Amino + Atonik + Seaweed + CaB ครั้งที่ 1','💊 CaB ดีสุดตอนนี้ — เซลล์แบ่งเร็วสุด B ช่วยแบ่งเซลล์ Ca สร้างผนังเซลล์','🔄 สลับ IRAC ทุกรอบถ้าพบเพลี้ยต่อเนื่อง'],
+        B:['✅ Amino + Seaweed — ยังกระตุ้นใบได้','❌ CaB — ให้แล้วที่ตั้งเขี้ยว (ครั้งที่ 1) ไม่ต้องซ้ำ | ใส่อีกเมื่อจำเป็นจริงๆ เท่านั้น','🔄 สลับกลุ่มยาแมลงทุกรอบ'],
+        C:['⚠️ CaB ครั้งที่ 2 conditional — ใส่เมื่อ: ใบยังอ่อน/แตกไม่สม่ำเสมอ/ต้นโทรม/อยากเร่งคุณภาพ','❌ ห้าม Amino · Atonik — หยุดกระตุ้นแล้ว','⚠️ Seaweed conditional — ใส่เฉพาะต้นโทรม/ฟื้นตัว','🛑 หลังจากนี้ หยุด CaB ตลอด Flush'],
         D:['❌ ห้าม Amino · Atonik · CaB · Seaweed','💡 เน้น Mg + MIX EDTA (ตามรอบ 2 เดือน)','ใบแก่ข้างๆ มีโรค → Copper 200 มล. ใบแก่เท่านั้น'],
         E:['❌ ห้าม Amino · Atonik · CaB · Seaweed','💡 ระยะสังเคราะห์แสงเต็มที่ — ไม่กระตุ้น','✅ พบโรคใบ → Copper 200 มล. ใบแก่เท่านั้น'],
       };
@@ -598,8 +598,8 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
         <div style="font-size:.82rem;font-weight:800;color:#f57f17;margin-bottom:6px">🟡 สูตร A — ตั้งเขี้ยว</div>
         <div style="font-size:.75rem;line-height:1.85;color:#37474f">
           <span style="color:#2e7d32;font-weight:600">พ่นเสมอ:</span><br>
-          Mg EDTA 100 · Amino 100<br>Seaweed 100 · Atonik 25<br>จับใบ 50 มล.<br>
-          <span style="color:#c62828">❌ CaB — ใบอ่อนเกินไป</span><br>
+          Mg EDTA 100 · Amino 100<br>Seaweed 100 · Atonik 25<br><strong>CaB ฉลาก ✅ (ครั้งที่ 1/Flush)</strong><br>จับใบ 50 มล.<br>
+          <span style="color:#7b1fa2;font-size:.72rem">💊 เซลล์แบ่งเร็วสุด = CaB ดีสุด</span><br>
           <span style="color:#1565c0;display:block;margin-top:2px">+ เพลี้ย → สลับ IRAC<br>+ หนอน → Chlorantraniliprole<br>+ ฝนชุก → Fosetyl-Al</span>
         </div>
       </div>
@@ -608,7 +608,8 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
         <div style="font-size:.82rem;font-weight:800;color:#e65100;margin-bottom:6px">🟠 สูตร B — หางปลา</div>
         <div style="font-size:.75rem;line-height:1.85;color:#37474f">
           <span style="color:#2e7d32;font-weight:600">พ่นเสมอ:</span><br>
-          Mg EDTA 100 · Amino 100<br>Seaweed 100 · Atonik 25<br><strong>CaB ฉลาก</strong> ✅ (ครั้งที่ 1/Flush)<br>จับใบ 50 มล.<br>
+          Mg EDTA 100 · Amino 100<br>Seaweed 100 · จับใบ 50 มล.<br>
+          <span style="color:#c62828">❌ CaB — ให้แล้วที่ตั้งเขี้ยว ไม่ต้องซ้ำ</span><br>
           <span style="color:#1565c0;display:block;margin-top:2px">+ เพลี้ย → สลับ IRAC<br>+ หนอน → สลับ IRAC<br>+ ฝนชุก → Fosetyl-Al</span>
         </div>
       </div>
@@ -617,7 +618,8 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
         <div style="font-size:.82rem;font-weight:800;color:#2e7d32;margin-bottom:6px">🟢 สูตร C — ใบกาง</div>
         <div style="font-size:.75rem;line-height:1.85;color:#37474f">
           <span style="color:#2e7d32;font-weight:600">พ่นเสมอ:</span><br>
-          Mg EDTA 100<br><strong>CaB ฉลาก</strong> ✅ (ครั้งที่ 2/Flush)<br>Zn EDTA 50 มล.<br>จับใบ 50 มล.<br>
+          Mg EDTA 100 · Zn EDTA 50<br>จับใบ 50 มล.<br>
+          <span style="color:#7b1fa2">⚠️ CaB ฉลาก — conditional ครั้งที่ 2/Flush<br>(ใบยังอ่อน/ไม่สม่ำเสมอ/ต้นโทรม เท่านั้น)</span><br>
           <span style="color:#7b1fa2">⚠️ Seaweed 50 — ต้นโทรม/เครียดเท่านั้น</span><br>
           <span style="color:#c62828">❌ Amino ❌ Atonik</span><br>
           <span style="color:#b71c1c;font-size:.72rem;font-weight:700">🛑 หลังนี้ หยุด CaB ตลอด Flush</span>
@@ -694,6 +696,48 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
         <tbody id="planBody"></tbody>
       </table></div>
     </div>
+
+    <!-- ===== Mini SOP ใต้ตารางฉีดพ่น ===== -->
+    <div style="margin-top:14px;margin-bottom:10px">
+      <div style="font-size:.82rem;font-weight:700;color:#37474f;margin-bottom:8px;letter-spacing:.3px">📋 Mini SOP — ตัดสินใจเร็ว</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px">
+
+        <!-- ฝน -->
+        <div style="background:#e3f2fd;border:1.5px solid #64b5f6;border-radius:11px;padding:12px 14px">
+          <div style="font-weight:700;font-size:.85rem;margin-bottom:7px;color:#0d47a1">🌧 ฝน — กฎเวลา</div>
+          <div style="font-size:.78rem;line-height:1.9;color:#1a237e">
+            ⏱ ฝนตก <strong>ภายใน 2 ชม.</strong> หลังฉีด → <span style="color:#c62828;font-weight:700">พ่นซ้ำ</span><br>
+            ⏱ ฝนตก <strong>หลัง 6 ชม.</strong> หลังฉีด → <span style="color:#2e7d32;font-weight:700">ไม่ต้องพ่นซ้ำ</span><br>
+            ⚠️ <strong>Fosetyl-Al:</strong> ใช้เมื่อฝนชุก / ดินแฉะ → ข้ามถ้าอากาศแห้ง
+          </div>
+        </div>
+
+        <!-- โรค -->
+        <div style="background:#fce4ec;border:1.5px solid #f48fb1;border-radius:11px;padding:12px 14px">
+          <div style="font-weight:700;font-size:.85rem;margin-bottom:7px;color:#880e4f">🍂 โรค — เลือกยาตามอาการ</div>
+          <div style="font-size:.78rem;line-height:1.9;color:#4a0026">
+            🔵 <strong>จุดดำ</strong> บนใบ → Cymoxanil (FRAC 27)<br>
+            🟡 <strong>ใบไหม้</strong> / ขอบใบเน่า → Copper (M1) ใบแก่เท่านั้น<br>
+            🟫 <strong>โคนเน่า</strong> / รากเน่า → Fosetyl-Al · Propamocarb · Dimethomorph<br>
+            <span style="color:#880e4f;font-size:.72rem">❌ ห้าม Copper ก่อนถึงใบแก่ 100%</span>
+          </div>
+        </div>
+
+        <!-- เพลี้ย -->
+        <div style="background:#f9fbe7;border:1.5px solid #aed581;border-radius:11px;padding:12px 14px">
+          <div style="font-weight:700;font-size:.85rem;margin-bottom:7px;color:#33691e">🐜 เพลี้ย — ตรวจก่อนฉีด</div>
+          <div style="font-size:.78rem;line-height:1.9;color:#1b5e20">
+            👁 <strong>มดเยอะ</strong> → เปิดดูใต้ใบทันที<br>
+            ✅ <strong>พบเพลี้ย</strong> → Flonicamid(29) / Acetamiprid(4A) / Buprofezin(16)<br>
+            ❌ <strong>ไม่พบเพลี้ย</strong> → ข้ามยาแมลง ไม่ต้องฉีด<br>
+            🔄 <span style="color:#33691e;font-size:.72rem">IRAC หมุนเวียน: 29→4A→16→29</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- ===== /Mini SOP ===== -->
+
   </div>
   <!-- ตารางราดโคนต้น -->
   <div id="planSection2" style="display:none">
@@ -802,27 +846,27 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
             <td style="text-align:center;font-size:.82rem">✅<br><span style="font-size:.7rem">100 มล.</span></td>
             <td style="text-align:center;font-size:.82rem">✅<br><span style="font-size:.7rem">100 มล.</span></td>
             <td style="text-align:center;font-size:.82rem">✅<br><span style="font-size:.7rem">100 มล.</span></td>
-            <td style="text-align:center;font-size:.82rem;color:#c62828;font-weight:700">❌<br><span style="font-size:.69rem">ใบอ่อนเกิน</span></td>
+            <td style="text-align:center;font-size:.78rem;color:#e65100;font-weight:700">✅<br><span style="font-size:.7rem">ครั้งที่ 1<br>ฉลาก</span></td>
             <td style="text-align:center;font-size:.82rem;color:#c62828;font-weight:700">❌</td>
             <td style="text-align:center;font-size:.82rem;color:#c62828;font-weight:700">❌</td>
-            <td style="font-size:.76rem;color:#6a1b9a">เพลี้ย→Flonicamid<br>หนอน→Chlorantraniliprole<br><span style="color:#c62828">❌ Copper ❌ CaB</span></td>
+            <td style="font-size:.76rem;color:#6a1b9a">เพลี้ย→Flonicamid<br>หนอน→Chlorantraniliprole<br><span style="color:#c62828">❌ Copper</span> | 💊 CaB ✅ รอบนี้</td>
           </tr>
           <tr style="background:#fff3e0">
             <td style="white-space:nowrap"><strong style="color:#e65100">🟠 หางปลา</strong><br><span style="font-size:.72rem;color:#bf360c">ใบเริ่มกาง ยังนิ่ม</span><br><span style="font-size:.7rem;color:#888">สูตร B</span></td>
             <td style="text-align:center;font-size:.82rem">✅<br><span style="font-size:.7rem">100 มล.</span></td>
             <td style="text-align:center;font-size:.82rem">✅<br><span style="font-size:.7rem">100 มล.</span></td>
             <td style="text-align:center;font-size:.82rem">✅<br><span style="font-size:.7rem">100 มล.</span></td>
-            <td style="text-align:center;font-size:.78rem;color:#e65100;font-weight:700">✅<br><span style="font-size:.7rem">ครั้งที่ 1<br>ฉลาก</span></td>
+            <td style="text-align:center;font-size:.82rem;color:#c62828;font-weight:700">❌<br><span style="font-size:.69rem">ให้แล้ว<br>ที่ตั้งเขี้ยว</span></td>
             <td style="text-align:center;font-size:.76rem;color:#546e7a">—</td>
             <td style="text-align:center;font-size:.82rem;color:#c62828;font-weight:700">❌</td>
-            <td style="font-size:.76rem;color:#6a1b9a">เพลี้ย→สลับ IRAC<br>หนอน→Indoxacarb<br><span style="color:#c62828">❌ Copper</span></td>
+            <td style="font-size:.76rem;color:#6a1b9a">เพลี้ย→สลับ IRAC<br>หนอน→Indoxacarb<br><span style="color:#c62828">❌ Copper ❌ CaB</span></td>
           </tr>
           <tr style="background:#e8f5e9">
             <td style="white-space:nowrap"><strong style="color:#2e7d32">🟢 ใบกาง</strong><br><span style="font-size:.72rem;color:#1b5e20">ใบกางเต็ม เริ่มแข็ง</span><br><span style="font-size:.7rem;color:#888">สูตร C</span></td>
             <td style="text-align:center;font-size:.82rem">✅<br><span style="font-size:.7rem">100 มล.</span></td>
             <td style="text-align:center;font-size:.82rem;color:#c62828;font-weight:700">❌</td>
             <td style="text-align:center;font-size:.78rem;color:#7b1fa2">⚠️<br><span style="font-size:.69rem">ต้นโทรม<br>50 มล.</span></td>
-            <td style="text-align:center;font-size:.78rem;color:#43a047;font-weight:700">✅<br><span style="font-size:.7rem">ครั้งที่ 2<br>ฉลาก</span></td>
+            <td style="text-align:center;font-size:.76rem;color:#7b1fa2;font-weight:600">⚠️<br><span style="font-size:.69rem">ครั้งที่ 2<br>conditional</span></td>
             <td style="text-align:center;font-size:.76rem;color:#43a047">✅<br><span style="font-size:.69rem">50 มล.</span></td>
             <td style="text-align:center;font-size:.76rem;color:#7b1fa2">⚠️<br><span style="font-size:.69rem">ถ้าถึงรอบ<br>2 เดือน</span></td>
             <td style="font-size:.76rem;color:#6a1b9a">เพลี้ย/หนอน→สลับ IRAC<br><span style="color:#c62828;font-weight:700">🛑 หลังนี้หยุด CaB ตลอด Flush</span></td>
@@ -1014,16 +1058,16 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
         </tr></thead>
         <tbody>
           <tr style="background:#fff9c4"><td colspan="3" style="font-weight:700;font-size:.78rem;color:#f57f17;padding:5px 10px">🟡 ตั้งเขี้ยว — สูตร A (ยอดแทง ใบนิ่มมาก)</td></tr>
-          <tr><td>พ่นเสมอ</td><td><strong>Mg+Amino+Seaweed+Atonik+จับใบ</strong> (100+100+100+25+50 มล.)</td><td style="font-size:.75rem;color:#c62828">❌ CaB ❌ Copper</td></tr>
+          <tr><td>พ่นเสมอ</td><td><strong>Mg+Amino+Seaweed+Atonik+<span style="color:#6a1b9a">CaB✅</span>+จับใบ</strong> (100+100+100+25+ฉลาก+50 มล.)</td><td style="font-size:.75rem;color:#c62828">❌ Copper | 💊 CaB ครั้งที่ 1/Flush</td></tr>
           <tr style="background:#fff9c4"><td>+ เพลี้ย</td><td><strong>+Flonicamid หรือ Acetamiprid</strong></td><td style="font-size:.75rem;color:var(--gr)">สลับ IRAC ทุกครั้ง</td></tr>
           <tr style="background:#fff9c4"><td>+ หนอน</td><td><strong>+Chlorantraniliprole</strong></td><td style="font-size:.75rem;color:var(--gr)">IRAC 28</td></tr>
           <tr style="background:#fff9c4"><td>+ ฝนชุก</td><td><strong>+Fosetyl-Al ฉลาก</strong></td><td style="font-size:.75rem;color:var(--gr)">FRAC 33 ข้ามได้ถ้าอากาศแห้ง</td></tr>
-          <tr style="background:#fff3e0"><td colspan="3" style="font-weight:700;font-size:.78rem;color:#e65100;padding:5px 10px">🟠 หางปลา — สูตร B (ใบเริ่มกาง + CaB ครั้งที่ 1)</td></tr>
-          <tr><td>พ่นเสมอ</td><td><strong>Mg+Amino+Seaweed+Atonik+CaB+จับใบ</strong> (100+100+100+25+ฉลาก+50 มล.)</td><td style="font-size:.75rem;color:var(--gr)">❌ Copper</td></tr>
+          <tr style="background:#fff3e0"><td colspan="3" style="font-weight:700;font-size:.78rem;color:#e65100;padding:5px 10px">🟠 หางปลา — สูตร B (ใบเริ่มกาง | ❌ CaB ให้แล้วที่ตั้งเขี้ยว)</td></tr>
+          <tr><td>พ่นเสมอ</td><td><strong>Mg+Amino+Seaweed+จับใบ</strong> (100+100+100+50 มล.)</td><td style="font-size:.75rem;color:#c62828">❌ CaB ❌ Copper ❌ Atonik</td></tr>
           <tr style="background:#fff3e0"><td>+ เพลี้ย</td><td><strong>+สลับ IRAC</strong></td><td style="font-size:.75rem;color:var(--gr)">Flonicamid→Acetamiprid→Buprofezin</td></tr>
           <tr style="background:#fff3e0"><td>+ หนอน</td><td><strong>+Indoxacarb 75 มล.</strong></td><td style="font-size:.75rem;color:var(--gr)">IRAC 22A</td></tr>
-          <tr style="background:#e8f5e9"><td colspan="3" style="font-weight:700;font-size:.78rem;color:#2e7d32;padding:5px 10px">🟢 ใบกาง — สูตร C (CaB ครั้งที่ 2 — 🛑 หยุด CaB หลังจากนี้)</td></tr>
-          <tr><td>พ่นเสมอ</td><td><strong>Mg+CaB+Zn+จับใบ</strong> (100+ฉลาก+50+50 มล.)</td><td style="font-size:.75rem;color:var(--gr)">❌ Amino ❌ Atonik</td></tr>
+          <tr style="background:#e8f5e9"><td colspan="3" style="font-weight:700;font-size:.78rem;color:#2e7d32;padding:5px 10px">🟢 ใบกาง — สูตร C (CaB conditional ครั้งที่ 2 — 🛑 หยุด CaB หลังจากนี้)</td></tr>
+          <tr><td>พ่นเสมอ</td><td><strong>Mg+Zn+จับใบ</strong> (100+50+50 มล.)</td><td style="font-size:.75rem;color:var(--gr)">❌ Amino ❌ Atonik | ⚠️ CaB conditional เท่านั้น</td></tr>
           <tr style="background:#e8f5e9"><td>ต้นโทรม/เครียด</td><td><strong>+Seaweed 50 มล.</strong></td><td style="font-size:.75rem;color:#7b1fa2">Conditional เท่านั้น</td></tr>
           <tr style="background:#e8f5e9"><td>+ เพลี้ย/หนอน</td><td><strong>+สลับ IRAC</strong></td><td style="font-size:.75rem;color:var(--gr)">ตามรอบสลับ</td></tr>
           <tr style="background:#e3f2fd"><td colspan="3" style="font-weight:700;font-size:.78rem;color:#1565c0;padding:5px 10px">🔵 เพสลาด — สูตร D (ใบแข็ง ❌ Amino ❌ CaB ❌ Seaweed)</td></tr>
@@ -1056,7 +1100,7 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
         <div style="font-size:.78rem;line-height:1.9;color:#3e2723">
           Copper + Abamectin ผสมกัน<br>
           <strong>Copper ❌ ตั้งเขี้ยว/หางปลา/ใบกาง/เพสลาด — ใบแก่ 100% เท่านั้น</strong><br>
-          <strong>CaB ❌ ตั้งเขี้ยว — เริ่มที่หางปลา (ครั้งที่1) + ใบกาง (ครั้งที่2) เท่านั้น</strong><br>
+          <strong>CaB ✅ ตั้งเขี้ยว (ครั้งที่1) — ❌ หางปลา | ใบกาง (ครั้งที่2 conditional เท่านั้น)</strong><br>
           Fosetyl-Al เกิน 8 รอบ/ปีโดยไม่มีเหตุ (ใช้เมื่อฝนชุก/ดินแฉะเท่านั้น)<br>
           ไซม็อกซิเมท แบบกันล่วงหน้า<br>
           Amino ช่วงเพสลาดขึ้นไป (ดันยอดเกิน)<br>
@@ -1069,7 +1113,7 @@ tr:nth-child(even) td{background:#f8fafb}tr:nth-child(even):hover td{background:
         <div style="font-size:.78rem;line-height:1.9;color:#1b5e20">
           1. Mg ใส่ได้ทุกรอบ ทุกระยะ<br>
           2. Copper ใบแก่ 100% เท่านั้น ❌ ตั้งเขี้ยว/หางปลา/ใบกาง<br>
-          3. CaB: หางปลา (ครั้งที่1) + ใบกาง (ครั้งที่2) เท่านั้น ❌ ตั้งเขี้ยว<br>
+          3. CaB: ตั้งเขี้ยว (ครั้งที่1 ✅) | ใบกาง (ครั้งที่2 conditional) ❌ หางปลา/เพสลาด/ใบแก่<br>
           4. Fosetyl-Al ใช้เมื่อฝนชุก/ดินแฉะ ข้ามได้ถ้าอากาศแห้ง<br>
           5. Amino + Atonik เฉพาะ ตั้งเขี้ยว + หางปลา ❌ ใบกางขึ้นไป<br>
           6. Seaweed หยุดตั้งแต่เพสลาด (ใบกาง conditional ต้นโทรมเท่านั้น)<br>
@@ -1222,13 +1266,13 @@ const DEFAULT_MEDS = [
   {id:'f2', name:'15-15-15',           group:'ปุ๋ย',     uses:'บำรุงรวม สะสมอาหาร ช่วงหนาว',   total:0,current:0,minAlert:0,unit:'กก.',  notes:'ใส่ ต.ค.-ม.ค./มี.ค.',status:'owned'},
   {id:'f3', name:'46-0-0 (ยูเรีย)',    group:'ปุ๋ย',     uses:'เสริม N เร่งใบ ช่วงฝนชุก',       total:0,current:0,minAlert:0,unit:'กก.',  notes:'ห้ามใส่ช่วงหนาว พ.ย.-ม.ค.',status:'owned'},
   {id:'f4', name:'ฮิวมิก',             group:'ปุ๋ย',     uses:'เพิ่มประสิทธิภาพปุ๋ยเคมี 20-30%',total:0,current:0,minAlert:0,unit:'กก.',  notes:'ใส่คู่กับปุ๋ยเคมีทุกครั้ง',status:'owned'},
-  {id:'m25',name:'Calcium Boron',       group:'ธาตุอาหาร',uses:'ผนังเซลล์ ลำเลียง Ca เข้าต้น',total:0,current:0,minAlert:0,unit:'มล.',  notes:'1-2 รอบ/Flush | สูตร B (หางปลา ครั้งที่1) · สูตร C (ใบกาง ครั้งที่2) | ❌ ตั้งเขี้ยว/เพสลาด/ใบแก่',status:'owned'},
+  {id:'m25',name:'Calcium Boron',       group:'ธาตุอาหาร',uses:'ผนังเซลล์ ลำเลียง Ca เข้าต้น',total:0,current:0,minAlert:0,unit:'มล.',  notes:'1-2 รอบ/Flush | สูตร A (ตั้งเขี้ยว ครั้งที่1 ✅) · สูตร C (ใบกาง ครั้งที่2 conditional) | ❌ หางปลา/เพสลาด/ใบแก่',status:'owned'},
 ];
 
 // ==============================================================
 //  DEFAULT SPRAY SCHEDULE
 // ==============================================================
-// Master Program 5 ระยะ: A=ตั้งเขี้ยว B=หางปลา(+CaB1) C=ใบกาง(+CaB2) D=เพสลาด E=ใบแก่ | พิเศษ: F=MIX EDTA G=สะสมอาหาร H=ก่อนฝนแรก
+// Master Program 5 ระยะ: A=ตั้งเขี้ยว(+CaB1) B=หางปลา(❌CaB) C=ใบกาง(CaB2 conditional) D=เพสลาด E=ใบแก่ | พิเศษ: F=MIX EDTA G=สะสมอาหาร H=ก่อนฝนแรก
 // ⚠️ ไม่พบแมลง → ข้ามยาแมลง | เลือกสูตร A-E ตามระยะใบ | พ่นทุก 7 วัน วันจันทร์
 const DEFAULT_SCHEDULE = [
   {id:1,  date:'2026-06-08',season:'ฝนชุก',    group:'หนอน+โรค',        chem:'Chlorantraniliprole+Fosetyl-Al+จับใบ',                   amt:'ฉลาก+ครึ่งโดส+50 มล.',           ppe:'หน้ากาก+ถุงมือ',      obs:'ยอดอ่อน หนอนเล็ก',                                               done:false},
@@ -1236,27 +1280,27 @@ const DEFAULT_SCHEDULE = [
   {id:3,  date:'2026-06-22',season:'ฝนชุก',    group:'เพลี้ย+บำรุง',    chem:'อะซีทามิพริด+Mg+MIX-EDTA+สาหร่าย+อมิโน+CaB+จับใบ',       amt:'ฉลาก+100+100+100+100+100+ฉลาก',  ppe:'หน้ากาก+ถุงมือ',      obs:'เพลี้ยแป้ง เพลี้ยไฟ ดูใต้ใบ',                                    done:false},
   {id:4,  date:'2026-06-29',season:'ฝนชุก',    group:'บำรุงใบอ่อน',     chem:'ฟลอนิคามิด+อมิโน+Mg+สาหร่าย+อโทนิค+จับใบ',             amt:'ฉลาก+ฉลาก+100+100+25+50 มล.',    ppe:'หน้ากาก+ถุงมือ',      obs:'ใบอ่อนแตก ดูยอด สีใบ',                                           done:false},
   {id:5,  date:'2026-07-06',season:'ฝนมาก',    group:'โรค+เพลี้ย+บำรุง', chem:'Fosetyl-Al+ฟลอนิคามิด+Mg EDTA+อมิโน+สาหร่าย+อโทนิค+จับใบ', amt:'ตามฉลาก+ฉลาก+100+100+100+25+50 มล.', ppe:'หน้ากาก+ถุงมือ', obs:'✅ ฉีดแล้ว | ยอดอ่อน ดูเพลี้ยไฟ', done:false},
-  {id:6,  date:'2026-07-13',season:'ฝนมาก',    group:'บำรุง A (เพลี้ยเมื่อพบ)', chem:'Acetamiprid+Mg EDTA+Amino+Seaweed+Atonik+จับใบ', amt:'ฉลาก+100+100+100+25+50 มล.',    stage:'🟡ตั้งเขี้ยว', ppe:'หน้ากาก+ถุงมือ', obs:'ระยะตั้งเขี้ยว: Amino+Atonik OK ❌CaB | ไม่พบเพลี้ย→ข้าม Acetamiprid | IRAC 4A', done:false},
-  {id:7,  date:'2026-07-20',season:'ฝนมาก',    group:'โรค+บำรุง',         chem:'Fosetyl-Al+Mg EDTA+Seaweed+จับใบ',                        amt:'ตามฉลาก+100+100+50 มล.',         stage:'🟡ตั้งเขี้ยว', ppe:'หน้ากาก+ถุงมือ', obs:'ฝนชุก/ดินแฉะ→OK | แห้ง→ข้าม Fosetyl-Al | พบหนอน→เพิ่ม Indoxacarb 75มล. | FRAC 33', done:false},
+  {id:6,  date:'2026-07-13',season:'ฝนมาก',    group:'บำรุง A (เพลี้ยเมื่อพบ)', chem:'Acetamiprid+Mg EDTA+Amino+Seaweed+Atonik+จับใบ', amt:'ฉลาก+100+100+100+25+50 มล.',    stage:'🟡ตั้งเขี้ยว', ppe:'หน้ากาก+ถุงมือ', obs:'ตั้งเขี้ยว: Amino+Atonik ✅ ❌CaB | 46-0-0/ปุ๋ย N→ใช้เฉพาะตั้งเขี้ยว+หางปลา งดเมื่อเข้าใบกาง | ไม่พบเพลี้ย→ข้าม Acetamiprid | IRAC 4A', done:false},
+  {id:7,  date:'2026-07-20',season:'ฝนมาก',    group:'โรค+บำรุง (conditional)', chem:'Fosetyl-Al+Mg EDTA+Seaweed+จับใบ',                    amt:'ตามฉลาก+100+100+50 มล.',         stage:'🟡ตั้งเขี้ยว', ppe:'หน้ากาก+ถุงมือ', obs:'⚠️ Fosetyl-Al: ฝนชุก/ดินแฉะ→ใส่ | ฝนหยุด/ดินแห้ง→ข้าม | ฝนตกภายใน 2 ชม.หลังฉีด→พ่นซ้ำ | หลัง 6 ชม.→ไม่ต้อง | พบหนอน→เพิ่ม Indoxacarb 75มล. | FRAC 33', done:false},
   {id:8,  date:'2026-07-27',season:'ฝนมาก',    group:'บำรุง B (เพลี้ยเมื่อพบ)', chem:'Buprofezin+Mg EDTA+Seaweed+Amino+จับใบ',         amt:'ฉลาก+100+100+100+50 มล.',        stage:'🟠หางปลา', ppe:'หน้ากาก+ถุงมือ', obs:'ระยะหางปลา: Amino OK | ไม่พบเพลี้ย→ข้าม Buprofezin | IRAC 16', done:false},
-  {id:9,  date:'2026-08-03',season:'ฝนมาก',    group:'MIX EDTA+Zn+บำรุง', chem:'Mg EDTA+Amino+Seaweed+Atonik+MIX EDTA+Zn+จับใบ',          amt:'100+100+100+25+100+50+50 มล.',    stage:'🟠หางปลา', ppe:'ถุงมือ', obs:'ระยะหางปลา: Amino+Atonik OK | ฝนติด→เพิ่ม Fosetyl-Al ฉลาก | MIX EDTA+Zn รวมรอบเดียว (ทุก 2 เดือน)',done:false},
-  {id:10, date:'2026-08-10',season:'ฝนมาก',    group:'บำรุง A (เพลี้ยเมื่อพบ)', chem:'Flonicamid+Mg EDTA+Seaweed+CaB+จับใบ',          amt:'ฉลาก+100+100+ฉลาก+50 มล.',       stage:'🟡ตั้งเขี้ยว', ppe:'หน้ากาก+ถุงมือ', obs:'ยังฝักดาบ/หางปลา→สลับ Amino+Atonik งด CaB | ไม่พบเพลี้ย→ข้าม Flonicamid | IRAC 29', done:false},
-  {id:11, date:'2026-08-17',season:'ฝนมาก',    group:'โรค+บำรุง (หนอนเมื่อพบ)', chem:'Fosetyl-Al+Indoxacarb+Mg EDTA+จับใบ',             amt:'ตามฉลาก+75+100+50 มล.',          stage:'🟡ตั้งเขี้ยว', ppe:'หน้ากาก+ถุงมือ', obs:'ฝนชุก→OK | แห้ง→ข้าม Fosetyl-Al | CaB ดูรอบ R10 (1รอบ/Flush พอ) | ไม่พบหนอน→ข้าม Indoxacarb | IRAC 22A+FRAC 33',done:false},
-  {id:12, date:'2026-08-24',season:'ฝนมาก',    group:'บำรุง (เพลี้ยเมื่อพบ)', chem:'Acetamiprid+Mg EDTA+Seaweed+จับใบ',                   amt:'ฉลาก+100+100+50 มล.',            stage:'🟢ใบกาง', ppe:'หน้ากาก+ถุงมือ', obs:'ใบกาง: CaB ครั้งที่ 2 ถ้าจำเป็น→เพิ่ม CaB ฉลาก | ไม่พบเพลี้ย→ข้าม Acetamiprid | IRAC 4A | MIX EDTA: ดูรอบ R16',done:false},
+  {id:9,  date:'2026-08-03',season:'ฝนมาก',    group:'MIX EDTA+บำรุง', chem:'Mg EDTA+Amino+Seaweed+MIX EDTA+Zn+จับใบ',                   amt:'100+100+100+100+50+50 มล.',       stage:'🟠หางปลา', ppe:'ถุงมือ', obs:'หางปลา: Amino ✅ ❌Atonik (ไม่จำเป็นแล้ว) | MIX EDTA รอบ 1 | Zn รอบนี้เพราะถึงรอบ 2 เดือน | R16→MIX EDTA อย่างเดียว R21→Zn อย่างเดียว (สลับ) | ฝนติด→เพิ่ม Fosetyl-Al ฉลาก',done:false},
+  {id:10, date:'2026-08-10',season:'ฝนมาก',    group:'บำรุง A+CaB ครั้งที่ 1 (เพลี้ยเมื่อพบ)', chem:'Flonicamid+Mg EDTA+Seaweed+CaB+จับใบ',  amt:'ฉลาก+100+100+ฉลาก+50 มล.',      stage:'🟡ตั้งเขี้ยว', ppe:'หน้ากาก+ถุงมือ', obs:'🟡ตั้งเขี้ยว: CaB ✅ ครั้งที่ 1/Flush (เซลล์แบ่งเร็วสุด = เวลาดีสุด) | B ช่วยแบ่งเซลล์ Ca สร้างผนังเซลล์ | ไม่พบเพลี้ย→ข้าม Flonicamid | IRAC 29', done:false},
+  {id:11, date:'2026-08-17',season:'ฝนมาก',    group:'โรค+บำรุง (หนอนเมื่อพบ)', chem:'Fosetyl-Al+Indoxacarb+Mg EDTA+จับใบ',             amt:'ตามฉลาก+75+100+50 มล.',          stage:'🟡ตั้งเขี้ยว', ppe:'หน้ากาก+ถุงมือ', obs:'ฝนชุก→OK | แห้ง→ข้าม Fosetyl-Al | R10 ให้ CaB แล้ว ✅ ไม่ต้อง CaB รอบนี้ | ไม่พบหนอน→ข้าม Indoxacarb | IRAC 22A+FRAC 33',done:false},
+  {id:12, date:'2026-08-24',season:'ฝนมาก',    group:'บำรุง C + CaB ครั้งที่ 2 (conditional)', chem:'Acetamiprid+Mg EDTA+Zn+จับใบ',              amt:'ฉลาก+100+50+50 มล.',             stage:'🟢ใบกาง', ppe:'หน้ากาก+ถุงมือ', obs:'🟢ใบกาง: CaB ครั้งที่ 2 conditional — ใส่เมื่อ: ใบยังอ่อน / แตกไม่สม่ำเสมอ / ต้นโทรม / อยากเร่งคุณภาพ | ต้นสมบูรณ์ → ข้าม CaB ได้ (R10 พอแล้ว) | ❌ Amino ❌ Atonik | 🛑 หยุด CaB หลังรอบนี้ | ไม่พบเพลี้ย→ข้าม Acetamiprid | IRAC 4A',done:false},
   {id:13, date:'2026-08-31',season:'ฝนมาก',    group:'โรค+บำรุง B',       chem:'Fosetyl-Al+Mg EDTA+Seaweed+จับใบ',                        amt:'ตามฉลาก+100+100+50 มล.',         stage:'🔵เพสลาด', ppe:'ถุงมือ', obs:'ฝนชุก→OK | แห้ง→ข้าม Fosetyl-Al | ใบแก่+โรค→ใช้ Copper 200มล. แทน',done:false},
   {id:14, date:'2026-09-07',season:'ฝนชุก',    group:'บำรุง B (เพลี้ยเมื่อพบ)', chem:'Buprofezin+Mg EDTA+Seaweed+จับใบ',                 amt:'ฉลาก+100+100+50 มล.',            stage:'🔵เพสลาด', ppe:'หน้ากาก+ถุงมือ', obs:'ระยะเพสลาด: ❌ Amino ❌ CaB | ไม่พบเพลี้ย→ข้าม Buprofezin | IRAC 16', done:false},
   {id:15, date:'2026-09-14',season:'ฝนชุก',    group:'โรค+บำรุง (หนอนเมื่อพบ)', chem:'Fosetyl-Al+Chlorantraniliprole+Mg EDTA+จับใบ',      amt:'ตามฉลาก+ฉลาก+100+50 มล.',       stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'ฝนชุก→OK | แห้ง→ข้าม Fosetyl-Al | ระยะใบแก่: ❌ CaB | ไม่พบหนอน→ข้าม Chlorantraniliprole | IRAC 28',done:false},
-  {id:16, date:'2026-09-21',season:'ฝนชุก',    group:'MIX EDTA+Zn (เพลี้ยเมื่อพบ)', chem:'Flonicamid+Mg EDTA+MIX EDTA+Seaweed+Zn+จับใบ',          amt:'ฉลาก+100+100+100+50+50 มล.',     stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'ฝักดาบ/หางปลา→เพิ่ม Amino 100มล. | ไม่พบเพลี้ย→ข้าม Flonicamid | MIX EDTA+Zn รวมรอบเดียว (ทุก 2 เดือน) | IRAC 29',done:false},
+  {id:16, date:'2026-09-21',season:'ฝนชุก',    group:'MIX EDTA รอบ 2 (เพลี้ยเมื่อพบ)', chem:'Flonicamid+Mg EDTA+MIX EDTA+จับใบ',              amt:'ฉลาก+100+100+50 มล.',            stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'MIX EDTA รอบ 2 (งด Zn รอบนี้ → R21 ใส่ Zn อย่างเดียว) | ตั้งเขี้ยว/หางปลา→เพิ่ม Amino 100มล. | ไม่พบเพลี้ย→ข้าม Flonicamid | IRAC 29',done:false},
   {id:17, date:'2026-09-28',season:'ฝนชุก',    group:'บำรุง B',            chem:'Mg EDTA+Seaweed+จับใบ',                                   amt:'100+100+50 มล.',                  stage:'⚫ใบแก่', ppe:'ถุงมือ', obs:'ระยะใบแก่: ❌ Amino ❌ CaB | ใบแก่+โรค→เพิ่ม Copper 200มล. | พบหนอน→เพิ่ม Indoxacarb 75มล.',done:false},
   {id:18, date:'2026-10-05',season:'ปลายฝน',   group:'สะสม B (เพลี้ยเมื่อพบ)', chem:'Acetamiprid+Mg EDTA+Seaweed+จับใบ',                amt:'ฉลาก+100+100+50 มล.',            stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'ระยะใบแก่: ❌ Amino ❌ CaB | ปลายฝนสะสมอาหาร | ไม่พบเพลี้ย→ข้าม Acetamiprid | IRAC 4A',done:false},
   {id:19, date:'2026-10-12',season:'ปลายฝน',   group:'โรค+บำรุง B',       chem:'Fosetyl-Al+Mg EDTA+Seaweed+จับใบ',                        amt:'ตามฉลาก+100+50+50 มล.',          stage:'⚫ใบแก่', ppe:'ถุงมือ', obs:'ปลายฝน | ฝนชุก→OK | แห้ง→ข้าม Fosetyl-Al | Seaweed ลด 50มล. (โปรแกรม B) | MIX EDTA ดูรอบ R21',done:false},
   {id:20, date:'2026-10-19',season:'ปลายฝน',   group:'สะสม B (เพลี้ยเมื่อพบ)', chem:'Buprofezin+Mg EDTA+Seaweed+จับใบ',               amt:'ฉลาก+100+50+50 มล.',              stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'โปรแกรม B | Seaweed 50มล. | ไม่พบเพลี้ย→ข้าม Buprofezin | IRAC 16',done:false},
-  {id:21, date:'2026-10-26',season:'ปลายฝน',   group:'สะสมอาหาร B',       chem:'Mg EDTA+MIX EDTA+Zn+จับใบ',                              amt:'100+100+50+50 มล.',               stage:'⚫ใบแก่', ppe:'ถุงมือ', obs:'เข้าโปรแกรม B เต็มตัว | MIX EDTA+Zn รอบเดียว (ทุก 2 เดือน) | ใบแก่+โรค→เพิ่ม Copper 200มล. | เตรียมรับหนาว',done:false},
+  {id:21, date:'2026-10-26',season:'ปลายฝน',   group:'สะสมอาหาร B + Zn อย่างเดียว', chem:'Mg EDTA+Zn+จับใบ',                                    amt:'100+50+50 มล.',                   stage:'⚫ใบแก่', ppe:'ถุงมือ', obs:'Zn อย่างเดียว (R16→MIX EDTA, R21→Zn, R24→MIX EDTA สลับ ไม่ต้องคู่กันทุกรอบ) | ใบแก่+โรค→เพิ่ม Copper 200มล. | เตรียมรับหนาว',done:false},
   {id:22, date:'2026-11-02',season:'หนาว',      group:'สะสม B (เพลี้ยเมื่อพบ)',   chem:'Flonicamid+Mg EDTA+Zn+จับใบ',                            amt:'ฉลาก+80-100+50+50 มล.',          stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'โปรแกรม B สะสม | Seaweed/Amino/Atonik หยุด | ไม่พบเพลี้ย→ข้าม Flonicamid | Zn ทุก 2-3 เดือน | IRAC 29',done:false},
   {id:23, date:'2026-11-09',season:'หนาว',      group:'โรค (conditional)', chem:'Fosetyl-Al+Mg EDTA+จับใบ',                               amt:'ตามฉลาก+80-100+50 มล.',          stage:'⚫ใบแก่', ppe:'ถุงมือ', obs:'ใช้เมื่อ: ฝนชุก/ดินแฉะ/ก่อนฝนแรก | ข้ามได้ถ้าอากาศแห้ง | เป้า 7-8 รอบ/ปี | MIX EDTA ดูรอบ R26 | FRAC 33',done:false},
-  {id:24, date:'2026-11-16',season:'หนาวจัด',   group:'MIX EDTA+Zn (หนอนเมื่อพบ)', chem:'Chlorantraniliprole+Mg EDTA+MIX EDTA+Zn+จับใบ',          amt:'ฉลาก+80-100+100+50+50 มล.',      stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'ไม่พบหนอน→ข้าม Chlorantraniliprole | MIX EDTA+Zn รอบเดียว (ทุก 2 เดือน) | IRAC 28',done:false},
-  {id:25, date:'2026-11-23',season:'หนาวจัด',   group:'โรค (conditional)', chem:'Copper+Mg EDTA+จับใบ',                                  amt:'200+80-100+50 มล.',               stage:'⚫ใบแก่', ppe:'หน้ากาก+แว่น+ถุงมือ', obs:'ใบแก่ 100% เท่านั้น ❌ฝักดาบ/หางปลา/ตั้งเขี้ยว | ข้ามได้ถ้าไม่มีโรค | M1',done:false},
-  {id:26, date:'2026-11-30',season:'หนาวจัด',   group:'สะสม B (เพลี้ยเมื่อพบ)',   chem:'Acetamiprid+Mg EDTA+MIX EDTA+Zn+จับใบ',                  amt:'ฉลาก+80-100+100+50+50 มล.',      stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'ไม่พบเพลี้ย→ข้าม Acetamiprid | MIX EDTA+Zn รอบเดียว (ทุก 2 เดือน) | IRAC 4A',done:false},
+  {id:24, date:'2026-11-16',season:'หนาวจัด',   group:'MIX EDTA รอบ 3 (หนอนเมื่อพบ)', chem:'Chlorantraniliprole+Mg EDTA+MIX EDTA+จับใบ',             amt:'ฉลาก+80-100+100+50 มล.',         stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'MIX EDTA อย่างเดียว (งด Zn รอบนี้ → R21=Zn, R24=MIX EDTA สลับ) | ไม่พบหนอน→ข้าม Chlorantraniliprole | IRAC 28',done:false},
+  {id:25, date:'2026-11-23',season:'หนาวจัด',   group:'โรค (conditional)', chem:'Copper+Mg EDTA+จับใบ',                                  amt:'200+80-100+50 มล.',               stage:'⚫ใบแก่', ppe:'หน้ากาก+แว่น+ถุงมือ', obs:'ใบแก่ 100% เท่านั้น ❌ ตั้งเขี้ยว/หางปลา/ใบกาง/เพสลาด | ข้ามได้ถ้าไม่มีโรค | M1',done:false},
+  {id:26, date:'2026-11-30',season:'หนาวจัด',   group:'สะสม B + Zn อย่างเดียว (เพลี้ยเมื่อพบ)', chem:'Acetamiprid+Mg EDTA+Zn+จับใบ',                   amt:'ฉลาก+80-100+50+50 มล.',          stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'Zn อย่างเดียว (R24=MIX EDTA, R26=Zn สลับ) | ไม่พบเพลี้ย→ข้าม Acetamiprid | IRAC 4A',done:false},
   {id:27, date:'2026-12-07',season:'ไรแดง',     group:'ไรแดง (เมื่อพบ)',            chem:'Bifenazate+Mg EDTA+จับใบ',                                amt:'75+80-100+50 มล.',                stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'ดูใต้ใบ จุดขาว/เส้นใย | ไม่พบ→ข้าม | ❌Amino/Atonik (โปรแกรม B) | IRAC 25',done:false},
   {id:28, date:'2026-12-14',season:'ไรแดง',     group:'โรค (conditional)', chem:'Fosetyl-Al+Mg EDTA+Zn+จับใบ',                            amt:'ตามฉลาก+80-100+50+50 มล.',       stage:'⚫ใบแก่', ppe:'ถุงมือ', obs:'ใช้เมื่อ: ฝนชุก/ดินแฉะ | ข้ามได้ถ้าอากาศแห้ง | Zn ทุก 2-3 เดือน | FRAC 33',done:false},
   {id:29, date:'2026-12-21',season:'เริ่มร้อน', group:'ไรแดง (เมื่อพบ)',            chem:'Spirodiclofen+Mg EDTA+จับใบ',                             amt:'ฉลาก+80-100+50 มล.',              stage:'⚫ใบแก่', ppe:'หน้ากาก+ถุงมือ', obs:'สลับจาก Bifenazate | ไม่พบ→ข้าม | IRAC 23',                      done:false},
